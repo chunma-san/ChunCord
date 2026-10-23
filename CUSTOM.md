@@ -6,10 +6,12 @@ Use the `custom` branch. Install the package-manager version declared in `packag
 pnpm install --frozen-lockfile
 node scripts/custom/test-testcord.mjs
 pnpm testTsc
-pnpm buildStandalone
+pnpm buildStandalone --disable-updater
 ```
 
 Use the normal Equicord source injection procedure for your client. Release downloads contain the desktop bundle, source revisions and licenses; downloading a ZIP does not install it or restart Discord.
+
+The standalone ZIP disables Equicord's built-in ASAR updater because this fork publishes desktop ZIPs. Use the source updater below for automatic updates, or replace a standalone bundle manually with a newer checked download. Source installations should keep the local branch named `custom` and track `origin/custom`.
 
 ## Source ownership
 

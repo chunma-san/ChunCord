@@ -47,7 +47,7 @@ jobs:
             git commit -m 'Sync selected TestCord plugins'
           fi
       - run: node scripts/custom/test-testcord.mjs
-      - run: pnpm buildStandalone
+      - run: pnpm buildStandalone --disable-updater
       - run: pnpm testTsc
       - name: Package validated build and source
         run: |
