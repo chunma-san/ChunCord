@@ -1,0 +1,88 @@
+# Vencord, a Discord client mod
+# Copyright (c) 2026 Vendicated and contributors
+# SPDX-License-Identifier: GPL-3.0-or-later
+name: Custom sync and release
+on:
+  push:
+    branches: [custom]
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+permissions:
+  contents: read
+concurrency:
+  group: custom-release
+  cancel-in-progress: false
+jobs:
+  build:
+    if: github.repository == 'chunma-san/Equicord' && github.ref == 'refs/heads/custom'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: custom
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Merge official source in the isolated build
+        run: |
+          mkdir -p "$RUNNER_TEMP/validated"
+          git rev-parse HEAD > "$RUNNER_TEMP/validated/base.txt"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git remote add upstream https://github.com/Equicord/Equicord.git
+          git fetch upstream main
+          git merge --no-edit upstream/main
+      - uses: pnpm/setup@ce3b1e5f04cd26dbb4614172464b544b5633cc92
+        with:
+          runtime: node@v24
+          require-lockfile: true
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm buildStandalone
+      - run: pnpm testTsc
+      - name: Package validated build and source
+        run: |
+          python3 scripts/custom/package.py "$RUNNER_TEMP/validated"
+          if [ "$(git rev-parse HEAD)" != "$(cat "$RUNNER_TEMP/validated/base.txt")" ]; then
+            git bundle create "$RUNNER_TEMP/validated/source.bundle" HEAD --not origin/custom
+          fi
+          git rev-parse HEAD > "$RUNNER_TEMP/validated/head.txt"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: validated-custom-build
+          path: ${{ runner.temp }}/validated/
+          retention-days: 3
+          if-no-files-found: error
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: custom
+          fetch-depth: 0
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: validated-custom-build
+          path: ${{ runner.temp }}/validated
+      - name: Publish only the tested source revision
+        run: |
+          test "$(git rev-parse HEAD)" = "$(cat "$RUNNER_TEMP/validated/base.txt")"
+          if [ -f "$RUNNER_TEMP/validated/source.bundle" ]; then
+            git fetch "$RUNNER_TEMP/validated/source.bundle" HEAD
+            test "$(git rev-parse FETCH_HEAD)" = "$(cat "$RUNNER_TEMP/validated/head.txt")"
+            git merge --ff-only FETCH_HEAD
+            git push origin HEAD:custom
+          fi
+      - name: Publish custom desktop download
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd "$RUNNER_TEMP/validated"
+          sha256sum -c SHA256SUMS.txt
+          if ! gh release view custom-latest --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create custom-latest --repo "$GITHUB_REPOSITORY" --target "$(cat head.txt)" --title 'Equicord Custom' --notes 'Validated official Equicord source with the custom plugins. See CUSTOM.md for setup and limitations.'
+          fi
+          gh release upload custom-latest --repo "$GITHUB_REPOSITORY" --clobber Equicord-Custom-Desktop.zip SHA256SUMS.txt build-info.json
