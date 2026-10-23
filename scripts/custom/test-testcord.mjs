@@ -6,6 +6,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
 import { build } from "esbuild";
 import ts from "typescript";
 
@@ -16,6 +17,12 @@ async function load(file, plugins = []) {
 const manifest = JSON.parse(fs.readFileSync("scripts/custom/testcord-allowlist.json", "utf8"));
 assert.equal(manifest.plugins.length, 123);
 assert.equal(new Set(manifest.plugins.map(p => p.name)).size, 123);
+const lock = JSON.parse(fs.readFileSync("scripts/custom/testcord-lock.json", "utf8"));
+for (const [file, hash] of Object.entries(lock.ported_files)) {
+    const data = fs.readFileSync(file);
+    const normalized = /\.(png|webp)$/.test(file) ? data : Buffer.from(data.toString("utf8").replace(/\r\n/g, "\n"));
+    assert.equal(createHash("sha256").update(normalized).digest("hex"), hash, `${file} differs from the recorded port`);
+}
 const available = new Set(manifest.plugins.map(p => p.name));
 for (const directory of ["src/plugins", "src/equicordplugins", "src/userplugins"])
     for (const entry of fs.readdirSync(directory, { recursive: true })) {

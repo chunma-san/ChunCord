@@ -119,11 +119,13 @@ def main():
         run('git', 'apply', '--check', '--whitespace=nowarn', str(patch), cwd=stage)
         run('git', 'apply', '--whitespace=nowarn', str(patch), cwd=stage)
         owned = list(mapping) + ['src/testcordplugins/_support/constants.ts']
-        output_hashes = {f:digest((stage/f).read_bytes()) for f in owned}
+        prepared = {f:(stage/f).read_bytes() for f in owned}
+        prepared = {f:data if Path(f).suffix in ('.png', '.webp') else data.replace(b'\r\n', b'\n') for f,data in prepared.items()}
+        output_hashes = {f:digest(data) for f,data in prepared.items()}
         for f in owned:
             out = ROOT/f
             out.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(stage/f, out)
+            out.write_bytes(prepared[f])
     lock = {'source':manifest['source'], 'revision':revision, 'plugin_count':123,
             'source_files':hashes, 'native_sources':native, 'ported_files':output_hashes}
     lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True)+'\n', encoding='utf-8')
