@@ -86,3 +86,4 @@ jobs:
             gh release create custom-latest --repo "$GITHUB_REPOSITORY" --target "$(cat head.txt)" --title 'Equicord Custom' --notes 'Validated official Equicord source with the custom plugins. See CUSTOM.md for setup and limitations.'
           fi
           gh release upload custom-latest --repo "$GITHUB_REPOSITORY" --clobber Equicord-Custom-Desktop.zip SHA256SUMS.txt build-info.json
+          gh api --method PATCH "repos/$GITHUB_REPOSITORY/git/refs/tags/custom-latest" -f sha="$(cat head.txt)" -F force=true >/dev/null

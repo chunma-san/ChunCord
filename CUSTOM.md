@@ -10,4 +10,6 @@ Add plugins under `src/userplugins/<PluginName>/`. The directory is ignored upst
 
 Do not replace a local customized installation with an upstream build that omits these plugins. The local updater should follow the validated `custom` branch, retain rollback files and activate changes on the next Discord restart.
 
+`scripts/custom/Update-Equicord.ps1 -Project <checkout>` is the reusable Windows updater. Its untracked `local-tools.json` supplies absolute `node`, `git` and `pnpm` executable paths on that PC. Keep that machine-specific file out of commits. Reuse an existing hidden scheduled task rather than registering duplicate tasks. The updater refuses to overwrite uncommitted plugin edits or ignored plugin additions until those changes have been committed to the fork.
+
 Discord client modifications are unofficial and may violate Discord's terms. Build checks establish compilation, not continued runtime compatibility with every Discord release. Plugin settings stay local and are never included in this repository.
