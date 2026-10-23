@@ -38,6 +38,15 @@ jobs:
           runtime: node@v24
           require-lockfile: true
       - run: pnpm install --frozen-lockfile
+      - name: Sync the selected TestCord plugins
+        run: |
+          git clone --depth=1 https://github.com/TestcordDev/TestCord.git "$RUNNER_TEMP/testcord-source"
+          python3 scripts/custom/sync-testcord.py "$RUNNER_TEMP/testcord-source"
+          git add src/testcordplugins scripts/custom/testcord-lock.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Sync selected TestCord plugins'
+          fi
+      - run: node scripts/custom/test-testcord.mjs
       - run: pnpm buildStandalone
       - run: pnpm testTsc
       - name: Package validated build and source

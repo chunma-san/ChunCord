@@ -38,8 +38,8 @@ try {
         "$(Get-Date -Format o) Already current: $head" | Out-File $log -Append
         exit 0
     }
-    $modifiedPlugins = (Run $tools.git @('-C', $Project, 'status', '--porcelain', '--untracked-files=all', '--', 'src/userplugins') | Out-String).Trim()
-    $ignoredPlugins = (Run $tools.git @('-C', $Project, 'ls-files', '--others', '--ignored', '--exclude-standard', '--', 'src/userplugins') | Out-String).Trim()
+    $modifiedPlugins = (Run $tools.git @('-C', $Project, 'status', '--porcelain', '--untracked-files=all', '--', 'src/userplugins', 'src/testcordplugins', 'scripts/custom', 'patches/testcord') | Out-String).Trim()
+    $ignoredPlugins = (Run $tools.git @('-C', $Project, 'ls-files', '--others', '--ignored', '--exclude-standard', '--', 'src/userplugins', 'src/testcordplugins', 'scripts/custom', 'patches/testcord') | Out-String).Trim()
     if ($modifiedPlugins -or $ignoredPlugins) { throw 'Custom plugin edits are not committed to the fork yet. Preserving the installed build.' }
     Run $tools.git @('-C', $Project, 'merge-base', '--is-ancestor', 'HEAD', $target) | Out-Null
     $stage = Join-Path $state 'stage'
@@ -54,6 +54,7 @@ try {
     Push-Location $stage
     try {
         Run $tools.pnpm @('install', '--frozen-lockfile') | Out-Null
+        Run $tools.node @('scripts/custom/test-testcord.mjs') | Out-Null
         Run $tools.pnpm @('testTsc') | Out-Null
         Run $tools.node @('scripts/build/build.mjs') | Out-Null
     } finally { Pop-Location }

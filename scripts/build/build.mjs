@@ -77,8 +77,8 @@ const globNativesPlugin = {
         });
 
         build.onLoad({ filter, namespace: "import-natives" }, async () => {
-            const pluginDirs = ["plugins", "equicordplugins", "userplugins"];
-            let code = "";
+            const pluginDirs = ["plugins", "equicordplugins", "userplugins", "testcordplugins"];
+            let code = 'import { guardNativeMethods } from "./testcordplugins/_support/nativeGuard";\n';
             let natives = "\n";
             let i = 0;
             /**
@@ -103,7 +103,7 @@ const globNativesPlugin = {
 
                     const mod = `p${i}`;
                     code += `import * as ${mod} from "./${dir}/${fileName}/native";\n`;
-                    natives += `${JSON.stringify(pluginName)}:${mod},\n`;
+                    natives += `${JSON.stringify(pluginName)}:${dir === "testcordplugins" ? `guardNativeMethods(${JSON.stringify(pluginName)}, ${mod})` : mod},\n`;
                     i++;
                 }
             }

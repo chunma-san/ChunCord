@@ -1,0 +1,1313 @@
+{
+  "source": "https://github.com/TestcordDev/TestCord",
+  "branch": "main",
+  "plugins": [
+    {
+      "name": "Bookmarks",
+      "folder": "src/testcordplugins/Bookmarks",
+      "entry": "src/testcordplugins/Bookmarks/index.tsx",
+      "files": [
+        "src/testcordplugins/Bookmarks/index.tsx"
+      ]
+    },
+    {
+      "name": "MessageTags",
+      "folder": "src/testcordplugins/MessageTags",
+      "entry": "src/testcordplugins/MessageTags/index.tsx",
+      "files": [
+        "src/testcordplugins/MessageTags/index.tsx"
+      ]
+    },
+    {
+      "name": "MessageReminders",
+      "folder": "src/testcordplugins/MessageReminders",
+      "entry": "src/testcordplugins/MessageReminders/index.tsx",
+      "files": [
+        "src/testcordplugins/MessageReminders/index.tsx"
+      ]
+    },
+    {
+      "name": "FloatingNotes",
+      "folder": "src/testcordplugins/floatingnotes",
+      "entry": "src/testcordplugins/floatingnotes/index.tsx",
+      "files": [
+        "src/testcordplugins/floatingnotes/index.tsx",
+        "src/testcordplugins/floatingnotes/style.css"
+      ]
+    },
+    {
+      "name": "UserNotes",
+      "folder": "src/testcordplugins/userNotes",
+      "entry": "src/testcordplugins/userNotes/index.tsx",
+      "files": [
+        "src/testcordplugins/userNotes/components/Icons.tsx",
+        "src/testcordplugins/userNotes/components/NotesDataButton.tsx",
+        "src/testcordplugins/userNotes/components/NotesDataModal.tsx",
+        "src/testcordplugins/userNotes/components/NoteSearchTab.tsx",
+        "src/testcordplugins/userNotes/components/UserNotesModal.tsx",
+        "src/testcordplugins/userNotes/data.ts",
+        "src/testcordplugins/userNotes/index.tsx",
+        "src/testcordplugins/userNotes/settings.tsx",
+        "src/testcordplugins/userNotes/styles.css"
+      ]
+    },
+    {
+      "name": "Calendar",
+      "folder": "src/testcordplugins/calendar",
+      "entry": "src/testcordplugins/calendar/index.tsx",
+      "files": [
+        "src/testcordplugins/calendar/index.tsx",
+        "src/testcordplugins/calendar/style.css"
+      ]
+    },
+    {
+      "name": "Modes",
+      "folder": "src/testcordplugins/Modes",
+      "entry": "src/testcordplugins/Modes/index.tsx",
+      "files": [
+        "src/testcordplugins/Modes/FriendPicker.tsx",
+        "src/testcordplugins/Modes/index.tsx",
+        "src/testcordplugins/Modes/share.ts",
+        "src/testcordplugins/Modes/ShareFileModal.tsx",
+        "src/testcordplugins/Modes/utils.ts"
+      ]
+    },
+    {
+      "name": "QuietHours",
+      "folder": "src/testcordplugins/quietHours",
+      "entry": "src/testcordplugins/quietHours/index.ts",
+      "files": [
+        "src/testcordplugins/quietHours/index.ts"
+      ]
+    },
+    {
+      "name": "Wellbeing",
+      "folder": "src/testcordplugins/Wellbeing",
+      "entry": "src/testcordplugins/Wellbeing/index.tsx",
+      "files": [
+        "src/testcordplugins/Wellbeing/controls.ts",
+        "src/testcordplugins/Wellbeing/Dashboard.tsx",
+        "src/testcordplugins/Wellbeing/index.tsx",
+        "src/testcordplugins/Wellbeing/state.ts",
+        "src/testcordplugins/Wellbeing/style.css"
+      ]
+    },
+    {
+      "name": "MessageStatistics",
+      "folder": "src/testcordplugins/messageStatistics",
+      "entry": "src/testcordplugins/messageStatistics/index.tsx",
+      "files": [
+        "src/testcordplugins/messageStatistics/index.tsx"
+      ]
+    },
+    {
+      "name": "PluginStars",
+      "folder": "src/testcordplugins/PluginStars",
+      "entry": "src/testcordplugins/PluginStars/index.tsx",
+      "files": [
+        "src/testcordplugins/PluginStars/index.tsx"
+      ]
+    },
+    {
+      "name": "ChannelGallery",
+      "folder": "src/testcordplugins/channelGallery",
+      "entry": "src/testcordplugins/channelGallery/index.tsx",
+      "files": [
+        "src/testcordplugins/channelGallery/components/GalleryGrid.tsx",
+        "src/testcordplugins/channelGallery/components/GalleryModal.tsx",
+        "src/testcordplugins/channelGallery/components/Icons.tsx",
+        "src/testcordplugins/channelGallery/components/LightboxViewer.tsx",
+        "src/testcordplugins/channelGallery/index.tsx",
+        "src/testcordplugins/channelGallery/native.ts",
+        "src/testcordplugins/channelGallery/style.css",
+        "src/testcordplugins/channelGallery/utils/download.ts",
+        "src/testcordplugins/channelGallery/utils/extractImages.ts",
+        "src/testcordplugins/channelGallery/utils/pagination.ts"
+      ]
+    },
+    {
+      "name": "HyprTiles",
+      "folder": "src/testcordplugins/hyprTiles",
+      "entry": "src/testcordplugins/hyprTiles/index.tsx",
+      "files": [
+        "src/testcordplugins/hyprTiles/components/HotkeyReferenceButton.tsx",
+        "src/testcordplugins/hyprTiles/components/KeybindEditor.tsx",
+        "src/testcordplugins/hyprTiles/components/TileContent.tsx",
+        "src/testcordplugins/hyprTiles/components/WorkspaceHost.tsx",
+        "src/testcordplugins/hyprTiles/components/WorkspaceSwitcherButton.tsx",
+        "src/testcordplugins/hyprTiles/controller.ts",
+        "src/testcordplugins/hyprTiles/index.tsx",
+        "src/testcordplugins/hyprTiles/migration.ts",
+        "src/testcordplugins/hyprTiles/native.ts",
+        "src/testcordplugins/hyprTiles/settings.ts",
+        "src/testcordplugins/hyprTiles/store.ts",
+        "src/testcordplugins/hyprTiles/styles.css",
+        "src/testcordplugins/hyprTiles/types.ts",
+        "src/testcordplugins/hyprTiles/utils/keybinds.ts",
+        "src/testcordplugins/hyprTiles/utils/layout.ts",
+        "src/testcordplugins/hyprTiles/utils/rules.ts",
+        "src/testcordplugins/hyprTiles/utils/rulesTemplate.ts"
+      ]
+    },
+    {
+      "name": "ComposeMode",
+      "folder": "src/testcordplugins/composeMode",
+      "entry": "src/testcordplugins/composeMode/index.tsx",
+      "files": [
+        "src/testcordplugins/composeMode/index.tsx"
+      ]
+    },
+    {
+      "name": "ReorderAttachments",
+      "folder": "src/testcordplugins/ReorderAttachments",
+      "entry": "src/testcordplugins/ReorderAttachments/index.tsx",
+      "files": [
+        "src/testcordplugins/ReorderAttachments/index.tsx",
+        "src/testcordplugins/ReorderAttachments/style.css"
+      ]
+    },
+    {
+      "name": "ContextMenuSelectFix",
+      "folder": "src/testcordplugins/contextMenuSelectFix",
+      "entry": "src/testcordplugins/contextMenuSelectFix/index.tsx",
+      "files": [
+        "src/testcordplugins/contextMenuSelectFix/index.tsx"
+      ]
+    },
+    {
+      "name": "DynamicIslande",
+      "folder": "src/testcordplugins/DynamicIslande",
+      "entry": "src/testcordplugins/DynamicIslande/index.tsx",
+      "files": [
+        "src/testcordplugins/DynamicIslande/index.tsx",
+        "src/testcordplugins/DynamicIslande/style.css"
+      ]
+    },
+    {
+      "name": "NewlinesInCommands",
+      "folder": "src/testcordplugins/vc-NewlinesInCommands",
+      "entry": "src/testcordplugins/vc-NewlinesInCommands/index.tsx",
+      "files": [
+        "src/testcordplugins/vc-NewlinesInCommands/index.tsx"
+      ]
+    },
+    {
+      "name": "DoubleEmoji",
+      "folder": "src/testcordplugins/doubleEmoji",
+      "entry": "src/testcordplugins/doubleEmoji/index.tsx",
+      "files": [
+        "src/testcordplugins/doubleEmoji/index.tsx"
+      ]
+    },
+    {
+      "name": "EmojiOnMouseUp",
+      "folder": "src/testcordplugins/emojiOnMouseUp",
+      "entry": "src/testcordplugins/emojiOnMouseUp/index.tsx",
+      "files": [
+        "src/testcordplugins/emojiOnMouseUp/index.tsx"
+      ]
+    },
+    {
+      "name": "Vimium",
+      "folder": "src/testcordplugins/Vimium",
+      "entry": "src/testcordplugins/Vimium/index.tsx",
+      "files": [
+        "src/testcordplugins/Vimium/hintEngine.ts",
+        "src/testcordplugins/Vimium/index.tsx",
+        "src/testcordplugins/Vimium/style.css"
+      ]
+    },
+    {
+      "name": "AllConnectionsEnabled",
+      "folder": "src/testcordplugins/allConnectionsEnabled",
+      "entry": "src/testcordplugins/allConnectionsEnabled/index.ts",
+      "files": [
+        "src/testcordplugins/allConnectionsEnabled/connection-types.ts",
+        "src/testcordplugins/allConnectionsEnabled/index.ts"
+      ]
+    },
+    {
+      "name": "MoreGuildDiscoveryCategories",
+      "folder": "src/testcordplugins/moreGuildDiscoveryCategories",
+      "entry": "src/testcordplugins/moreGuildDiscoveryCategories/index.ts",
+      "files": [
+        "src/testcordplugins/moreGuildDiscoveryCategories/index.ts"
+      ]
+    },
+    {
+      "name": "NoDraftLengthLimit",
+      "folder": "src/testcordplugins/noDraftLengthLimit",
+      "entry": "src/testcordplugins/noDraftLengthLimit/index.ts",
+      "files": [
+        "src/testcordplugins/noDraftLengthLimit/index.ts"
+      ]
+    },
+    {
+      "name": "FreezePresence",
+      "folder": "src/testcordplugins/freezePresence",
+      "entry": "src/testcordplugins/freezePresence/index.tsx",
+      "files": [
+        "src/testcordplugins/freezePresence/index.tsx"
+      ]
+    },
+    {
+      "name": "CustomAppIcons",
+      "folder": "src/testcordplugins/CustomAppIcons",
+      "entry": "src/testcordplugins/CustomAppIcons/index.tsx",
+      "files": [
+        "src/testcordplugins/CustomAppIcons/AppIconModal.tsx",
+        "src/testcordplugins/CustomAppIcons/index.tsx"
+      ]
+    },
+    {
+      "name": "AutoThemeSwitcher",
+      "folder": "src/testcordplugins/AutoThemeSwitcher",
+      "entry": "src/testcordplugins/AutoThemeSwitcher/index.tsx",
+      "files": [
+        "src/testcordplugins/AutoThemeSwitcher/index.tsx",
+        "src/testcordplugins/AutoThemeSwitcher/pluginSettings.ts",
+        "src/testcordplugins/AutoThemeSwitcher/themeLinksComponent.tsx",
+        "src/testcordplugins/AutoThemeSwitcher/themeLister.ts",
+        "src/testcordplugins/AutoThemeSwitcher/themeScheduler.ts",
+        "src/testcordplugins/AutoThemeSwitcher/themeToggler.ts",
+        "src/testcordplugins/AutoThemeSwitcher/timeComponent.tsx",
+        "src/testcordplugins/AutoThemeSwitcher/types.ts"
+      ]
+    },
+    {
+      "name": "LivingAccent",
+      "folder": "src/testcordplugins/LivingAccent",
+      "entry": "src/testcordplugins/LivingAccent/index.tsx",
+      "files": [
+        "src/testcordplugins/LivingAccent/color.ts",
+        "src/testcordplugins/LivingAccent/index.tsx"
+      ]
+    },
+    {
+      "name": "MutualServerMembers",
+      "folder": "src/testcordplugins/mutualServerMembers",
+      "entry": "src/testcordplugins/mutualServerMembers/index.tsx",
+      "files": [
+        "src/testcordplugins/mutualServerMembers/index.tsx"
+      ]
+    },
+    {
+      "name": "DeadMembers",
+      "folder": "src/testcordplugins/DeadMembers",
+      "entry": "src/testcordplugins/DeadMembers/index.tsx",
+      "files": [
+        "src/testcordplugins/DeadMembers/index.tsx",
+        "src/testcordplugins/DeadMembers/style.css"
+      ]
+    },
+    {
+      "name": "LastOnline",
+      "folder": "src/testcordplugins/lastOnline",
+      "entry": "src/testcordplugins/lastOnline/index.tsx",
+      "files": [
+        "src/testcordplugins/lastOnline/db.ts",
+        "src/testcordplugins/lastOnline/index.tsx"
+      ]
+    },
+    {
+      "name": "NewUserIndicator",
+      "folder": "src/testcordplugins/newUserIndicator",
+      "entry": "src/testcordplugins/newUserIndicator/index.tsx",
+      "files": [
+        "src/testcordplugins/newUserIndicator/index.tsx"
+      ]
+    },
+    {
+      "name": "BoostCounts",
+      "folder": "src/testcordplugins/BoosterCount-main",
+      "entry": "src/testcordplugins/BoosterCount-main/index.tsx",
+      "files": [
+        "src/testcordplugins/BoosterCount-main/index.tsx",
+        "src/testcordplugins/BoosterCount-main/style.css"
+      ]
+    },
+    {
+      "name": "AntiNameChange",
+      "folder": "src/testcordplugins/antiNameChange",
+      "entry": "src/testcordplugins/antiNameChange/index.ts",
+      "files": [
+        "src/testcordplugins/antiNameChange/index.ts"
+      ]
+    },
+    {
+      "name": "ReactionTracker",
+      "folder": "src/testcordplugins/ReactionTracker",
+      "entry": "src/testcordplugins/ReactionTracker/index.tsx",
+      "files": [
+        "src/testcordplugins/ReactionTracker/index.tsx",
+        "src/testcordplugins/ReactionTracker/style.css"
+      ]
+    },
+    {
+      "name": "ReactionLogger",
+      "folder": "src/testcordplugins/ReactionLogger",
+      "entry": "src/testcordplugins/ReactionLogger/index.tsx",
+      "files": [
+        "src/testcordplugins/ReactionLogger/index.tsx"
+      ]
+    },
+    {
+      "name": "ProfileVisibility",
+      "folder": "src/testcordplugins/ProfileVisibility",
+      "entry": "src/testcordplugins/ProfileVisibility/index.tsx",
+      "files": [
+        "src/testcordplugins/ProfileVisibility/index.tsx"
+      ]
+    },
+    {
+      "name": "FileViewer",
+      "folder": "src/testcordplugins/FilePreview",
+      "entry": "src/testcordplugins/FilePreview/index.tsx",
+      "files": [
+        "src/testcordplugins/FilePreview/index.tsx"
+      ]
+    },
+    {
+      "name": "File Splitter",
+      "folder": "src/testcordplugins/fileSplitter",
+      "entry": "src/testcordplugins/fileSplitter/index.tsx",
+      "files": [
+        "src/testcordplugins/fileSplitter/index.tsx",
+        "src/testcordplugins/fileSplitter/style.css"
+      ]
+    },
+    {
+      "name": "FloeP2PService",
+      "folder": "src/testcordplugins/FloeP2PService.desktop",
+      "entry": "src/testcordplugins/FloeP2PService.desktop/index.tsx",
+      "files": [
+        "src/testcordplugins/FloeP2PService.desktop/index.tsx",
+        "src/testcordplugins/FloeP2PService.desktop/native.ts"
+      ]
+    },
+    {
+      "name": "MediaDownloader",
+      "folder": "src/testcordplugins/mediaDownloader.desktop",
+      "entry": "src/testcordplugins/mediaDownloader.desktop/index.tsx",
+      "files": [
+        "src/testcordplugins/mediaDownloader.desktop/DependencyModal.tsx",
+        "src/testcordplugins/mediaDownloader.desktop/index.tsx",
+        "src/testcordplugins/mediaDownloader.desktop/native.ts",
+        "src/testcordplugins/mediaDownloader.desktop/style.css"
+      ]
+    },
+    {
+      "name": "MetadataScanner",
+      "folder": "src/testcordplugins/MetadataViewer",
+      "entry": "src/testcordplugins/MetadataViewer/index.tsx",
+      "files": [
+        "src/testcordplugins/MetadataViewer/index.tsx",
+        "src/testcordplugins/MetadataViewer/modal.tsx",
+        "src/testcordplugins/MetadataViewer/native.ts",
+        "src/testcordplugins/MetadataViewer/parser.ts",
+        "src/testcordplugins/MetadataViewer/style.css",
+        "src/testcordplugins/MetadataViewer/utils.ts"
+      ]
+    },
+    {
+      "name": "Pinterest Tool",
+      "folder": "src/testcordplugins/PinterestTool",
+      "entry": "src/testcordplugins/PinterestTool/index.tsx",
+      "files": [
+        "src/testcordplugins/PinterestTool/components.tsx",
+        "src/testcordplugins/PinterestTool/effects.ts",
+        "src/testcordplugins/PinterestTool/gif.ts",
+        "src/testcordplugins/PinterestTool/i18n.ts",
+        "src/testcordplugins/PinterestTool/icon.ts",
+        "src/testcordplugins/PinterestTool/index.tsx",
+        "src/testcordplugins/PinterestTool/native.ts",
+        "src/testcordplugins/PinterestTool/searchRanking.ts",
+        "src/testcordplugins/PinterestTool/shared.ts",
+        "src/testcordplugins/PinterestTool/style.css"
+      ]
+    },
+    {
+      "name": "TeX",
+      "folder": "src/testcordplugins/teX",
+      "entry": "src/testcordplugins/teX/index.tsx",
+      "files": [
+        "src/testcordplugins/teX/index.tsx",
+        "src/testcordplugins/teX/katexLoader.ts",
+        "src/testcordplugins/teX/style.css"
+      ]
+    },
+    {
+      "name": "TempMail",
+      "folder": "src/testcordplugins/tempMail",
+      "entry": "src/testcordplugins/tempMail/index.tsx",
+      "files": [
+        "src/testcordplugins/tempMail/api.ts",
+        "src/testcordplugins/tempMail/components/TempMailModal.tsx",
+        "src/testcordplugins/tempMail/index.tsx",
+        "src/testcordplugins/tempMail/native.ts",
+        "src/testcordplugins/tempMail/providers.ts",
+        "src/testcordplugins/tempMail/store.ts",
+        "src/testcordplugins/tempMail/styles.css"
+      ]
+    },
+    {
+      "name": "TestcordAI",
+      "folder": "src/testcordplugins/TestcordAI",
+      "entry": "src/testcordplugins/TestcordAI/index.tsx",
+      "files": [
+        "src/testcordplugins/TestcordAI/aiProvider.ts",
+        "src/testcordplugins/TestcordAI/groqManager.ts",
+        "src/testcordplugins/TestcordAI/index.tsx",
+        "src/testcordplugins/TestcordAI/native.ts",
+        "src/testcordplugins/TestcordAI/styles.css"
+      ]
+    },
+    {
+      "name": "SummarizeAI",
+      "folder": "src/testcordplugins/summarizeAI",
+      "entry": "src/testcordplugins/summarizeAI/index.tsx",
+      "files": [
+        "src/testcordplugins/summarizeAI/index.tsx"
+      ]
+    },
+    {
+      "name": "AutoResponder",
+      "folder": "src/testcordplugins/autoResponder",
+      "entry": "src/testcordplugins/autoResponder/index.tsx",
+      "files": [
+        "src/testcordplugins/autoResponder/index.tsx"
+      ]
+    },
+    {
+      "name": "VoiceDictation",
+      "folder": "src/testcordplugins/voiceDictation",
+      "entry": "src/testcordplugins/voiceDictation/index.tsx",
+      "files": [
+        "src/testcordplugins/voiceDictation/index.tsx"
+      ]
+    },
+    {
+      "name": "OBS Remote Control",
+      "folder": "src/testcordplugins/obsRemoteControl",
+      "entry": "src/testcordplugins/obsRemoteControl/index.tsx",
+      "files": [
+        "src/testcordplugins/obsRemoteControl/index.tsx",
+        "src/testcordplugins/obsRemoteControl/native.ts",
+        "src/testcordplugins/obsRemoteControl/obs-websocket-js/base.ts",
+        "src/testcordplugins/obsRemoteControl/obs-websocket-js/eventEmitter.ts",
+        "src/testcordplugins/obsRemoteControl/obs-websocket-js/json.ts",
+        "src/testcordplugins/obsRemoteControl/obs-websocket-js/types.ts",
+        "src/testcordplugins/obsRemoteControl/obs-websocket-js/utils/authenticationHashing.ts",
+        "src/testcordplugins/obsRemoteControl/styles.css",
+        "src/testcordplugins/obsRemoteControl/utils.ts"
+      ]
+    },
+    {
+      "name": "AudioCenter",
+      "folder": "src/testcordplugins/audioCenter",
+      "entry": "src/testcordplugins/audioCenter/index.tsx",
+      "files": [
+        "src/testcordplugins/audioCenter/index.tsx"
+      ]
+    },
+    {
+      "name": "MicSpamGuard",
+      "folder": "src/testcordplugins/MicSpamGuard",
+      "entry": "src/testcordplugins/MicSpamGuard/index.tsx",
+      "files": [
+        "src/testcordplugins/MicSpamGuard/index.tsx",
+        "src/testcordplugins/MicSpamGuard/LICENSE",
+        "src/testcordplugins/MicSpamGuard/protection.ts"
+      ]
+    },
+    {
+      "name": "VoiceVUMeters",
+      "folder": "src/testcordplugins/VoiceVUMeters",
+      "entry": "src/testcordplugins/VoiceVUMeters/index.tsx",
+      "files": [
+        "src/testcordplugins/VoiceVUMeters/index.tsx",
+        "src/testcordplugins/VoiceVUMeters/LICENSE",
+        "src/testcordplugins/VoiceVUMeters/native/bridge-test.cjs",
+        "src/testcordplugins/VoiceVUMeters/native/callback_test.cpp",
+        "src/testcordplugins/VoiceVUMeters/native/CMakeLists.txt",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/.editorconfig",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/.gitignore",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/AUTHORS.txt",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/cmake/minhook-config.cmake.in",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/CMakeLists.txt",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/dll_resources/MinHook.def",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/dll_resources/MinHook.rc",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/include/MinHook.h",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/LICENSE.txt",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/src/buffer.c",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/src/buffer.h",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/src/hde/hde32.c",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/src/hde/hde32.h",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/src/hde/hde64.c",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/src/hde/hde64.h",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/src/hde/pstdint.h",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/src/hde/table32.h",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/src/hde/table64.h",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/src/hook.c",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/src/trampoline.c",
+        "src/testcordplugins/VoiceVUMeters/native/minhook/src/trampoline.h",
+        "src/testcordplugins/VoiceVUMeters/native/participant_bridge.cjs",
+        "src/testcordplugins/VoiceVUMeters/native/participant_metrics.hpp",
+        "src/testcordplugins/VoiceVUMeters/native/participant_tap.cpp",
+        "src/testcordplugins/VoiceVUMeters/style.css"
+      ]
+    },
+    {
+      "name": "SoloAudio",
+      "folder": "src/testcordplugins/soloaudio",
+      "entry": "src/testcordplugins/soloaudio/index.tsx",
+      "files": [
+        "src/testcordplugins/soloaudio/index.tsx"
+      ]
+    },
+    {
+      "name": "UniversalVolume",
+      "folder": "src/testcordplugins/UniversalVolume",
+      "entry": "src/testcordplugins/UniversalVolume/index.tsx",
+      "files": [
+        "src/testcordplugins/UniversalVolume/index.tsx"
+      ]
+    },
+    {
+      "name": "RecordUrMic",
+      "folder": "src/testcordplugins/callrecorder",
+      "entry": "src/testcordplugins/callrecorder/index.tsx",
+      "files": [
+        "src/testcordplugins/callrecorder/index.tsx",
+        "src/testcordplugins/callrecorder/native.ts"
+      ]
+    },
+    {
+      "name": "VoiceFakeDetector",
+      "folder": "src/testcordplugins/VoiceFakeDetector",
+      "entry": "src/testcordplugins/VoiceFakeDetector/index.tsx",
+      "files": [
+        "src/testcordplugins/VoiceFakeDetector/index.tsx",
+        "src/testcordplugins/VoiceFakeDetector/style.css"
+      ]
+    },
+    {
+      "name": "VoiceServerInfo",
+      "folder": "src/testcordplugins/voiceServerInfo",
+      "entry": "src/testcordplugins/voiceServerInfo/index.tsx",
+      "files": [
+        "src/testcordplugins/voiceServerInfo/index.tsx",
+        "src/testcordplugins/voiceServerInfo/native.ts",
+        "src/testcordplugins/voiceServerInfo/style.css",
+        "src/testcordplugins/voiceServerInfo/VoiceServerModal.tsx"
+      ]
+    },
+    {
+      "name": "AutoMute",
+      "folder": "src/testcordplugins/autoMute",
+      "entry": "src/testcordplugins/autoMute/index.tsx",
+      "files": [
+        "src/testcordplugins/autoMute/index.tsx"
+      ]
+    },
+    {
+      "name": "AutoDisconnect",
+      "folder": "src/testcordplugins/autoDeco",
+      "entry": "src/testcordplugins/autoDeco/index.ts",
+      "files": [
+        "src/testcordplugins/autoDeco/index.ts"
+      ]
+    },
+    {
+      "name": "FollowMajority",
+      "folder": "src/testcordplugins/FollowMajority",
+      "entry": "src/testcordplugins/FollowMajority/index.tsx",
+      "files": [
+        "src/testcordplugins/FollowMajority/index.tsx"
+      ]
+    },
+    {
+      "name": "Leash",
+      "folder": "src/testcordplugins/laisse",
+      "entry": "src/testcordplugins/laisse/index.tsx",
+      "files": [
+        "src/testcordplugins/laisse/index.tsx"
+      ]
+    },
+    {
+      "name": "VoiceGuard",
+      "folder": "src/testcordplugins/voiceGuard",
+      "entry": "src/testcordplugins/voiceGuard/index.tsx",
+      "files": [
+        "src/testcordplugins/voiceGuard/index.tsx",
+        "src/testcordplugins/voiceGuard/style.css"
+      ]
+    },
+    {
+      "name": "FriendsInVoice",
+      "folder": "src/testcordplugins/friendsInVoice",
+      "entry": "src/testcordplugins/friendsInVoice/index.tsx",
+      "files": [
+        "src/testcordplugins/friendsInVoice/index.tsx",
+        "src/testcordplugins/friendsInVoice/style.css"
+      ]
+    },
+    {
+      "name": "CustomStreamTopQ",
+      "folder": "src/testcordplugins/customStream",
+      "entry": "src/testcordplugins/customStream/index.tsx",
+      "files": [
+        "src/testcordplugins/customStream/index.tsx"
+      ]
+    },
+    {
+      "name": "SilentCall",
+      "folder": "src/testcordplugins/Silentcall",
+      "entry": "src/testcordplugins/Silentcall/index.tsx",
+      "files": [
+        "src/testcordplugins/Silentcall/index.tsx"
+      ]
+    },
+    {
+      "name": "AntiStereo",
+      "folder": "src/testcordplugins/antiStereo",
+      "entry": "src/testcordplugins/antiStereo/index.ts",
+      "files": [
+        "src/testcordplugins/antiStereo/index.ts"
+      ]
+    },
+    {
+      "name": "StereoGuard",
+      "folder": "src/testcordplugins/StereoGuard",
+      "entry": "src/testcordplugins/StereoGuard/index.tsx",
+      "files": [
+        "src/testcordplugins/StereoGuard/index.tsx",
+        "src/testcordplugins/StereoGuard/LICENSE",
+        "src/testcordplugins/StereoGuard/protection.ts"
+      ]
+    },
+    {
+      "name": "SoundboardPro",
+      "folder": "src/testcordplugins/soundboardPro",
+      "entry": "src/testcordplugins/soundboardPro/index.tsx",
+      "files": [
+        "src/testcordplugins/soundboardPro/icone.webp",
+        "src/testcordplugins/soundboardPro/index.tsx",
+        "src/testcordplugins/soundboardPro/style.css"
+      ]
+    },
+    {
+      "name": "CustomDNS",
+      "folder": "src/testcordplugins/CustomDNS",
+      "entry": "src/testcordplugins/CustomDNS/index.tsx",
+      "files": [
+        "src/testcordplugins/CustomDNS/index.tsx",
+        "src/testcordplugins/CustomDNS/native.ts"
+      ]
+    },
+    {
+      "name": "WebRTCLeakPrevent",
+      "folder": "src/testcordplugins/webRtcLeakPrevent",
+      "entry": "src/testcordplugins/webRtcLeakPrevent/index.tsx",
+      "files": [
+        "src/testcordplugins/webRtcLeakPrevent/index.tsx"
+      ]
+    },
+    {
+      "name": "PasswordManager",
+      "folder": "src/testcordplugins/passwordManager",
+      "entry": "src/testcordplugins/passwordManager/index.tsx",
+      "files": [
+        "src/testcordplugins/passwordManager/index.tsx",
+        "src/testcordplugins/passwordManager/styles.css"
+      ]
+    },
+    {
+      "name": "DiscordLock",
+      "folder": "src/testcordplugins/DiscordLock",
+      "entry": "src/testcordplugins/DiscordLock/index.ts",
+      "files": [
+        "src/testcordplugins/DiscordLock/index.ts"
+      ]
+    },
+    {
+      "name": "ApiSniper",
+      "folder": "src/testcordplugins/apisniper",
+      "entry": "src/testcordplugins/apisniper/index.tsx",
+      "files": [
+        "src/testcordplugins/apisniper/components/FolderSelectInput.tsx",
+        "src/testcordplugins/apisniper/index.tsx",
+        "src/testcordplugins/apisniper/native/index.ts",
+        "src/testcordplugins/apisniper/settings.tsx",
+        "src/testcordplugins/apisniper/styles.css",
+        "src/testcordplugins/apisniper/utils/constants.ts"
+      ]
+    },
+    {
+      "name": "DsaWarnings",
+      "folder": "src/testcordplugins/DsaWarnings",
+      "entry": "src/testcordplugins/DsaWarnings/index.tsx",
+      "files": [
+        "src/testcordplugins/DsaWarnings/api.ts",
+        "src/testcordplugins/DsaWarnings/index.tsx",
+        "src/testcordplugins/DsaWarnings/native.ts",
+        "src/testcordplugins/DsaWarnings/settings.ts",
+        "src/testcordplugins/DsaWarnings/style.css",
+        "src/testcordplugins/DsaWarnings/types.ts"
+      ]
+    },
+    {
+      "name": "TestcordOSINTToolkit",
+      "folder": "src/testcordplugins/testcordosinttoolkit",
+      "entry": "src/testcordplugins/testcordosinttoolkit/index.tsx",
+      "files": [
+        "src/testcordplugins/testcordosinttoolkit/aiManager.ts",
+        "src/testcordplugins/testcordosinttoolkit/algorithms.ts",
+        "src/testcordplugins/testcordosinttoolkit/components/OSINTPanel.tsx",
+        "src/testcordplugins/testcordosinttoolkit/index.tsx",
+        "src/testcordplugins/testcordosinttoolkit/linkAnalysis.ts",
+        "src/testcordplugins/testcordosinttoolkit/native.ts",
+        "src/testcordplugins/testcordosinttoolkit/style.css",
+        "src/testcordplugins/testcordosinttoolkit/webNative.ts"
+      ]
+    },
+    {
+      "name": "vAnalyzer",
+      "folder": "src/testcordplugins/vAnalyzer-main",
+      "entry": "src/testcordplugins/vAnalyzer-main/index.tsx",
+      "files": [
+        "src/testcordplugins/vAnalyzer-main/AnalysisAccesory.tsx",
+        "src/testcordplugins/vAnalyzer-main/analyzers/BotProfile/index.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/CertPL/index.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/CertPL/native.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/CordCat/CordCatModal.tsx",
+        "src/testcordplugins/vAnalyzer-main/analyzers/CordCat/index.tsx",
+        "src/testcordplugins/vAnalyzer-main/analyzers/CordCat/native.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/CrtSh/index.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/CrtSh/native.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/DiscordInvite/index.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/DiscordInvite/native.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/FishFish/index.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/FishFish/native.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/HybridAnalysis/index.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/HybridAnalysis/native.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/ModularScan/index.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/ModularScan/native.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/Sucuri/index.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/Sucuri/native.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/VirusTotal/index.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/VirusTotal/native.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/WaybackMachine/index.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/WaybackMachine/native.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/WhereGoes/index.ts",
+        "src/testcordplugins/vAnalyzer-main/analyzers/WhereGoes/native.ts",
+        "src/testcordplugins/vAnalyzer-main/autoAnalyze.ts",
+        "src/testcordplugins/vAnalyzer-main/components/ModularScanSettings.tsx",
+        "src/testcordplugins/vAnalyzer-main/components/SeparatorSettings.tsx",
+        "src/testcordplugins/vAnalyzer-main/index.tsx",
+        "src/testcordplugins/vAnalyzer-main/modularScanStore.ts",
+        "src/testcordplugins/vAnalyzer-main/native.ts",
+        "src/testcordplugins/vAnalyzer-main/settings.tsx",
+        "src/testcordplugins/vAnalyzer-main/style/AnalyzeIcon.tsx",
+        "src/testcordplugins/vAnalyzer-main/style/styles.css",
+        "src/testcordplugins/vAnalyzer-main/threatStore.ts",
+        "src/testcordplugins/vAnalyzer-main/urlFilter.ts",
+        "src/testcordplugins/vAnalyzer-main/utils.ts"
+      ]
+    },
+    {
+      "name": "remoteControl",
+      "folder": "src/testcordplugins/remoteControl",
+      "entry": "src/testcordplugins/remoteControl/index.tsx",
+      "files": [
+        "src/testcordplugins/remoteControl/commands.ts",
+        "src/testcordplugins/remoteControl/index.tsx",
+        "src/testcordplugins/remoteControl/local.ts",
+        "src/testcordplugins/remoteControl/scheduler.ts",
+        "src/testcordplugins/remoteControl/settings.ts",
+        "src/testcordplugins/remoteControl/slash.ts",
+        "src/testcordplugins/remoteControl/utils.ts"
+      ]
+    },
+    {
+      "name": "Socket",
+      "folder": "src/testcordplugins/socket.desktop",
+      "entry": "src/testcordplugins/socket.desktop/index.ts",
+      "files": [
+        "src/testcordplugins/socket.desktop/index.ts",
+        "src/testcordplugins/socket.desktop/native.ts"
+      ]
+    },
+    {
+      "name": "SharePerms",
+      "folder": "src/testcordplugins/sharePerms",
+      "entry": "src/testcordplugins/sharePerms/index.tsx",
+      "files": [
+        "src/testcordplugins/sharePerms/index.tsx"
+      ]
+    },
+    {
+      "name": "GatewayLogger",
+      "folder": "src/testcordplugins/gatewayLogger",
+      "entry": "src/testcordplugins/gatewayLogger/index.tsx",
+      "files": [
+        "src/testcordplugins/gatewayLogger/index.tsx"
+      ]
+    },
+    {
+      "name": "StereoInstaller",
+      "folder": "src/testcordplugins/stereoInstaller.desktop",
+      "entry": "src/testcordplugins/stereoInstaller.desktop/index.tsx",
+      "files": [
+        "src/testcordplugins/stereoInstaller.desktop/index.tsx",
+        "src/testcordplugins/stereoInstaller.desktop/native.ts",
+        "src/testcordplugins/stereoInstaller.desktop/style.css"
+      ]
+    },
+    {
+      "name": "GpuBinder",
+      "folder": "src/testcordplugins/vencord-gpubinder-main",
+      "entry": "src/testcordplugins/vencord-gpubinder-main/index.ts",
+      "files": [
+        "src/testcordplugins/vencord-gpubinder-main/index.ts",
+        "src/testcordplugins/vencord-gpubinder-main/LICENSE",
+        "src/testcordplugins/vencord-gpubinder-main/native.ts"
+      ]
+    },
+    {
+      "name": "CursorMacOS",
+      "folder": "src/testcordplugins/cursorMacOS",
+      "entry": "src/testcordplugins/cursorMacOS/index.ts",
+      "files": [
+        "src/testcordplugins/cursorMacOS/index.ts",
+        "src/testcordplugins/cursorMacOS/native.ts",
+        "src/testcordplugins/cursorMacOS/settings.ts"
+      ]
+    },
+    {
+      "name": "MultiInstance",
+      "folder": "src/testcordplugins/MultiInstance",
+      "entry": "src/testcordplugins/MultiInstance/index.tsx",
+      "files": [
+        "src/testcordplugins/MultiInstance/index.tsx",
+        "src/testcordplugins/MultiInstance/native.ts",
+        "src/testcordplugins/MultiInstance/style.css"
+      ]
+    },
+    {
+      "name": "RpcMirror",
+      "folder": "src/testcordplugins/rpcMirror",
+      "entry": "src/testcordplugins/rpcMirror/index.tsx",
+      "files": [
+        "src/testcordplugins/rpcMirror/index.tsx",
+        "src/testcordplugins/rpcMirror/native.ts"
+      ]
+    },
+    {
+      "name": "LocalMessageEditor",
+      "folder": "src/testcordplugins/localmessageedit",
+      "entry": "src/testcordplugins/localmessageedit/index.tsx",
+      "files": [
+        "src/testcordplugins/localmessageedit/index.tsx"
+      ]
+    },
+    {
+      "name": "FakeDM",
+      "folder": "src/testcordplugins/fakeDM",
+      "entry": "src/testcordplugins/fakeDM/index.tsx",
+      "files": [
+        "src/testcordplugins/fakeDM/index.tsx",
+        "src/testcordplugins/fakeDM/native.ts",
+        "src/testcordplugins/fakeDM/styles.css"
+      ]
+    },
+    {
+      "name": "FakeFriends",
+      "folder": "src/testcordplugins/fakeFriends",
+      "entry": "src/testcordplugins/fakeFriends/index.tsx",
+      "files": [
+        "src/testcordplugins/fakeFriends/index.tsx"
+      ]
+    },
+    {
+      "name": "FakeConnections",
+      "folder": "src/testcordplugins/fakeConnections",
+      "entry": "src/testcordplugins/fakeConnections/index.tsx",
+      "files": [
+        "src/testcordplugins/fakeConnections/index.tsx",
+        "src/testcordplugins/fakeConnections/styles.css"
+      ]
+    },
+    {
+      "name": "FakeUserSwitcher",
+      "folder": "src/testcordplugins/FakeUserSwitcher",
+      "entry": "src/testcordplugins/FakeUserSwitcher/index.tsx",
+      "files": [
+        "src/testcordplugins/FakeUserSwitcher/data.ts",
+        "src/testcordplugins/FakeUserSwitcher/index.tsx",
+        "src/testcordplugins/FakeUserSwitcher/legacyModal.tsx",
+        "src/testcordplugins/FakeUserSwitcher/manualFields.css",
+        "src/testcordplugins/FakeUserSwitcher/modal.tsx"
+      ]
+    },
+    {
+      "name": "FakeVoicePremium",
+      "folder": "src/testcordplugins/FakeVoicePremium",
+      "entry": "src/testcordplugins/FakeVoicePremium/index.tsx",
+      "files": [
+        "src/testcordplugins/FakeVoicePremium/index.tsx",
+        "src/testcordplugins/FakeVoicePremium/presets.tsx",
+        "src/testcordplugins/FakeVoicePremium/settings.ts",
+        "src/testcordplugins/FakeVoicePremium/style.css"
+      ]
+    },
+    {
+      "name": "BadgeSpoofer",
+      "folder": "src/testcordplugins/BadgeSpoofer",
+      "entry": "src/testcordplugins/BadgeSpoofer/index.tsx",
+      "files": [
+        "src/testcordplugins/BadgeSpoofer/components/BadgeSpooferModal.tsx",
+        "src/testcordplugins/BadgeSpoofer/engine.ts",
+        "src/testcordplugins/BadgeSpoofer/hypesquad.tsx",
+        "src/testcordplugins/BadgeSpoofer/index.tsx",
+        "src/testcordplugins/BadgeSpoofer/settings.tsx",
+        "src/testcordplugins/BadgeSpoofer/styles.css",
+        "src/testcordplugins/BadgeSpoofer/types.ts"
+      ]
+    },
+    {
+      "name": "AutoReplyContent",
+      "folder": "src/testcordplugins/AutoReplyContent",
+      "entry": "src/testcordplugins/AutoReplyContent/index.tsx",
+      "files": [
+        "src/testcordplugins/AutoReplyContent/index.tsx"
+      ]
+    },
+    {
+      "name": "DMAway",
+      "folder": "src/testcordplugins/dmAway",
+      "entry": "src/testcordplugins/dmAway/index.tsx",
+      "files": [
+        "src/testcordplugins/dmAway/index.tsx"
+      ]
+    },
+    {
+      "name": "AutoReact",
+      "folder": "src/testcordplugins/AutoReact",
+      "entry": "src/testcordplugins/AutoReact/index.tsx",
+      "files": [
+        "src/testcordplugins/AutoReact/index.tsx",
+        "src/testcordplugins/AutoReact/style.css"
+      ]
+    },
+    {
+      "name": "AutoDeleter",
+      "folder": "src/testcordplugins/autoDeleter",
+      "entry": "src/testcordplugins/autoDeleter/index.tsx",
+      "files": [
+        "src/testcordplugins/autoDeleter/index.tsx"
+      ]
+    },
+    {
+      "name": "AntiDeleteMessage",
+      "folder": "src/testcordplugins/antiDeleteMessage",
+      "entry": "src/testcordplugins/antiDeleteMessage/index.ts",
+      "files": [
+        "src/testcordplugins/antiDeleteMessage/index.ts"
+      ]
+    },
+    {
+      "name": "AntiGroup",
+      "folder": "src/testcordplugins/antiGroup",
+      "entry": "src/testcordplugins/antiGroup/index.tsx",
+      "files": [
+        "src/testcordplugins/antiGroup/index.tsx"
+      ]
+    },
+    {
+      "name": "AutoLanguageBlock",
+      "folder": "src/testcordplugins/AutoLanguageBlock",
+      "entry": "src/testcordplugins/AutoLanguageBlock/index.tsx",
+      "files": [
+        "src/testcordplugins/AutoLanguageBlock/index.tsx"
+      ]
+    },
+    {
+      "name": "Rotator Suite",
+      "folder": "src/testcordplugins/rotatorSuite",
+      "entry": "src/testcordplugins/rotatorSuite/index.tsx",
+      "files": [
+        "src/testcordplugins/rotatorSuite/index.tsx"
+      ]
+    },
+    {
+      "name": "RelationshipPruner",
+      "folder": "src/testcordplugins/relationshipPruner",
+      "entry": "src/testcordplugins/relationshipPruner/index.tsx",
+      "files": [
+        "src/testcordplugins/relationshipPruner/components/FriendPruneModal.tsx",
+        "src/testcordplugins/relationshipPruner/components/GuildPruneModal.tsx",
+        "src/testcordplugins/relationshipPruner/components/InfoWithIcon.tsx",
+        "src/testcordplugins/relationshipPruner/constants.ts",
+        "src/testcordplugins/relationshipPruner/index.tsx",
+        "src/testcordplugins/relationshipPruner/style.css"
+      ]
+    },
+    {
+      "name": "LeaveAllGroups",
+      "folder": "src/testcordplugins/leaveAllGroups",
+      "entry": "src/testcordplugins/leaveAllGroups/index.tsx",
+      "files": [
+        "src/testcordplugins/leaveAllGroups/index.tsx"
+      ]
+    },
+    {
+      "name": "ChatsScrapper",
+      "folder": "src/testcordplugins/chatsScrapper",
+      "entry": "src/testcordplugins/chatsScrapper/index.tsx",
+      "files": [
+        "src/testcordplugins/chatsScrapper/index.tsx"
+      ]
+    },
+    {
+      "name": "Smart Cleanup Suite",
+      "folder": "src/testcordplugins/KFOCleanupSuite",
+      "entry": "src/testcordplugins/KFOCleanupSuite/index.tsx",
+      "files": [
+        "src/testcordplugins/KFOCleanupSuite/index.tsx"
+      ]
+    },
+    {
+      "name": "AntilogPremium",
+      "folder": "src/testcordplugins/AntilogPremium",
+      "entry": "src/testcordplugins/AntilogPremium/index.tsx",
+      "files": [
+        "src/testcordplugins/AntilogPremium/index.tsx"
+      ]
+    },
+    {
+      "name": "ServerToolkit",
+      "folder": "src/testcordplugins/ServerToolkit",
+      "entry": "src/testcordplugins/ServerToolkit/index.tsx",
+      "files": [
+        "src/testcordplugins/ServerToolkit/copy/engine.ts",
+        "src/testcordplugins/ServerToolkit/CopyModal.tsx",
+        "src/testcordplugins/ServerToolkit/index.tsx",
+        "src/testcordplugins/ServerToolkit/style.css",
+        "src/testcordplugins/ServerToolkit/tabs/ChannelsTab.tsx",
+        "src/testcordplugins/ServerToolkit/tabs/EmojisTab.tsx",
+        "src/testcordplugins/ServerToolkit/tabs/MembersTab.tsx",
+        "src/testcordplugins/ServerToolkit/tabs/OverviewTab.tsx",
+        "src/testcordplugins/ServerToolkit/tabs/PermissionsTab.tsx",
+        "src/testcordplugins/ServerToolkit/tabs/RolesTab.tsx",
+        "src/testcordplugins/ServerToolkit/tabs/WebhooksTab.tsx",
+        "src/testcordplugins/ServerToolkit/XRayModal.tsx"
+      ]
+    },
+    {
+      "name": "AutoBanMenu",
+      "folder": "src/testcordplugins/autoBanMenu",
+      "entry": "src/testcordplugins/autoBanMenu/index.tsx",
+      "files": [
+        "src/testcordplugins/autoBanMenu/index.tsx"
+      ]
+    },
+    {
+      "name": "MultiServerAutoban",
+      "folder": "src/testcordplugins/MultiServerAutoban",
+      "entry": "src/testcordplugins/MultiServerAutoban/index.tsx",
+      "files": [
+        "src/testcordplugins/MultiServerAutoban/index.tsx"
+      ]
+    },
+    {
+      "name": "AutoClaim",
+      "folder": "src/testcordplugins/autoClaim",
+      "entry": "src/testcordplugins/autoClaim/index.tsx",
+      "files": [
+        "src/testcordplugins/autoClaim/index.tsx"
+      ]
+    },
+    {
+      "name": "AutoBump",
+      "folder": "src/testcordplugins/AutoBumpSelf",
+      "entry": "src/testcordplugins/AutoBumpSelf/index.ts",
+      "files": [
+        "src/testcordplugins/AutoBumpSelf/index.ts"
+      ]
+    },
+    {
+      "name": "OwoSelf",
+      "folder": "src/testcordplugins/owoself",
+      "entry": "src/testcordplugins/owoself/index.tsx",
+      "files": [
+        "src/testcordplugins/owoself/accounts.ts",
+        "src/testcordplugins/owoself/dashboard.tsx",
+        "src/testcordplugins/owoself/engine.ts",
+        "src/testcordplugins/owoself/index.tsx",
+        "src/testcordplugins/owoself/settings.ts"
+      ]
+    },
+    {
+      "name": "GreedCmds",
+      "folder": "src/testcordplugins/greedcmds",
+      "entry": "src/testcordplugins/greedcmds/index.tsx",
+      "files": [
+        "src/testcordplugins/greedcmds/index.tsx"
+      ]
+    },
+    {
+      "name": "vcOwnerDetector",
+      "folder": "src/testcordplugins/vcOwnerDetector",
+      "entry": "src/testcordplugins/vcOwnerDetector/index.tsx",
+      "files": [
+        "src/testcordplugins/vcOwnerDetector/index.tsx",
+        "src/testcordplugins/vcOwnerDetector/style.css"
+      ]
+    },
+    {
+      "name": "MassDM",
+      "folder": "src/testcordplugins/MassDM",
+      "entry": "src/testcordplugins/MassDM/index.tsx",
+      "files": [
+        "src/testcordplugins/MassDM/index.tsx"
+      ]
+    },
+    {
+      "name": "GhostTyping",
+      "folder": "src/testcordplugins/GhostTyping",
+      "entry": "src/testcordplugins/GhostTyping/index.tsx",
+      "files": [
+        "src/testcordplugins/GhostTyping/index.tsx"
+      ]
+    },
+    {
+      "name": "AutoRedeem",
+      "folder": "src/testcordplugins/autoRedeem",
+      "entry": "src/testcordplugins/autoRedeem/index.tsx",
+      "files": [
+        "src/testcordplugins/autoRedeem/captcha.ts",
+        "src/testcordplugins/autoRedeem/captchaWarning.tsx",
+        "src/testcordplugins/autoRedeem/channelWarmup.ts",
+        "src/testcordplugins/autoRedeem/claimFence.ts",
+        "src/testcordplugins/autoRedeem/components/LogTab.tsx",
+        "src/testcordplugins/autoRedeem/giftCodes.ts",
+        "src/testcordplugins/autoRedeem/index.tsx",
+        "src/testcordplugins/autoRedeem/native.ts",
+        "src/testcordplugins/autoRedeem/nightyAlts.ts",
+        "src/testcordplugins/autoRedeem/store.ts",
+        "src/testcordplugins/autoRedeem/types.ts",
+        "src/testcordplugins/autoRedeem/webhook.ts"
+      ]
+    },
+    {
+      "name": "MimicTroll",
+      "folder": "src/testcordplugins/mimicTroll",
+      "entry": "src/testcordplugins/mimicTroll/index.tsx",
+      "files": [
+        "src/testcordplugins/mimicTroll/index.tsx"
+      ]
+    },
+    {
+      "name": "StickyMessages",
+      "folder": "src/testcordplugins/stickymessages",
+      "entry": "src/testcordplugins/stickymessages/index.tsx",
+      "files": [
+        "src/testcordplugins/stickymessages/index.tsx"
+      ]
+    },
+    {
+      "name": "gctrap",
+      "folder": "src/testcordplugins/gctrap",
+      "entry": "src/testcordplugins/gctrap/index.tsx",
+      "files": [
+        "src/testcordplugins/gctrap/actions.ts",
+        "src/testcordplugins/gctrap/api.ts",
+        "src/testcordplugins/gctrap/components/DashboardTab.tsx",
+        "src/testcordplugins/gctrap/components/GroupCard.tsx",
+        "src/testcordplugins/gctrap/components/LogTab.tsx",
+        "src/testcordplugins/gctrap/components/NewTab.tsx",
+        "src/testcordplugins/gctrap/components/UserPicker.tsx",
+        "src/testcordplugins/gctrap/index.tsx",
+        "src/testcordplugins/gctrap/settings.ts",
+        "src/testcordplugins/gctrap/store.ts",
+        "src/testcordplugins/gctrap/style.css",
+        "src/testcordplugins/gctrap/types.ts",
+        "src/testcordplugins/gctrap/utils.tsx"
+      ]
+    },
+    {
+      "name": "MiniGames",
+      "folder": "src/testcordplugins/MiniGames",
+      "entry": "src/testcordplugins/MiniGames/index.tsx",
+      "files": [
+        "src/testcordplugins/MiniGames/boards.tsx",
+        "src/testcordplugins/MiniGames/dm.ts",
+        "src/testcordplugins/MiniGames/engine.ts",
+        "src/testcordplugins/MiniGames/index.tsx",
+        "src/testcordplugins/MiniGames/protocol.ts",
+        "src/testcordplugins/MiniGames/store.ts"
+      ]
+    },
+    {
+      "name": "WordBomb",
+      "folder": "src/testcordplugins/wordBomb",
+      "entry": "src/testcordplugins/wordBomb/index.tsx",
+      "files": [
+        "src/testcordplugins/wordBomb/components/WordBombOverlay.tsx",
+        "src/testcordplugins/wordBomb/index.tsx",
+        "src/testcordplugins/wordBomb/styles.css"
+      ]
+    },
+    {
+      "name": "WikiLookup",
+      "folder": "src/testcordplugins/wikiLookup",
+      "entry": "src/testcordplugins/wikiLookup/index.ts",
+      "files": [
+        "src/testcordplugins/wikiLookup/index.ts"
+      ]
+    }
+  ],
+  "support": [
+    {
+      "source": "src/utils/testcordI18n.ts",
+      "target": "src/testcordplugins/_support/i18n.ts"
+    },
+    {
+      "source": "src/utils/testcordModals.ts",
+      "target": "src/testcordplugins/_support/modals.ts"
+    },
+    {
+      "source": "src/utils/apiKeyWarning.tsx",
+      "target": "src/testcordplugins/_support/apiKeyWarning.tsx"
+    },
+    {
+      "source": "src/utils/localStorage.ts",
+      "target": "src/testcordplugins/_support/localStorage.ts"
+    },
+    {
+      "source": "src/utils/pluginIds.ts",
+      "target": "src/testcordplugins/_support/pluginIds.ts"
+    },
+    {
+      "source": "src/testcordplugins/TestcordHelper/iconColors.ts",
+      "target": "src/testcordplugins/_support/iconColors.ts"
+    },
+    {
+      "source": "src/api/RuntimeInterposition.ts",
+      "target": "src/testcordplugins/_support/RuntimeInterposition.ts"
+    },
+    {
+      "source": "src/api/RuntimeInterpositionCore.ts",
+      "target": "src/testcordplugins/_support/RuntimeInterpositionCore.ts"
+    },
+    {
+      "source": "src/main/utils/safeFetch.ts",
+      "target": "src/testcordplugins/_support/safeFetch.ts"
+    },
+    {
+      "source": "src/api/TestcordRequestCoordinator.ts",
+      "target": "src/testcordplugins/_support/TestcordRequestCoordinator.ts"
+    }
+  ]
+}
