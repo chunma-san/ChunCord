@@ -1,3 +1,8 @@
+<p align="center">
+  <a href="https://discord.com/users/891081797318897715"><img src="https://lanyard.cnrad.dev/api/891081797318897715?theme=dark&bg=0d1117&borderRadius=16px&showDisplayName=true&animated=true" alt="chunma Discord profile and activity" /></a>
+</p>
+
+
 # [<img src="./browser/icon.png" width="40" align="left" alt="Equicord">](https://github.com/Equicord/Equicord) Equicord
 
 [![Equibop](https://img.shields.io/badge/Equibop-grey?style=flat)](https://github.com/Equicord/Equibop)
