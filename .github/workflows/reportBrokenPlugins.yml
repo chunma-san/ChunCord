@@ -37,9 +37,13 @@ permissions:
 
 jobs:
     TestPlugins:
-        name: Test Patches
+        name: Test Patches (${{ matrix.discord_branch }})
         runs-on: ubuntu-latest
         timeout-minutes: 25
+        strategy:
+            fail-fast: false
+            matrix:
+                discord_branch: ${{ fromJSON(inputs.discord_branch == 'stable' && '["stable"]' || inputs.discord_branch == 'canary' && '["canary"]' || '["stable", "canary"]') }}
 
         steps:
             - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
@@ -69,33 +73,12 @@ jobs:
 
                   esbuild scripts/generateReport.ts > dist/report.mjs
 
-                  stable_output_file=$(mktemp)
-                  canary_output_file=$(mktemp)
-
-                  pids=""
-
-                  branch="$DISCORD_BRANCH"
-
-                  if [[ "$branch" = "both" || "$branch" = "stable" ]]; then
-                    node dist/report.mjs > "$stable_output_file" &
-                    pids+=" $!"
-                  fi
-
-                  if [[ "$branch" = "both" || "$branch" = "canary" ]]; then
-                    USE_CANARY=true node dist/report.mjs > "$canary_output_file" &
-                    pids+=" $!"
-                  fi
-
+                  report_file=$(mktemp)
                   exit_code=0
-                  for pid in $pids; do
-                      if ! wait "$pid"; then
-                        exit_code=1
-                      fi
-                  done
-
-                  cat "$stable_output_file" "$canary_output_file" >> $GITHUB_STEP_SUMMARY
+                  node dist/report.mjs > "$report_file" || exit_code=$?
+                  cat "$report_file" >> "$GITHUB_STEP_SUMMARY"
                   exit $exit_code
               env:
-                  DISCORD_BRANCH: ${{ inputs.discord_branch || 'both' }}
+                  USE_CANARY: ${{ matrix.discord_branch == 'canary' && 'true' || 'false' }}
                   # Scheduled fork reports stay in the GitHub job summary.
                   WEBHOOK_URL: ${{ inputs.webhook_url }}

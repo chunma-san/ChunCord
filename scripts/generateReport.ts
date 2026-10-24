@@ -41,6 +41,7 @@ let metaData = {
 
 const browser = await pup.launch({
     headless: true,
+    protocolTimeout: 300000,
     executablePath: process.env.CHROMIUM_BIN,
     args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
@@ -237,7 +238,15 @@ async function printReport() {
     }
 }
 
-page.on("console", async e => {
+page.on("console", e => {
+    void handleConsole(e).catch(error => {
+        process.exitCode = 1;
+        report.otherErrors.push(`Could not inspect a browser console event: ${String(error)}`);
+        logStderr("Console inspection failed:", String(error));
+    });
+});
+
+async function handleConsole(e: import("puppeteer-core").ConsoleMessage) {
     const level = e.type();
     const rawArgs = e.args();
 
@@ -256,7 +265,9 @@ page.on("console", async e => {
         }
     }
 
-    const firstArg = await rawArgs[0]?.jsonValue();
+    // Reading the prefix does not need a CDP round trip while the page is busy
+    // importing thousands of Discord chunks.
+    const firstArg = e.text().split(" ", 1)[0];
 
     const isEquicord = firstArg === "[Equicord]";
     const isDebug = firstArg === "[PUP_DEBUG]";
@@ -357,7 +368,7 @@ page.on("console", async e => {
             }
         }
     }
-});
+}
 
 page.on("error", e => logStderr("[Error]", e.message));
 page.on("pageerror", (e: any) => {
