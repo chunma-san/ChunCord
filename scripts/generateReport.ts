@@ -250,6 +250,18 @@ async function finishReport(incomplete?: string) {
     }
     clearTimeout(reportDeadline);
     try {
+        const failedModules = [...new Set(report.badPatches.filter(patch => patch.type === "errored").map(patch => patch.id))];
+        if (!incomplete && failedModules.length) {
+            try {
+                const factories = await Promise.race([
+                    page.evaluate(ids => Object.fromEntries(ids.map(id => [id, String(Vencord.Webpack.wreq.m[id]).slice(0, 1_000_000)])), failedModules),
+                    new Promise<never>((_, reject) => setTimeout(() => reject(new Error("Module capture timed out")), 10000))
+                ]);
+                writeFileSync(`dist/patch-module-sources-${CANARY ? "canary" : "stable"}.json`, JSON.stringify(factories, null, 2));
+            } catch (error) {
+                logStderr("Could not capture failed public module factories:", String(error));
+            }
+        }
         await printReport();
     } finally {
         await Promise.race([browser.close().catch(error => {

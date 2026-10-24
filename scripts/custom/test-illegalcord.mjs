@@ -111,6 +111,27 @@ assert.equal(state.listeners.size, 0);
 assert.equal(state.restores, 1);
 assert.equal(session.webRequest.onBeforeRequest, originalRequest);
 
+const originalStart = () => {};
+state.registry = {
+    DiscreetMode: { name: "DiscreetMode", dependencies: ["HeaderBarAPI"] },
+    ClientDiagnostics: { name: "ClientDiagnostics" },
+    HeaderBarAPI: { name: "HeaderBarAPI" },
+    Optional: { name: "Optional", start: originalStart }
+};
+const { installPluginSuspension } = await fixture("src/illegalcordplugins/discreetMode/suspension.ts", {
+    "@api/PluginManager": "export const isPluginEnabled=()=>false,startPlugin=()=>{},stopPlugin=()=>true;",
+    "@api/Settings": "export const SettingsStore={addChangeListener(){},removeChangeListener(){}};",
+    "@api/Styles": "export const disableStyle=()=>{},enableStyle=()=>{},isStyleEnabled=()=>false;",
+    "@utils/Logger": "export class Logger { error(){} }",
+    "~plugins": 'export default globalThis.fixture.registry;export const PluginMeta={HeaderBarAPI:{folderName:"src/plugins/_api/headerBar.tsx"}};',
+    "./settings": 'export const settings={store:{active:false,mode:"hide"}};',
+    "./fullSuspension": "export const installFullSuspension=()=>({onReady(){},stop(){}});"
+}, state);
+const suspension = installPluginSuspension();
+assert.notEqual(state.registry.Optional.start, originalStart);
+suspension.stop();
+assert.equal(state.registry.Optional.start, originalStart);
+
 const { guardNativeMethods } = await fixture("src/testcordplugins/_support/nativeGuard.ts", {
     "@main/settings": "export const RendererSettings={store:globalThis.fixture.settings};"
 }, state);

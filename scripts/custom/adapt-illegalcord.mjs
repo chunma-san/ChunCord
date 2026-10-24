@@ -56,6 +56,7 @@ for (const plugin of manifest.plugins) for (const file of plugin.files) {
         .replace("            larpCordPrivacy.stop();\n", "")
         .replace("Client Diagnostics and LarpCord contact replacements remain available.", "Client Diagnostics remain available.")
         .replace("LarpCord profile changes are suspended in this mode. Its email and phone replacements remain active.", "Profile customization plugins are suspended in this mode.");
+    if (file.endsWith("discreetMode/suspension.ts")) code = code.replace('["DiscreetMode", "LarpCord", "ClientDiagnostics"]', '["DiscreetMode", "ClientDiagnostics"]');
     const ast = ts.createSourceFile(file, code, ts.ScriptTarget.Latest, true);
     const edits = [];
     function visit(node) {

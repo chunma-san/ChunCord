@@ -18,7 +18,7 @@ import { settings } from "./settings";
 const logger = new Logger("DiscreetMode");
 
 export function installPluginSuspension() {
-    const retained = new Set(["DiscreetMode", "LarpCord", "ClientDiagnostics"]);
+    const retained = new Set(["DiscreetMode", "ClientDiagnostics"]);
     for (const [name, meta] of Object.entries(PluginMeta)) {
         if (/\/(?:_api|_core)\//.test(meta.folderName)) retained.add(name);
     }
