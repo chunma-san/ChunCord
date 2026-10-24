@@ -15,6 +15,7 @@ import { Heading } from "@components/Heading";
 import { FolderIcon, GithubIcon, LogIcon, PaintbrushIcon, RestartIcon } from "@components/Icons";
 import { Notice } from "@components/Notice";
 import { Paragraph } from "@components/Paragraph";
+import { Link } from "@components/Link";
 import { openContributorModal, openPluginModal, SettingsTab, wrapTab } from "@components/settings";
 import { QuickAction, QuickActionCard } from "@components/settings/QuickAction";
 import { SpecialCard } from "@components/settings/SpecialCard";
@@ -270,8 +271,11 @@ function EquicordSettings() {
             <Divider className={Margins.top20} />
 
             <Heading className={Margins.top20}>Client Settings</Heading>
+            <Paragraph>
+                ChunCord is maintained by <Link href="https://github.com/chunma-san">chunma-san</Link>, based on Equicord and Vencord with selected TestCord plugins.
+            </Paragraph>
             <Paragraph className={Margins.bottom16}>
-                Configure how Equicord behaves and integrates with Discord. These settings affect the Discord client's appearance and behavior.
+                Configure how ChunCord behaves and integrates with Discord. These settings affect the Discord client's appearance and behavior.
             </Paragraph>
             <Notice.Info className={Margins.bottom20} style={{ width: "100%" }}>
                 You can customize where this settings section appears in Discord's settings menu by configuring the{" "}
@@ -294,7 +298,7 @@ function EquicordSettings() {
     );
 }
 
-export default wrapTab(EquicordSettings, "Equicord Settings");
+export default wrapTab(EquicordSettings, "ChunCord Settings");
 
 export function isEquicordDonor(userId: string): boolean {
     const donorBadges = BadgeAPI.getEquicordDonorBadges(userId);

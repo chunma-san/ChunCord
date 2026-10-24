@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 param([string]$Project, [switch]$Force)
 $ErrorActionPreference = 'Stop'
-if (!$Project) { throw 'Specify the custom Equicord project folder.' }
+if (!$Project) { throw 'Specify the ChunCord project folder.' }
 $Project = (Resolve-Path -LiteralPath $Project).Path
 $state = Join-Path (Split-Path $Project) '.equicord-updater'
 New-Item -ItemType Directory -Path $state -Force | Out-Null
@@ -28,7 +28,7 @@ try {
     }
     "`n$(Get-Date -Format o) Checking validated custom fork" | Out-File $log -Append -Encoding utf8
     $origin = (Run $tools.git @('-C', $Project, 'remote', 'get-url', 'origin') | Out-String).Trim()
-    if ($origin -notmatch '^https://github\.com/chunma-san/Equicord(?:\.git)?$') { throw 'Unexpected custom fork repository.' }
+    if ($origin -notmatch '^https://github\.com/chunma-san/(?:Equicord|ChunCord)(?:\.git)?$') { throw 'Unexpected custom fork repository.' }
     Run $tools.git @('-C', $Project, 'fetch', 'origin', 'custom') | Out-Null
     $target = (Run $tools.git @('-C', $Project, 'rev-parse', 'FETCH_HEAD') | Out-String).Trim()
     $head = (Run $tools.git @('-C', $Project, 'rev-parse', 'HEAD') | Out-String).Trim()

@@ -18,7 +18,9 @@
 
 import { fetchBuffer, fetchJson } from "@main/utils/http";
 import { VENCORD_USER_AGENT } from "@shared/vencordUserAgent";
-import { writeFileSync } from "original-fs";
+import { parseChunCordRelease, releaseChecksum, releaseMatches, type ChunCordRelease } from "@shared/chuncordRelease";
+import { createHash, randomUUID } from "crypto";
+import { existsSync, renameSync, unlinkSync, writeFileSync } from "original-fs";
 
 import gitHash from "~git-hash";
 import gitRemote from "~git-remote";
@@ -27,7 +29,7 @@ import { Updater } from ".";
 import { ASAR_FILE } from "./common";
 
 const API_BASE = `https://api.github.com/repos/${gitRemote}`;
-let PendingUpdate: string | null = null;
+let PendingUpdate: ChunCordRelease | null = null;
 
 async function githubGet<T = any>(endpoint: string) {
     return fetchJson<T>(API_BASE + endpoint, {
@@ -44,7 +46,8 @@ async function listUpdates() {
     const isOutdated = await fetchUpdate();
     if (!isOutdated) return [];
 
-    const data = await githubGet(`/compare/${gitHash}...HEAD`);
+    if (!PendingUpdate) return [];
+    const data = await githubGet(`/compare/${gitHash}...${PendingUpdate.revision}`);
 
     return data.commits.map((c: any) => ({
         hash: c.sha,
@@ -54,14 +57,12 @@ async function listUpdates() {
 }
 
 async function fetchUpdate() {
-    const data = await githubGet("/releases/latest");
-
-    const hash = data.name.slice(data.name.lastIndexOf(" ") + 1);
-    if (hash === gitHash)
+    const data = parseChunCordRelease(await githubGet<unknown>("/releases/latest"), ASAR_FILE);
+    if (releaseMatches(data.revision, gitHash)) {
+        PendingUpdate = null;
         return false;
-
-    const asset = data.assets.find(a => a.name === ASAR_FILE);
-    PendingUpdate = asset.browser_download_url;
+    }
+    PendingUpdate = data;
 
     return true;
 }
@@ -69,8 +70,19 @@ async function fetchUpdate() {
 async function applyUpdate() {
     if (!PendingUpdate) return true;
 
-    const data = await fetchBuffer(PendingUpdate);
-    writeFileSync(__dirname, data, { flush: true });
+    const candidate = PendingUpdate;
+    const checksumList = await fetchBuffer(candidate.checksums.browser_download_url);
+    const expected = releaseChecksum(checksumList.toString("utf8"), ASAR_FILE);
+    const data = await fetchBuffer(candidate.asset.browser_download_url);
+    if (data.length !== candidate.asset.size || createHash("sha256").update(data).digest("hex") !== expected)
+        throw new Error("ChunCord update verification failed. The installed version was preserved.");
+    const temporary = `${__dirname}.update-${randomUUID()}`;
+    try {
+        writeFileSync(temporary, data, { flush: true, flag: "wx" });
+        renameSync(temporary, __dirname);
+    } finally {
+        if (existsSync(temporary)) unlinkSync(temporary);
+    }
 
     PendingUpdate = null;
 

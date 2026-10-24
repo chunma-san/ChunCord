@@ -20,7 +20,7 @@
 // @ts-check
 
 import { createPackage } from "@electron/asar";
-import { readdir, writeFile } from "fs/promises";
+import { copyFile, readdir, writeFile } from "fs/promises";
 import { dirname, join, resolve } from "path";
 import { fileURLToPath } from "url";
 
@@ -229,12 +229,16 @@ const buildConfigs = ([
 await buildOrWatchAll(buildConfigs);
 
 await Promise.all([
+    copyFile("LICENSE", "dist/desktop/LICENSE"),
+    copyFile("LICENSE", "dist/equibop/LICENSE"),
+    copyFile("patches/testcord/LICENSE", "dist/desktop/TestCord-LICENSE"),
+    copyFile("patches/testcord/LICENSE", "dist/equibop/TestCord-LICENSE"),
     writeFile("dist/desktop/package.json", JSON.stringify({
-        name: "equicord",
+        name: "chuncord",
         main: "patcher.js"
     })),
     writeFile("dist/equibop/package.json", JSON.stringify({
-        name: "equicord",
+        name: "chuncord",
         main: "main.js"
     }))
 ]);
