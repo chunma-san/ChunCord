@@ -106,7 +106,8 @@ const enum SearchStatus {
     NEW,
     USER_PLUGINS,
     API_PLUGINS,
-    TESTCORD
+    TESTCORD,
+    ILLEGALCORD
 }
 
 export const ExcludedReasons: Record<PluginTarget, string> = {
@@ -224,6 +225,9 @@ export default function PluginSettings() {
                 break;
             case SearchStatus.TESTCORD:
                 if (!PluginMeta[plugin.name].folderName.startsWith("src/testcordplugins/")) return false;
+                break;
+            case SearchStatus.ILLEGALCORD:
+                if (!PluginMeta[plugin.name].folderName.startsWith("src/illegalcordplugins/")) return false;
                 break;
             case SearchStatus.NEW:
                 if (!newPluginsSet?.has(plugin.name)) return false;
@@ -427,6 +431,7 @@ export default function PluginSettings() {
                             { label: "Show Equicord", value: SearchStatus.EQUICORD },
                             { label: "Show Vencord", value: SearchStatus.VENCORD },
                             { label: "Show TestCord", value: SearchStatus.TESTCORD },
+                            { label: "Show Illegalcord", value: SearchStatus.ILLEGALCORD },
                             { label: "Show New", value: SearchStatus.NEW },
                             hasUserPlugins && { label: "Show UserPlugins", value: SearchStatus.USER_PLUGINS },
                             { label: "Show API Plugins", value: SearchStatus.API_PLUGINS },

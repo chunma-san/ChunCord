@@ -46,7 +46,7 @@ for (const [file, hash] of Object.entries(lock.ported_files)) {
     assert.equal(createHash("sha256").update(normalized).digest("hex"), hash, `${file} differs from the recorded port`);
 }
 const available = new Set(manifest.plugins.map(p => p.name));
-for (const directory of ["src/plugins", "src/equicordplugins", "src/userplugins"])
+for (const directory of ["src/plugins", "src/equicordplugins", "src/userplugins", "src/illegalcordplugins"].filter(directory => fs.existsSync(directory)))
     for (const entry of fs.readdirSync(directory, { recursive: true })) {
         if (!/\.tsx?$/.test(entry)) continue;
         const code = fs.readFileSync(path.join(directory, entry), "utf8");

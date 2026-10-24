@@ -1,0 +1,732 @@
+{
+  "source": "https://github.com/ImHisako/Illegalcord",
+  "branch": "main",
+  "plugins": [
+    {
+      "name": "1FA",
+      "folder": "src/illegalcordplugins/2FA HIder",
+      "entry": "src/illegalcordplugins/2FA HIder/index.tsx",
+      "files": [
+        "src/illegalcordplugins/2FA HIder/index.tsx"
+      ]
+    },
+    {
+      "name": "AnonLi",
+      "folder": "src/illegalcordplugins/AnonLiDrop",
+      "entry": "src/illegalcordplugins/AnonLiDrop/index.tsx",
+      "files": [
+        "src/illegalcordplugins/AnonLiDrop/index.tsx",
+        "src/illegalcordplugins/AnonLiDrop/native.ts"
+      ]
+    },
+    {
+      "name": "AutoModBypass",
+      "folder": "src/illegalcordplugins/AutoModBypass",
+      "entry": "src/illegalcordplugins/AutoModBypass/index.tsx",
+      "files": [
+        "src/illegalcordplugins/AutoModBypass/index.tsx"
+      ]
+    },
+    {
+      "name": "BadgeSelector",
+      "folder": "src/illegalcordplugins/BadgesSelector",
+      "entry": "src/illegalcordplugins/BadgesSelector/index.tsx",
+      "files": [
+        "src/illegalcordplugins/BadgesSelector/index.tsx",
+        "src/illegalcordplugins/BadgesSelector/README.md"
+      ]
+    },
+    {
+      "name": "BetterMicrophone",
+      "folder": "src/illegalcordplugins/betterMicrophone.desktop",
+      "entry": "src/illegalcordplugins/betterMicrophone.desktop/index.tsx",
+      "files": [
+        "src/illegalcordplugins/betterMicrophone.desktop/components/index.tsx",
+        "src/illegalcordplugins/betterMicrophone.desktop/components/MicrophoneSettingsModal.tsx",
+        "src/illegalcordplugins/betterMicrophone.desktop/constants/constants.ts",
+        "src/illegalcordplugins/betterMicrophone.desktop/constants/index.ts",
+        "src/illegalcordplugins/betterMicrophone.desktop/index.tsx",
+        "src/illegalcordplugins/betterMicrophone.desktop/logger/index.ts",
+        "src/illegalcordplugins/betterMicrophone.desktop/modals/index.tsx",
+        "src/illegalcordplugins/betterMicrophone.desktop/patchers/index.ts",
+        "src/illegalcordplugins/betterMicrophone.desktop/patchers/microphone.ts",
+        "src/illegalcordplugins/betterMicrophone.desktop/stores/index.ts",
+        "src/illegalcordplugins/betterMicrophone.desktop/stores/microphoneStore.ts"
+      ]
+    },
+    {
+      "name": "BetterScreenshare",
+      "folder": "src/illegalcordplugins/betterScreenshare.desktop",
+      "entry": "src/illegalcordplugins/betterScreenshare.desktop/index.tsx",
+      "files": [
+        "src/illegalcordplugins/betterScreenshare.desktop/components/AudioSourceSelect.tsx",
+        "src/illegalcordplugins/betterScreenshare.desktop/components/index.tsx",
+        "src/illegalcordplugins/betterScreenshare.desktop/components/OpenScreenshareSettingsButton.tsx",
+        "src/illegalcordplugins/betterScreenshare.desktop/components/ScreenshareSettingsModal.tsx",
+        "src/illegalcordplugins/betterScreenshare.desktop/constants/constants.ts",
+        "src/illegalcordplugins/betterScreenshare.desktop/constants/index.ts",
+        "src/illegalcordplugins/betterScreenshare.desktop/index.tsx",
+        "src/illegalcordplugins/betterScreenshare.desktop/logger/index.ts",
+        "src/illegalcordplugins/betterScreenshare.desktop/modals/index.tsx",
+        "src/illegalcordplugins/betterScreenshare.desktop/patchers/index.ts",
+        "src/illegalcordplugins/betterScreenshare.desktop/patchers/screenshare.ts",
+        "src/illegalcordplugins/betterScreenshare.desktop/patchers/screenshareAudio.ts",
+        "src/illegalcordplugins/betterScreenshare.desktop/patches/index.ts",
+        "src/illegalcordplugins/betterScreenshare.desktop/patches/screenshareModal.tsx",
+        "src/illegalcordplugins/betterScreenshare.desktop/README.md",
+        "src/illegalcordplugins/betterScreenshare.desktop/stores/index.ts",
+        "src/illegalcordplugins/betterScreenshare.desktop/stores/screenshareAudioStore.ts",
+        "src/illegalcordplugins/betterScreenshare.desktop/stores/screenshareStore.ts"
+      ]
+    },
+    {
+      "name": "ClientDiagnostics",
+      "folder": "src/illegalcordplugins/ClientDiagnostics",
+      "entry": "src/illegalcordplugins/ClientDiagnostics/index.tsx",
+      "files": [
+        "src/illegalcordplugins/ClientDiagnostics/causes.tsx",
+        "src/illegalcordplugins/ClientDiagnostics/health.tsx",
+        "src/illegalcordplugins/ClientDiagnostics/index.tsx",
+        "src/illegalcordplugins/ClientDiagnostics/style.css"
+      ]
+    },
+    {
+      "name": "ClientIcon",
+      "folder": "src/illegalcordplugins/ClientIcon.desktop",
+      "entry": "src/illegalcordplugins/ClientIcon.desktop/index.tsx",
+      "files": [
+        "src/illegalcordplugins/ClientIcon.desktop/index.tsx",
+        "src/illegalcordplugins/ClientIcon.desktop/linux.ts",
+        "src/illegalcordplugins/ClientIcon.desktop/native.ts",
+        "src/illegalcordplugins/ClientIcon.desktop/shortcuts.ts"
+      ]
+    },
+    {
+      "name": "ConfigEditor",
+      "folder": "src/illegalcordplugins/configEditor.desktop",
+      "entry": "src/illegalcordplugins/configEditor.desktop/index.tsx",
+      "files": [
+        "src/illegalcordplugins/configEditor.desktop/Backups.tsx",
+        "src/illegalcordplugins/configEditor.desktop/Cleanup.tsx",
+        "src/illegalcordplugins/configEditor.desktop/config.ts",
+        "src/illegalcordplugins/configEditor.desktop/Editor.tsx",
+        "src/illegalcordplugins/configEditor.desktop/index.tsx",
+        "src/illegalcordplugins/configEditor.desktop/native.ts",
+        "src/illegalcordplugins/configEditor.desktop/SettingsPage.tsx",
+        "src/illegalcordplugins/configEditor.desktop/style.css",
+        "src/illegalcordplugins/configEditor.desktop/utils.ts"
+      ]
+    },
+    {
+      "name": "DetectBlock",
+      "folder": "src/illegalcordplugins/detectBlock",
+      "entry": "src/illegalcordplugins/detectBlock/index.tsx",
+      "files": [
+        "src/illegalcordplugins/detectBlock/BlockedWarningModal.tsx",
+        "src/illegalcordplugins/detectBlock/DetectBlockBadge.tsx",
+        "src/illegalcordplugins/detectBlock/detection.ts",
+        "src/illegalcordplugins/detectBlock/index.tsx",
+        "src/illegalcordplugins/detectBlock/styles.css"
+      ]
+    },
+    {
+      "name": "DisableAnimations",
+      "folder": "src/illegalcordplugins/disableAnimations",
+      "entry": "src/illegalcordplugins/disableAnimations/index.ts",
+      "files": [
+        "src/illegalcordplugins/disableAnimations/index.ts"
+      ]
+    },
+    {
+      "name": "DiscordHardened",
+      "folder": "src/illegalcordplugins/DiscordHardened",
+      "entry": "src/illegalcordplugins/DiscordHardened/index.ts",
+      "files": [
+        "src/illegalcordplugins/DiscordHardened/AttachmentWarnings.tsx",
+        "src/illegalcordplugins/DiscordHardened/browsers.ts",
+        "src/illegalcordplugins/DiscordHardened/BrowserSettings.tsx",
+        "src/illegalcordplugins/DiscordHardened/index.ts",
+        "src/illegalcordplugins/DiscordHardened/microphonePrivacy.ts",
+        "src/illegalcordplugins/DiscordHardened/native.ts",
+        "src/illegalcordplugins/DiscordHardened/nativePermissions.ts",
+        "src/illegalcordplugins/DiscordHardened/nativeSecurity.ts",
+        "src/illegalcordplugins/DiscordHardened/nativeSession.ts",
+        "src/illegalcordplugins/DiscordHardened/network.ts",
+        "src/illegalcordplugins/DiscordHardened/policy.ts",
+        "src/illegalcordplugins/DiscordHardened/runtime.ts",
+        "src/illegalcordplugins/DiscordHardened/SecurityPanel.tsx",
+        "src/illegalcordplugins/DiscordHardened/session.ts",
+        "src/illegalcordplugins/DiscordHardened/SettingsPage.tsx",
+        "src/illegalcordplugins/DiscordHardened/style.css"
+      ]
+    },
+    {
+      "name": "DiscreetMode",
+      "folder": "src/illegalcordplugins/discreetMode",
+      "entry": "src/illegalcordplugins/discreetMode/index.tsx",
+      "files": [
+        "src/illegalcordplugins/discreetMode/fullSuspension.ts",
+        "src/illegalcordplugins/discreetMode/index.tsx",
+        "src/illegalcordplugins/discreetMode/pinDms.ts",
+        "src/illegalcordplugins/discreetMode/settings.ts",
+        "src/illegalcordplugins/discreetMode/style.css",
+        "src/illegalcordplugins/discreetMode/suspension.ts",
+        "src/illegalcordplugins/discreetMode/visuals.tsx"
+      ]
+    },
+    {
+      "name": "DontLimitMe",
+      "folder": "src/illegalcordplugins/dontLimitMe",
+      "entry": "src/illegalcordplugins/dontLimitMe/index.tsx",
+      "files": [
+        "src/illegalcordplugins/dontLimitMe/index.tsx"
+      ]
+    },
+    {
+      "name": "EmbeddedURLs",
+      "folder": "src/illegalcordplugins/embeddedURLs",
+      "entry": "src/illegalcordplugins/embeddedURLs/index.ts",
+      "files": [
+        "src/illegalcordplugins/embeddedURLs/index.ts"
+      ]
+    },
+    {
+      "name": "ExpandedWidgets",
+      "folder": "src/illegalcordplugins/expandedWidgets",
+      "entry": "src/illegalcordplugins/expandedWidgets/index.tsx",
+      "files": [
+        "src/illegalcordplugins/expandedWidgets/index.tsx"
+      ]
+    },
+    {
+      "name": "FakeMuteAndDeafen",
+      "folder": "src/illegalcordplugins/FakeMuteAndDeafen",
+      "entry": "src/illegalcordplugins/FakeMuteAndDeafen/index.tsx",
+      "files": [
+        "src/illegalcordplugins/FakeMuteAndDeafen/index.tsx"
+      ]
+    },
+    {
+      "name": "FastGifPicker",
+      "folder": "src/illegalcordplugins/FastGifPicker",
+      "entry": "src/illegalcordplugins/FastGifPicker/index.tsx",
+      "files": [
+        "src/illegalcordplugins/FastGifPicker/index.tsx"
+      ]
+    },
+    {
+      "name": "Hisako's Optimizations",
+      "folder": "src/illegalcordplugins/Hisako's Optimizations",
+      "entry": "src/illegalcordplugins/Hisako's Optimizations/index.tsx",
+      "files": [
+        "src/illegalcordplugins/Hisako's Optimizations/index.tsx"
+      ]
+    },
+    {
+      "name": "IGP",
+      "folder": "src/illegalcordplugins/IGP",
+      "entry": "src/illegalcordplugins/IGP/index.tsx",
+      "files": [
+        "src/illegalcordplugins/IGP/decryptModal.tsx",
+        "src/illegalcordplugins/IGP/index.tsx",
+        "src/illegalcordplugins/IGP/modal.tsx",
+        "src/illegalcordplugins/IGP/openpgp.min.mjs",
+        "src/illegalcordplugins/IGP/READMEEN.md",
+        "src/illegalcordplugins/IGP/READMEIT.md"
+      ]
+    },
+    {
+      "name": "IllegalMessageLogger",
+      "folder": "src/illegalcordplugins/illegalMessageLogger",
+      "entry": "src/illegalcordplugins/illegalMessageLogger/index.tsx",
+      "files": [
+        "src/illegalcordplugins/illegalMessageLogger/db.ts",
+        "src/illegalcordplugins/illegalMessageLogger/engine.ts",
+        "src/illegalcordplugins/illegalMessageLogger/index.tsx",
+        "src/illegalcordplugins/illegalMessageLogger/io.ts",
+        "src/illegalcordplugins/illegalMessageLogger/LogsModal.tsx",
+        "src/illegalcordplugins/illegalMessageLogger/search.ts",
+        "src/illegalcordplugins/illegalMessageLogger/settings.ts",
+        "src/illegalcordplugins/illegalMessageLogger/style.css",
+        "src/illegalcordplugins/illegalMessageLogger/types.ts",
+        "src/illegalcordplugins/illegalMessageLogger/utils.ts"
+      ]
+    },
+    {
+      "name": "MassMention",
+      "folder": "src/illegalcordplugins/MassMention",
+      "entry": "src/illegalcordplugins/MassMention/index.ts",
+      "files": [
+        "src/illegalcordplugins/MassMention/index.ts"
+      ]
+    },
+    {
+      "name": "MutualScanner",
+      "folder": "src/illegalcordplugins/mutualScanner",
+      "entry": "src/illegalcordplugins/mutualScanner/index.tsx",
+      "files": [
+        "src/illegalcordplugins/mutualScanner/index.tsx",
+        "src/illegalcordplugins/mutualScanner/memberHydrator.ts",
+        "src/illegalcordplugins/mutualScanner/MutualScannerTab.tsx",
+        "src/illegalcordplugins/mutualScanner/runtime.ts",
+        "src/illegalcordplugins/mutualScanner/store.ts",
+        "src/illegalcordplugins/mutualScanner/styles.css",
+        "src/illegalcordplugins/mutualScanner/types.ts",
+        "src/illegalcordplugins/mutualScanner/utils.ts"
+      ]
+    },
+    {
+      "name": "OpenOptimizer",
+      "folder": "src/illegalcordplugins/openOptimizer",
+      "entry": "src/illegalcordplugins/openOptimizer/index.ts",
+      "files": [
+        "src/illegalcordplugins/openOptimizer/index.ts"
+      ]
+    },
+    {
+      "name": "OpSec",
+      "folder": "src/illegalcordplugins/OpSec-Illegalcord",
+      "entry": "src/illegalcordplugins/OpSec-Illegalcord/index.tsx",
+      "files": [
+        "src/illegalcordplugins/OpSec-Illegalcord/index.tsx",
+        "src/illegalcordplugins/OpSec-Illegalcord/README.md"
+      ]
+    },
+    {
+      "name": "PhilsPluginLibrary",
+      "folder": "src/illegalcordplugins/philsPluginLibrary",
+      "entry": "src/illegalcordplugins/philsPluginLibrary/index.tsx",
+      "files": [
+        "src/illegalcordplugins/philsPluginLibrary/components/AuthorSummaryItem.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/buttons/CopyButton.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/buttons/DeleteButton.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/buttons/IconTooltipButton.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/buttons/index.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/buttons/NewButton.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/buttons/SaveButton.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/ContributorAuthorSummary.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/index.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/settingsModal/index.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/settingsModal/SettingsModal.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/settingsModal/SettingsModalCard.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/settingsModal/SettingsModalCardItem.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/settingsModal/SettingsModalCardRow.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/settingsModal/SettingsModalProfilesCard.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/settingsPanel/index.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/settingsPanel/SettingsPanel.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/settingsPanel/SettingsPanelButton.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/settingsPanel/SettingsPanelRow.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/components/settingsPanel/SettingsPanelTooltipButton.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/constants/constants.ts",
+        "src/illegalcordplugins/philsPluginLibrary/constants/index.ts",
+        "src/illegalcordplugins/philsPluginLibrary/discordModules/classes.ts",
+        "src/illegalcordplugins/philsPluginLibrary/discordModules/components.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/discordModules/index.ts",
+        "src/illegalcordplugins/philsPluginLibrary/discordModules/modules.ts",
+        "src/illegalcordplugins/philsPluginLibrary/discordModules/stores.ts",
+        "src/illegalcordplugins/philsPluginLibrary/emitter/emitter.ts",
+        "src/illegalcordplugins/philsPluginLibrary/emitter/index.ts",
+        "src/illegalcordplugins/philsPluginLibrary/icons/index.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/index.tsx",
+        "src/illegalcordplugins/philsPluginLibrary/patchers/index.ts",
+        "src/illegalcordplugins/philsPluginLibrary/patchers/patcher.ts",
+        "src/illegalcordplugins/philsPluginLibrary/patches/audio.ts",
+        "src/illegalcordplugins/philsPluginLibrary/patches/index.ts",
+        "src/illegalcordplugins/philsPluginLibrary/patches/video.ts",
+        "src/illegalcordplugins/philsPluginLibrary/store/index.ts",
+        "src/illegalcordplugins/philsPluginLibrary/store/profileable.ts",
+        "src/illegalcordplugins/philsPluginLibrary/store/store.ts",
+        "src/illegalcordplugins/philsPluginLibrary/styles/index.ts",
+        "src/illegalcordplugins/philsPluginLibrary/styles/styles.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/common/index.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/constants/index.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/discordModules/classes/index.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/discordModules/classes/panelClasses.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/discordModules/components/index.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/discordModules/components/userSummaryItem.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/discordModules/index.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/discordModules/modules/conn.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/discordModules/modules/connection.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/discordModules/modules/framerateReducer.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/discordModules/modules/index.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/discordModules/modules/mediaEngine.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/discordModules/modules/utils.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/discordModules/modules/videoQualityManager.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/discordModules/stores/index.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/discordModules/stores/mediaEngineStore.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/index.ts",
+        "src/illegalcordplugins/philsPluginLibrary/types/typed-emitter.d.ts",
+        "src/illegalcordplugins/philsPluginLibrary/utils/index.ts",
+        "src/illegalcordplugins/philsPluginLibrary/utils/utils.ts"
+      ]
+    },
+    {
+      "name": "PresenceLab",
+      "folder": "src/illegalcordplugins/presenceLab",
+      "entry": "src/illegalcordplugins/presenceLab/index.tsx",
+      "files": [
+        "src/illegalcordplugins/presenceLab/index.tsx",
+        "src/illegalcordplugins/presenceLab/PresenceLabTab.tsx",
+        "src/illegalcordplugins/presenceLab/store.ts",
+        "src/illegalcordplugins/presenceLab/styles.css",
+        "src/illegalcordplugins/presenceLab/types.ts",
+        "src/illegalcordplugins/presenceLab/utils.ts"
+      ]
+    },
+    {
+      "name": "PrivateSearchBrowser",
+      "folder": "src/illegalcordplugins/PrivateSearchEngine.desktop",
+      "entry": "src/illegalcordplugins/PrivateSearchEngine.desktop/index.tsx",
+      "files": [
+        "src/illegalcordplugins/PrivateSearchEngine.desktop/index.tsx",
+        "src/illegalcordplugins/PrivateSearchEngine.desktop/native.ts"
+      ]
+    },
+    {
+      "name": "RamOptimizer",
+      "folder": "src/illegalcordplugins/RamOptimizer.desktop",
+      "entry": "src/illegalcordplugins/RamOptimizer.desktop/index.ts",
+      "files": [
+        "src/illegalcordplugins/RamOptimizer.desktop/index.ts",
+        "src/illegalcordplugins/RamOptimizer.desktop/native.ts"
+      ]
+    },
+    {
+      "name": "ScamLinkDetector",
+      "folder": "src/illegalcordplugins/scamLinkDetector",
+      "entry": "src/illegalcordplugins/scamLinkDetector/index.tsx",
+      "files": [
+        "src/illegalcordplugins/scamLinkDetector/index.tsx"
+      ]
+    },
+    {
+      "name": "ScreenShareAlert",
+      "folder": "src/illegalcordplugins/ScreenShareAlert",
+      "entry": "src/illegalcordplugins/ScreenShareAlert/index.tsx",
+      "files": [
+        "src/illegalcordplugins/ScreenShareAlert/index.tsx"
+      ]
+    },
+    {
+      "name": "Securecord",
+      "folder": "src/illegalcordplugins/Securecord",
+      "entry": "src/illegalcordplugins/Securecord/index.tsx",
+      "files": [
+        "src/illegalcordplugins/Securecord/index.tsx"
+      ]
+    },
+    {
+      "name": "SecurecordOpossum",
+      "folder": "src/illegalcordplugins/SecurecordOpossum",
+      "entry": "src/illegalcordplugins/SecurecordOpossum/index.tsx",
+      "files": [
+        "src/illegalcordplugins/SecurecordOpossum/index.tsx"
+      ]
+    },
+    {
+      "name": "SecureZipper",
+      "folder": "src/illegalcordplugins/SecureZipper",
+      "entry": "src/illegalcordplugins/SecureZipper/index.tsx",
+      "files": [
+        "src/illegalcordplugins/SecureZipper/index.tsx",
+        "src/illegalcordplugins/SecureZipper/native.ts"
+      ]
+    },
+    {
+      "name": "ServerBadges",
+      "folder": "src/illegalcordplugins/ServerBadges",
+      "entry": "src/illegalcordplugins/ServerBadges/index.tsx",
+      "files": [
+        "src/illegalcordplugins/ServerBadges/index.tsx"
+      ]
+    },
+    {
+      "name": "ShareClientConfig",
+      "folder": "src/illegalcordplugins/shareClientConfig",
+      "entry": "src/illegalcordplugins/shareClientConfig/index.tsx",
+      "files": [
+        "src/illegalcordplugins/shareClientConfig/index.tsx"
+      ]
+    },
+    {
+      "name": "SilentEdit",
+      "folder": "src/illegalcordplugins/SilentEdit",
+      "entry": "src/illegalcordplugins/SilentEdit/index.tsx",
+      "files": [
+        "src/illegalcordplugins/SilentEdit/index.tsx"
+      ]
+    },
+    {
+      "name": "SoundcloudRPC",
+      "folder": "src/illegalcordplugins/SoundcloudRPC.desktop",
+      "entry": "src/illegalcordplugins/SoundcloudRPC.desktop/index.tsx",
+      "files": [
+        "src/illegalcordplugins/SoundcloudRPC.desktop/index.tsx"
+      ]
+    },
+    {
+      "name": "SoundPad",
+      "folder": "src/illegalcordplugins/SoundPad",
+      "entry": "src/illegalcordplugins/SoundPad/index.tsx",
+      "files": [
+        "src/illegalcordplugins/SoundPad/index.tsx",
+        "src/illegalcordplugins/SoundPad/player.ts",
+        "src/illegalcordplugins/SoundPad/style.css"
+      ]
+    },
+    {
+      "name": "StaffDetector",
+      "folder": "src/illegalcordplugins/StaffDetector",
+      "entry": "src/illegalcordplugins/StaffDetector/index.tsx",
+      "files": [
+        "src/illegalcordplugins/StaffDetector/index.tsx"
+      ]
+    },
+    {
+      "name": "Stalker",
+      "folder": "src/illegalcordplugins/stalker",
+      "entry": "src/illegalcordplugins/stalker/index.tsx",
+      "files": [
+        "src/illegalcordplugins/stalker/activity.ts",
+        "src/illegalcordplugins/stalker/index.native.ts",
+        "src/illegalcordplugins/stalker/index.tsx",
+        "src/illegalcordplugins/stalker/native.ts",
+        "src/illegalcordplugins/stalker/status.ts",
+        "src/illegalcordplugins/stalker/voice.ts"
+      ]
+    },
+    {
+      "name": "StereoScreenshareAudio",
+      "folder": "src/illegalcordplugins/stereoScreenshareAudio",
+      "entry": "src/illegalcordplugins/stereoScreenshareAudio/index.ts",
+      "files": [
+        "src/illegalcordplugins/stereoScreenshareAudio/index.ts"
+      ]
+    },
+    {
+      "name": "StreamProofEnhanched",
+      "folder": "src/illegalcordplugins/StreamProof",
+      "entry": "src/illegalcordplugins/StreamProof/index.tsx",
+      "files": [
+        "src/illegalcordplugins/StreamProof/index.tsx",
+        "src/illegalcordplugins/StreamProof/styles.css"
+      ]
+    },
+    {
+      "name": "Surveillance",
+      "folder": "src/illegalcordplugins/Surveillance",
+      "entry": "src/illegalcordplugins/Surveillance/index.tsx",
+      "files": [
+        "src/illegalcordplugins/Surveillance/components/styles.css",
+        "src/illegalcordplugins/Surveillance/components/SurveillanceTab.tsx",
+        "src/illegalcordplugins/Surveillance/index.tsx",
+        "src/illegalcordplugins/Surveillance/store.ts",
+        "src/illegalcordplugins/Surveillance/types.ts"
+      ]
+    },
+    {
+      "name": "TypingFriends",
+      "folder": "src/illegalcordplugins/typingFriends",
+      "entry": "src/illegalcordplugins/typingFriends/index.tsx",
+      "files": [
+        "src/illegalcordplugins/typingFriends/index.tsx",
+        "src/illegalcordplugins/typingFriends/README.md"
+      ]
+    },
+    {
+      "name": "YMusicSync",
+      "folder": "src/illegalcordplugins/yMusicSync.desktop",
+      "entry": "src/illegalcordplugins/yMusicSync.desktop/index.tsx",
+      "files": [
+        "src/illegalcordplugins/yMusicSync.desktop/components/Controls.tsx",
+        "src/illegalcordplugins/yMusicSync.desktop/components/Player.tsx",
+        "src/illegalcordplugins/yMusicSync.desktop/components/TrackCover.tsx",
+        "src/illegalcordplugins/yMusicSync.desktop/constants.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/css.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/index.tsx",
+        "src/illegalcordplugins/yMusicSync.desktop/native/commands.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/connection.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/constants.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/covers.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/device.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/events.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/index.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/mapping.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/state.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/station/address.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/station/constants.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/station/devices.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/station/index.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/station/mdns.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/station/quasar.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/tracks.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/ynisonSocket.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native/ynisonTypes.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/native.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/nativeBridge.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/README.md",
+        "src/illegalcordplugins/yMusicSync.desktop/richPresence.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/settings.tsx",
+        "src/illegalcordplugins/yMusicSync.desktop/store.ts",
+        "src/illegalcordplugins/yMusicSync.desktop/styles.css",
+        "src/illegalcordplugins/yMusicSync.desktop/types.ts"
+      ]
+    },
+    {
+      "name": "ZeroWidthSanitizer",
+      "folder": "src/illegalcordplugins/ZeroWidthSanitizer",
+      "entry": "src/illegalcordplugins/ZeroWidthSanitizer/index.ts",
+      "files": [
+        "src/illegalcordplugins/ZeroWidthSanitizer/index.ts"
+      ]
+    }
+  ],
+  "support": [
+    {
+      "source": "src/illegalcordplugins/_legalWarnings.tsx",
+      "target": "src/illegalcordplugins/_legalWarnings.tsx"
+    },
+    {
+      "source": "src/illegalcordplugins/_kamidereCompat/branding.ts",
+      "target": "src/illegalcordplugins/_kamidereCompat/branding.ts"
+    },
+    {
+      "source": "src/illegalcordplugins/_kamidereCompat/runtimeActivity.ts",
+      "target": "src/illegalcordplugins/_kamidereCompat/runtimeActivity.ts"
+    },
+    {
+      "source": "src/illegalcordplugins/IllegalcordDynamicIsland/native.ts",
+      "target": "src/illegalcordplugins/SoundcloudRPC.desktop/native.ts"
+    }
+  ],
+  "skipped": [
+    {
+      "name": "BoostCounts",
+      "reason": "Already included as BoostCounts."
+    },
+    {
+      "name": "ClanSwitcher",
+      "reason": "Equivalent feature already provided by Rotator Suite."
+    },
+    {
+      "name": "ConsoleCleaner",
+      "reason": "Equivalent feature already provided by ConsoleJanitor."
+    },
+    {
+      "name": "CrashHandlerEnhanced",
+      "reason": "Equivalent feature already provided by CrashHandler."
+    },
+    {
+      "name": "CustomDNS",
+      "reason": "Already included as CustomDNS."
+    },
+    {
+      "name": "CustomStreamTopQ",
+      "reason": "Already included as CustomStreamTopQ."
+    },
+    {
+      "name": "DiscordLock",
+      "reason": "Already included as DiscordLock."
+    },
+    {
+      "name": "FloeP2PService",
+      "reason": "Already included as FloeP2PService."
+    },
+    {
+      "name": "FollowUser",
+      "reason": "Equivalent feature already provided by FollowVoiceUser."
+    },
+    {
+      "name": "GatewayLogger",
+      "reason": "Already included as GatewayLogger."
+    },
+    {
+      "name": "GhostSelfbot",
+      "reason": "External selfbot launcher downloads and executes third-party software and can extract the active Discord session token; excluded from this plugin import."
+    },
+    {
+      "name": "IllegalcordAnnouncements",
+      "reason": "Source-client announcements rather than a ChunCord feature."
+    },
+    {
+      "name": "IllegalcordDynamicIsland",
+      "reason": "Equivalent feature already provided by DynamicIslande."
+    },
+    {
+      "name": "IllegalcordEasterEgg",
+      "reason": "Source-client loading-screen branding."
+    },
+    {
+      "name": "IllegalcordTutorial",
+      "reason": "Tutorial for the source client, not ChunCord."
+    },
+    {
+      "name": "LarpCord",
+      "reason": "Equivalent feature already provided by FakeUserSwitcher and BadgeSelector."
+    },
+    {
+      "name": "MultiInstance",
+      "reason": "Already included as MultiInstance."
+    },
+    {
+      "name": "NightcordPort",
+      "reason": "Source-client port labels rather than a standalone feature."
+    },
+    {
+      "name": "NitroSniper Nighty Ver",
+      "reason": "Equivalent feature already provided by AutoRedeem."
+    },
+    {
+      "name": "NitroSniper",
+      "reason": "Equivalent feature already provided by AutoRedeem."
+    },
+    {
+      "name": "OSINTToolkit",
+      "reason": "Equivalent feature already provided by TestcordOSINTToolkit."
+    },
+    {
+      "name": "PluginStars",
+      "reason": "Already included as PluginStars."
+    },
+    {
+      "name": "SecureBookmarks",
+      "reason": "Equivalent feature already provided by Bookmarks and PasswordManager."
+    },
+    {
+      "name": "SendTrail",
+      "reason": "Equivalent feature already provided by Smart Cleanup Suite."
+    },
+    {
+      "name": "ServerCloner",
+      "reason": "Equivalent feature already provided by ServerToolkit."
+    },
+    {
+      "name": "SilentGroupCall",
+      "reason": "Equivalent feature already provided by SilentCall."
+    },
+    {
+      "name": "SilentDelete",
+      "reason": "Equivalent feature already provided by AntilogPremium."
+    },
+    {
+      "name": "StatusCycler",
+      "reason": "Equivalent feature already provided by Rotator Suite."
+    },
+    {
+      "name": "StereoInstaller",
+      "reason": "Already included as StereoInstaller."
+    },
+    {
+      "name": "GpuBinder",
+      "reason": "Already included as GpuBinder."
+    },
+    {
+      "name": "VoiceServerInfo",
+      "reason": "Already included as VoiceServerInfo."
+    },
+    {
+      "name": "WebRTCLeakPrevent",
+      "reason": "Already included as WebRTCLeakPrevent."
+    }
+  ]
+}

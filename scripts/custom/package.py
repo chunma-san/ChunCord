@@ -13,6 +13,9 @@ for name in ['patcher.js','preload.js','renderer.js']:
 lock=json.loads((root/'scripts/custom/testcord-lock.json').read_text())
 selection=json.loads((root/'scripts/custom/testcord-allowlist.json').read_text())
 info={'source_commit':git('rev-parse','HEAD'),'upstream_commit':git('rev-parse','upstream/main'),'plugins':['BadgeSelector','FakeMuteAndDeafen','ServerBadges'],'testcord_plugins':[p['name'] for p in selection['plugins']],'testcord_revision':lock['revision'],'standalone':True}
+illegalcord=json.loads((root/'scripts/custom/illegalcord-allowlist.json').read_text())
+info['illegalcord_plugins']=[p['name'] for p in illegalcord['plugins']]
+info['illegalcord_revision']=json.loads((root/'scripts/custom/illegalcord-lock.json').read_text())['revision']
 (destination/'build-info.json').write_text(json.dumps(info,indent=2)+'\n')
 for name in ['desktop.asar','equibop.asar']:
     source=root/'dist'/name

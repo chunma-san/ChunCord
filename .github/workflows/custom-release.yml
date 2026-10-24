@@ -47,6 +47,15 @@ jobs:
             git commit -m 'Sync selected TestCord plugins'
           fi
       - run: node scripts/custom/test-testcord.mjs
+      - name: Sync the selected Illegalcord plugins
+        run: |
+          git clone --depth=1 https://github.com/ImHisako/Illegalcord.git "$RUNNER_TEMP/illegalcord-source"
+          python3 scripts/custom/sync-illegalcord.py "$RUNNER_TEMP/illegalcord-source"
+          git add src/illegalcordplugins scripts/custom/illegalcord-lock.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Sync selected Illegalcord plugins'
+          fi
+      - run: node scripts/custom/test-illegalcord.mjs
       - run: node scripts/custom/test-chuncord.mjs
       - run: node scripts/custom/test-reporter.mjs
       - run: pnpm buildStandalone

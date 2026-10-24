@@ -59,6 +59,9 @@
             "@webpack/types": [
                 "./src/webpack/types"
             ],
+            "@illegalcordplugins/*": [
+                "./src/illegalcordplugins/*"
+            ],
             "@equicordplugins/*": [
                 "./src/equicordplugins/*"
             ]

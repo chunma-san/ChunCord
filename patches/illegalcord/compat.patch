@@ -1,0 +1,49 @@
+--- a/src/illegalcordplugins/DiscordHardened/nativeSession.ts
++++ b/src/illegalcordplugins/DiscordHardened/nativeSession.ts
+@@ -25,6 +25,7 @@
+
+ const logger = new Logger("DiscordHardened");
+ const sessions = new Map<Session, SessionState>();
++let listening = false;
+
+ export function getSessionStatus(ses: Session) {
+     const settings = RendererSettings.store.plugins?.DiscordHardened;
+@@ -63,6 +64,11 @@
+ }
+
+ export function prepareSession(ses: Session): SessionState {
++    if (!listening) {
++        listening = true;
++        app.on("web-contents-created", protectWindow);
++        app.once("will-quit", stop);
++    }
+     const existing = sessions.get(ses);
+     if (existing) return existing;
+     const restorePermissions = installPermissionControls(ses);
+@@ -171,19 +177,21 @@
+     }
+     state.restore();
+     sessions.delete(ses);
++    if (sessions.size === 0) {
++        app.removeListener("web-contents-created", protectWindow);
++        app.removeListener("will-quit", stop);
++        listening = false;
++    }
+     return true;
+ }
+
+ function protectWindow(_event: Electron.Event, contents: WebContents): void {
+-    if (contents.session === session.defaultSession) prepareSession(contents.session);
++    if (RendererSettings.store.plugins?.DiscordHardened?.enabled === true && contents.session === session.defaultSession) prepareSession(contents.session);
+ }
+
+ function stop(): void {
+     app.removeListener("web-contents-created", protectWindow);
+     for (const state of sessions.values()) state.restore();
+     sessions.clear();
++    listening = false;
+ }
+-
+-app.on("web-contents-created", protectWindow);
+-app.once("will-quit", stop);
+-void app.whenReady().then(() => prepareSession(session.defaultSession));

@@ -77,7 +77,7 @@ const globNativesPlugin = {
         });
 
         build.onLoad({ filter, namespace: "import-natives" }, async () => {
-            const pluginDirs = ["plugins", "equicordplugins", "userplugins", "testcordplugins"];
+            const pluginDirs = ["plugins", "equicordplugins", "userplugins", "testcordplugins", "illegalcordplugins"];
             let code = 'import { guardNativeMethods } from "./testcordplugins/_support/nativeGuard";\n';
             let natives = "\n";
             let i = 0;
@@ -103,7 +103,7 @@ const globNativesPlugin = {
 
                     const mod = `p${i}`;
                     code += `import * as ${mod} from "./${dir}/${fileName}/native";\n`;
-                    natives += `${JSON.stringify(pluginName)}:${dir === "testcordplugins" ? `guardNativeMethods(${JSON.stringify(pluginName)}, ${mod})` : mod},\n`;
+                    natives += `${JSON.stringify(pluginName)}:${["testcordplugins", "illegalcordplugins"].includes(dir) ? `guardNativeMethods(${JSON.stringify(pluginName)}, ${mod})` : mod},\n`;
                     i++;
                 }
             }
@@ -229,6 +229,9 @@ const buildConfigs = ([
 await buildOrWatchAll(buildConfigs);
 
 await Promise.all([
+    ...["LICENSE", "OpenPGP-LICENSE", "noble-ciphers-LICENSE", "noble-hashes-LICENSE", "noble-curves-LICENSE", "ws-LICENSE", "NOTICE.md"].flatMap(name =>
+        ["desktop", "equibop"].map(target => copyFile(`patches/illegalcord/${name}`, `dist/${target}/Illegalcord-${name}`))
+    ),
     copyFile("LICENSE", "dist/desktop/LICENSE"),
     copyFile("LICENSE", "dist/equibop/LICENSE"),
     copyFile("patches/testcord/LICENSE", "dist/desktop/TestCord-LICENSE"),

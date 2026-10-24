@@ -6,9 +6,11 @@
 
 [![Custom build](https://github.com/chunma-san/ChunCord/actions/workflows/custom-release.yml/badge.svg?branch=custom)](https://github.com/chunma-san/ChunCord/actions/workflows/custom-release.yml)
 
-ChunCord is my Equicord fork, with the regular Equicord plugins, three custom additions and 123 selected plugins ported from TestCord.
+ChunCord is my Equicord fork, with the regular Equicord plugins, 123 selected TestCord plugins and an Illegalcord collection of 47 plugins, including the three earlier custom additions.
 
 The base stays with [Equicord](https://github.com/Equicord/Equicord). Vencord changes arrive through Equicord. Only the [selected TestCord plugins](TESTCORD_PLUGINS.md) and their required helpers come from [TestCord](https://github.com/TestcordDev/TestCord); its client, settings and updater are not imported.
+
+The [Illegalcord collection](ILLEGALCORD_PLUGINS.md) comes from [ImHisako/Illegalcord](https://github.com/ImHisako/Illegalcord). Use **Show TestCord** or **Show Illegalcord** in the plugin filters to find each group.
 
 ## Install on Windows
 
@@ -18,7 +20,7 @@ The base stays with [Equicord](https://github.com/Equicord/Equicord). Vencord ch
 
 Git, Node.js and a source folder are not needed. You can delete the downloaded installer after setup. ChunCord stores its own installed files in the application data folder.
 
-New TestCord plugins start disabled. Enable only the ones you want. BadgeSelector, FakeMuteAndDeafen and ServerBadges are also included.
+New imported plugins start disabled. Enable only the ones you want. BadgeSelector, FakeMuteAndDeafen and ServerBadges are now in the Illegalcord group and retain their existing settings.
 
 Updates download through ChunCord inside Discord. A notification tells you when to restart. You can also use **Settings → ChunCord → Updater**. The installer includes Repair and Uninstall. Keep the installer available if a Discord update needs a repair.
 
@@ -30,7 +32,7 @@ See [CUSTOM.md](CUSTOM.md) for source builds and release details.
 
 ## Updates
 
-The release workflow checks upstream every six hours. It merges Equicord, syncs the fixed TestCord selection, reapplies the compatibility fixes and runs the checks before publishing. Conflicts or failed checks leave the previous release available. Native code changes require review before they can enter an automatic release.
+The release workflow checks upstream every six hours. It merges Equicord, syncs the fixed TestCord and Illegalcord selections, reapplies the compatibility fixes and runs the checks before publishing. Conflicts or failed checks leave the previous release available. Native code changes require review before they can enter an automatic release.
 
 Compilation checks cover both desktop targets and TypeScript. They do not guarantee that every plugin works with every Discord release. The TestCord selection includes optional automation and system integrations; read a plugin's settings before enabling it.
 
@@ -40,7 +42,7 @@ Compilation checks cover both desktop targets and TypeScript. They do not guaran
 
 ## Credits
 
-Based on [Equicord](https://github.com/Equicord/Equicord) and [Vencord](https://github.com/Vendicated/Vencord), with selected plugins from [TestCord](https://github.com/TestcordDev/TestCord). Original authors and license notices remain in the source. This is an unofficial fork, not an official release from those projects.
+Based on [Equicord](https://github.com/Equicord/Equicord) and [Vencord](https://github.com/Vendicated/Vencord), with selected plugins from [TestCord](https://github.com/TestcordDev/TestCord) and [Illegalcord](https://github.com/ImHisako/Illegalcord). Original authors and license notices remain in the source. This is an unofficial fork, not an official release from those projects.
 
 - [Equicord documentation](https://equicord.org/)
 - [Equicord plugin catalog](https://equicord.org/plugins)

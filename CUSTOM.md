@@ -5,6 +5,7 @@ Use the `custom` branch. Install the package-manager version declared in `packag
 ```sh
 pnpm install --frozen-lockfile
 node scripts/custom/test-testcord.mjs
+node scripts/custom/test-illegalcord.mjs
 pnpm testTsc
 pnpm buildStandalone
 ```
@@ -19,7 +20,8 @@ Public releases include `desktop.asar` and SHA-256 checksums. The ChunCord insta
 | --- | --- |
 | Equicord `main` | Client, built-in Equicord plugins and its Vencord updates |
 | TestCord `main` | Exactly the 123 entries in `scripts/custom/testcord-allowlist.json` and listed helpers |
-| This fork | Three user plugins, compatibility helpers, reviewed patches and release workflow |
+| Illegalcord `main` | The 47 entries in `scripts/custom/illegalcord-allowlist.json`, including the three previous user plugins |
+| This fork | Compatibility helpers, reviewed patches and release workflow |
 
 `scripts/custom/testcord-lock.json` records the upstream revision and source hashes. `patches/testcord/compat.patch` preserves the Equicord adaptations, including the encrypted vault migration and AI action confirmations. Plugin authorship remains with the original contributors. The imported GPL license is in `patches/testcord/LICENSE`.
 
@@ -27,9 +29,12 @@ To refresh the selection from a clean public upstream checkout:
 
 ```sh
 python3 scripts/custom/sync-testcord.py /path/to/TestCord
+python3 scripts/custom/sync-illegalcord.py /path/to/Illegalcord
 ```
 
 The importer checks repository identity, file paths, source types and the fixed plugin count. It stages changes in a temporary directory and applies the port before replacing source. New upstream files are not imported automatically. A failed patch or an unreviewed native code change stops the update. Review such changes before using `--review-native`, update the patch if needed, then repeat the checks above. Changes to the selection itself require an explicit manifest edit.
+
+The Illegalcord selection, exclusions, compatibility details and source links are documented in [ILLEGALCORD_PLUGINS.md](ILLEGALCORD_PLUGINS.md). Its lock file and compatibility patch follow the same update rules as the TestCord selection.
 
 The existing release workflow runs every six hours, on pushes to `custom` and on manual dispatch. Source and downloads publish only after the candidate build passes. Scheduled GitHub runs can be delayed or paused after inactivity.
 
