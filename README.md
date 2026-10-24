@@ -4,49 +4,52 @@
 
 # ChunCord
 
-[![Custom build](https://github.com/chunma-san/ChunCord/actions/workflows/custom-release.yml/badge.svg?branch=custom)](https://github.com/chunma-san/ChunCord/actions/workflows/custom-release.yml)
+[![Build](https://github.com/chunma-san/ChunCord/actions/workflows/custom-release.yml/badge.svg?branch=custom)](https://github.com/chunma-san/ChunCord/actions/workflows/custom-release.yml)
 
-ChunCord is my Equicord fork, with the regular Equicord plugins, 123 selected TestCord plugins and an Illegalcord collection of 45 plugins, including the three earlier custom additions.
+My Equicord fork, with extra plugins and updates delivered inside Discord.
 
-The base stays with [Equicord](https://github.com/Equicord/Equicord). Vencord changes arrive through Equicord. Only the [selected TestCord plugins](TESTCORD_PLUGINS.md) and their required helpers come from [TestCord](https://github.com/TestcordDev/TestCord); its client, settings and updater are not imported.
+ChunCord keeps the Equicord plugin collection and adds **123 selected TestCord plugins** and **45 Illegalcord plugins**. Each collection has its own filter in the plugin settings, so you can find what you want without searching through everything.
 
-The [Illegalcord collection](ILLEGALCORD_PLUGINS.md) comes from [ImHisako/Illegalcord](https://github.com/ImHisako/Illegalcord). Use **Show TestCord** or **Show Illegalcord** in the plugin filters to find each group.
+## Get started
 
-## Install on Windows
-
-1. Download **[ChunCord-Installer.exe](https://github.com/chunma-san/ChunCord-Installer/releases/latest/download/ChunCord-Installer.exe)**.
+1. Download **[ChunCord Installer](https://github.com/chunma-san/ChunCord-Installer/releases/latest/download/ChunCord-Installer.exe)** for Windows x64.
 2. Close Discord, open the installer, select your Discord installation and click **Install**.
-3. Start Discord and open **Settings → ChunCord → Plugins**.
+3. Open Discord and go to **Settings → ChunCord → Plugins**.
 
-Git, Node.js and a source folder are not needed. You can delete the downloaded installer after setup. ChunCord stores its own installed files in the application data folder.
+You do not need Git, Node.js or a source folder. Once setup finishes, you can delete the downloaded installer. ChunCord keeps its installed files in your application data folder.
 
-New imported plugins start disabled. Enable only the ones you want. BadgeSelector, FakeMuteAndDeafen and ServerBadges are now in the Illegalcord group and retain their existing settings.
+Imported plugins start disabled. Use **Show TestCord** or **Show Illegalcord** to browse the extra collections and enable the plugins you want. BadgeSelector, FakeMuteAndDeafen and ServerBadges are included in the Illegalcord group; existing settings are preserved.
 
-Updates download through ChunCord inside Discord. A notification tells you when to restart. You can also use **Settings → ChunCord → Updater**. The installer includes Repair and Uninstall. Keep the installer available if a Discord update needs a repair.
+## Staying up to date
 
-Updates are verified and staged while Discord is running, then applied before ChunCord loads on the next start. If an older installation reports an `EPERM` update error, close Discord and run **Repair** with the latest installer once.
+Open **Settings → ChunCord → Updater** to check for updates or change your update preferences. Updates are verified and downloaded while Discord is running, then applied on the next start. Keep notifications enabled if you want a reminder to restart.
 
-Windows installers are currently unsigned. Windows may show an unrecognized publisher prompt. Official ChunCord downloads are hosted only under the two GitHub repositories linked here.
+If Discord stops loading ChunCord after an update, close Discord and run **Repair** with the latest installer. Repair also fixes the `EPERM` update error on older installations. Choose **Uninstall** in the installer to remove ChunCord.
 
-See [CUSTOM.md](CUSTOM.md) for source builds and release details.
+The installer is currently unsigned, so Windows may show an unknown publisher warning. Download it from the [ChunCord Installer releases](https://github.com/chunma-san/ChunCord-Installer/releases).
 
-## Updates
+## What gets updated
 
-The release workflow checks upstream every six hours. It merges Equicord, syncs the fixed TestCord and Illegalcord selections, reapplies the compatibility fixes and runs the checks before publishing. Conflicts or failed checks leave the previous release available. Native code changes require review before they can enter an automatic release.
+The release workflow checks upstream every six hours. Equicord supplies the base client and Vencord changes. The selected plugins are synced from TestCord and Illegalcord, with ChunCord compatibility fixes applied before building.
 
-Compilation checks cover both desktop targets and TypeScript. They do not guarantee that every plugin works with every Discord release. The TestCord selection includes optional automation and system integrations; read a plugin's settings before enabling it.
+A release is published only after the build checks pass. Merge conflicts or failed checks leave the previous release available. Native code changes require review. Discord changes can still break individual plugins after a successful build; read each plugin's description and settings before enabling it.
 
-## Contributors
+| Collection | Details |
+| --- | --- |
+| Equicord and Vencord | Base client and standard plugins, maintained through Equicord |
+| TestCord | [The 123 selected plugins](TESTCORD_PLUGINS.md) |
+| Illegalcord | [The 45 included plugins and exclusions](ILLEGALCORD_PLUGINS.md) |
 
-- [chunma-san](https://github.com/chunma-san): ChunCord maintenance, custom integrations and releases.
+For source builds, compatibility changes and release details, see [CUSTOM.md](CUSTOM.md).
 
-## Credits
+## Maintainer and credits
 
-Based on [Equicord](https://github.com/Equicord/Equicord) and [Vencord](https://github.com/Vendicated/Vencord), with selected plugins from [TestCord](https://github.com/TestcordDev/TestCord) and [Illegalcord](https://github.com/ImHisako/Illegalcord). Original authors and license notices remain in the source. This is an unofficial fork, not an official release from those projects.
+Maintained by [chunma-san](https://github.com/chunma-san).
+
+Built on [Equicord](https://github.com/Equicord/Equicord) and [Vencord](https://github.com/Vendicated/Vencord), with selected plugins from [TestCord](https://github.com/TestcordDev/TestCord) and [Illegalcord](https://github.com/ImHisako/Illegalcord). Original authorship and license notices are preserved. ChunCord is an independent fork.
 
 - [Equicord documentation](https://equicord.org/)
 - [Equicord plugin catalog](https://equicord.org/plugins)
-- [Vencord](https://vencord.dev/)
 - [GPL license](LICENSE)
 
-Discord is a trademark of Discord Inc. This project is not affiliated with Discord. Client modifications can violate Discord's terms; cosmetic badges do not grant Nitro, verification or partnership.
+ChunCord is not affiliated with Discord. Client modifications can violate Discord's terms. Cosmetic badges do not grant Nitro, verification or partnership.
