@@ -104,7 +104,8 @@ jobs:
           sha256sum -c SHA256SUMS.txt
           release_tag="chuncord-$(cut -c1-12 head.txt)"
           if ! gh release view "$release_tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release create "$release_tag" --repo "$GITHUB_REPOSITORY" --draft --target "$(cat head.txt)" --title "ChunCord" --notes 'Install using ChunCord Installer. ChunCord updates inside Discord. Original Equicord, Vencord and TestCord credits remain in the source.' desktop.asar equibop.asar SHA256SUMS.txt build-info.json
+            gh api "repos/$GITHUB_REPOSITORY/commits/$(cat head.txt)" --jq '"## Changes\n\n" + .commit.message + "\n\nSource: " + .html_url' > release-notes.md
+            gh release create "$release_tag" --repo "$GITHUB_REPOSITORY" --draft --target "$(cat head.txt)" --title "ChunCord" --generate-notes --notes-file release-notes.md desktop.asar equibop.asar SHA256SUMS.txt build-info.json
           fi
           if [ "$(gh release view "$release_tag" --repo "$GITHUB_REPOSITORY" --json isDraft --jq .isDraft)" = true ]; then
             gh release upload "$release_tag" --repo "$GITHUB_REPOSITORY" --clobber desktop.asar equibop.asar SHA256SUMS.txt build-info.json

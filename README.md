@@ -1,3 +1,9 @@
+<!-- CAT-COUNTER:START -->
+<p align="center">
+  <img src="https://count.himiku.com/@chunma-chuncord?theme=capoo-2&amp;padding=6&amp;scale=0.8&amp;darkmode=1" alt="Cute cat project visits counter" />
+</p>
+<!-- CAT-COUNTER:END -->
+
 <p align="center">
   <a href="https://discord.com/users/891081797318897715"><img src="https://lanyard.cnrad.dev/api/891081797318897715?theme=dark&bg=0d1117&borderRadius=16px&showDisplayName=true&animated=true" alt="chunma Discord profile and activity" /></a>
 </p>
@@ -18,7 +24,7 @@ ChunCord keeps the Equicord plugin collection and adds **123 selected TestCord p
 
 You do not need Git, Node.js or a source folder. Once setup finishes, you can delete the downloaded installer. ChunCord keeps its installed files in your application data folder.
 
-Imported plugins start disabled. Use **Show TestCord** or **Show Illegalcord** to browse the extra collections and enable the plugins you want. BadgeSelector, FakeMuteAndDeafen and ServerBadges are included in the Illegalcord group; existing settings are preserved.
+Imported plugins start disabled. Use **Show TestCord** or **Show Illegalcord** to browse the extra collections and enable the plugins you want.
 
 ## Staying up to date
 
