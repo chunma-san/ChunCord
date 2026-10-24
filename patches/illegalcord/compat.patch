@@ -47,3 +47,18 @@
 -app.on("web-contents-created", protectWindow);
 -app.once("will-quit", stop);
 -void app.whenReady().then(() => prepareSession(session.defaultSession));
+diff --git a/src/illegalcordplugins/typingFriends/index.tsx b/src/illegalcordplugins/typingFriends/index.tsx
+index 13810d50..349f45b3 100644
+--- a/src/illegalcordplugins/typingFriends/index.tsx
++++ b/src/illegalcordplugins/typingFriends/index.tsx
+@@ -305,8 +305,8 @@ export default definePlugin({
+             find: ".setGuildsTree(",
+             predicate: () => settings.store.showGuildIcons,
+             replacement: {
+-                match: /renderTreeNode:(\i)(?=,lurkingGuildIds:)/,
+-                replace: "renderTreeNode:(...args)=>$self.wrapTreeNode($1(...args),args[0])"
++                match: /(\.jsxs?\)\(\i,\{guildDiscoveryButton:\i,disableAppDownload:\i,isOverlay:\i,)renderTreeNode:(\i)(?=,lurkingGuildIds:)/,
++                replace: "$1renderTreeNode:(...args)=>$self.wrapTreeNode($2(...args),args[0])"
+             }
+         },
+     ],

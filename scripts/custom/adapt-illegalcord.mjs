@@ -18,14 +18,14 @@ for (const statement of registry.statements) if (ts.isVariableStatement(statemen
         const name = item.name.getText(registry);
         if (!["Devs", "EquicordDevs"].includes(name)) continue;
         const call = item.initializer;
-        if (!ts.isCallExpression(call) || call.expression.getText(registry) !== "Object.freeze") throw new Error("Unexpected author registry.");
+        if (!ts.isCallExpression(call) || call.expression.getText(registry) !== "Object.freeze" || call.arguments.length !== 1) throw new Error("Unexpected author registry.");
         let authors = call.arguments[0];
         if (ts.isSatisfiesExpression(authors)) authors = authors.expression;
         if (!ts.isObjectLiteralExpression(authors)) throw new Error("Unexpected author registry.");
         for (const author of authors.properties) {
-            if (!ts.isPropertyAssignment(author) || !ts.isObjectLiteralExpression(author.initializer)) throw new Error("Unexpected author entry.");
+            if (!ts.isPropertyAssignment(author) || !(ts.isIdentifier(author.name) || ts.isStringLiteral(author.name)) || !ts.isObjectLiteralExpression(author.initializer)) throw new Error("Unexpected author entry.");
             for (const field of author.initializer.properties)
-                if (!ts.isPropertyAssignment(field) || ![ts.SyntaxKind.StringLiteral, ts.SyntaxKind.NumericLiteral, ts.SyntaxKind.BigIntLiteral, ts.SyntaxKind.FalseKeyword, ts.SyntaxKind.TrueKeyword].includes(field.initializer.kind)) throw new Error("Unexpected author field.");
+                if (!ts.isPropertyAssignment(field) || !(ts.isIdentifier(field.name) || ts.isStringLiteral(field.name)) || ![ts.SyntaxKind.StringLiteral, ts.SyntaxKind.NumericLiteral, ts.SyntaxKind.BigIntLiteral, ts.SyntaxKind.FalseKeyword, ts.SyntaxKind.TrueKeyword].includes(field.initializer.kind)) throw new Error("Unexpected author field.");
         }
         definitions.set(name, call.getText(registry));
     }
@@ -57,6 +57,7 @@ for (const plugin of manifest.plugins) for (const file of plugin.files) {
         .replace("Client Diagnostics and LarpCord contact replacements remain available.", "Client Diagnostics remain available.")
         .replace("LarpCord profile changes are suspended in this mode. Its email and phone replacements remain active.", "Profile customization plugins are suspended in this mode.");
     if (file.endsWith("discreetMode/suspension.ts")) code = code.replace('["DiscreetMode", "LarpCord", "ClientDiagnostics"]', '["DiscreetMode", "ClientDiagnostics"]');
+    if (file.includes("discreetMode/")) code = code.replaceAll("(?:illegalcord|equicord|vencord", "(?:chuncord|illegalcord|equicord|vencord");
     const ast = ts.createSourceFile(file, code, ts.ScriptTarget.Latest, true);
     const edits = [];
     function visit(node) {

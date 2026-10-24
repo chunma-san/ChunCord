@@ -1,6 +1,6 @@
 # Illegalcord plugins in ChunCord
 
-Use **Settings → ChunCord → Plugins → Show Illegalcord** to view this group. It contains 47 plugins, including BadgeSelector, FakeMuteAndDeafen and ServerBadges, which were previously under UserPlugins. Their plugin names and existing settings are preserved. New additions start disabled.
+Use **Settings → ChunCord → Plugins → Show Illegalcord** to view this group. It contains 45 plugins, including BadgeSelector, FakeMuteAndDeafen and ServerBadges, which were previously under UserPlugins. Their plugin names and existing settings are preserved. New additions start disabled.
 
 The source is [ImHisako/Illegalcord](https://github.com/ImHisako/Illegalcord). ChunCord imports the fixed selection below and its required helpers, not the Illegalcord client or updater. Original authorship and GPL notices remain in the files.
 
@@ -26,9 +26,7 @@ The source is [ImHisako/Illegalcord](https://github.com/ImHisako/Illegalcord). C
 | ExpandedWidgets | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/expandedWidgets) |
 | FakeMuteAndDeafen | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/FakeMuteAndDeafen) |
 | FastGifPicker | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/FastGifPicker) |
-| Hisako's Optimizations | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/Hisako%27s%20Optimizations) |
 | IGP | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/IGP) |
-| IllegalMessageLogger | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/illegalMessageLogger) |
 | MassMention | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/MassMention) |
 | MutualScanner | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/mutualScanner) |
 | OpenOptimizer | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/openOptimizer) |
@@ -96,6 +94,8 @@ Already included plugins are kept with their current provider. Similar features 
 | GpuBinder | Already included as GpuBinder. |
 | VoiceServerInfo | Already included as VoiceServerInfo. |
 | WebRTCLeakPrevent | Already included as WebRTCLeakPrevent. |
+| Hisako's Optimizations | Already covered by DisableAnimations and NoTypingAnimation. |
+| IllegalMessageLogger | Already covered by MessageLoggerEnhanced, including persistent storage. |
 
 ## Updates and checks
 

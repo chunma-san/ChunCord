@@ -34,7 +34,7 @@ const cl = classNameFactory("vc-discreet-mode-");
 const logger = new Logger("DiscreetMode");
 const INTERFACE_KEYS: Array<"active" | "hideInterface" | "manualMode"> = ["active", "hideInterface", "manualMode"];
 const ENABLED_KEYS: Parameters<typeof useSettings>[0] = ["plugins.DiscreetMode.enabled"];
-const CLIENT_NAMES = /\b(?:illegalcord|equicord|vencord|vesktop|equibop|betterdiscord|nightcord|testcord)\b/i;
+const CLIENT_NAMES = /\b(?:chuncord|illegalcord|equicord|vencord|vesktop|equibop|betterdiscord|nightcord|testcord)\b/i;
 const RECOGNIZABLE_PLUGINS: Record<string, string> = {
     CustomRPC: "Custom activities remain public unless they mention a filtered client name.",
     RichPresence: "Extra music and application activities remain public.",

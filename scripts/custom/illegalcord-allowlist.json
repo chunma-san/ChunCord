@@ -215,14 +215,6 @@
       ]
     },
     {
-      "name": "Hisako's Optimizations",
-      "folder": "src/illegalcordplugins/Hisako's Optimizations",
-      "entry": "src/illegalcordplugins/Hisako's Optimizations/index.tsx",
-      "files": [
-        "src/illegalcordplugins/Hisako's Optimizations/index.tsx"
-      ]
-    },
-    {
       "name": "IGP",
       "folder": "src/illegalcordplugins/IGP",
       "entry": "src/illegalcordplugins/IGP/index.tsx",
@@ -233,23 +225,6 @@
         "src/illegalcordplugins/IGP/openpgp.min.mjs",
         "src/illegalcordplugins/IGP/READMEEN.md",
         "src/illegalcordplugins/IGP/READMEIT.md"
-      ]
-    },
-    {
-      "name": "IllegalMessageLogger",
-      "folder": "src/illegalcordplugins/illegalMessageLogger",
-      "entry": "src/illegalcordplugins/illegalMessageLogger/index.tsx",
-      "files": [
-        "src/illegalcordplugins/illegalMessageLogger/db.ts",
-        "src/illegalcordplugins/illegalMessageLogger/engine.ts",
-        "src/illegalcordplugins/illegalMessageLogger/index.tsx",
-        "src/illegalcordplugins/illegalMessageLogger/io.ts",
-        "src/illegalcordplugins/illegalMessageLogger/LogsModal.tsx",
-        "src/illegalcordplugins/illegalMessageLogger/search.ts",
-        "src/illegalcordplugins/illegalMessageLogger/settings.ts",
-        "src/illegalcordplugins/illegalMessageLogger/style.css",
-        "src/illegalcordplugins/illegalMessageLogger/types.ts",
-        "src/illegalcordplugins/illegalMessageLogger/utils.ts"
       ]
     },
     {
@@ -727,6 +702,14 @@
     {
       "name": "WebRTCLeakPrevent",
       "reason": "Already included as WebRTCLeakPrevent."
+    },
+    {
+      "name": "Hisako's Optimizations",
+      "reason": "Its two active functions are already provided by DisableAnimations and NoTypingAnimation; the duplicate typing patch can conflict with the built-in one."
+    },
+    {
+      "name": "IllegalMessageLogger",
+      "reason": "MessageLoggerEnhanced already provides persistent local message logs, searching and export. This alternative also disables that existing plugin when enabled, so the current provider is preserved."
     }
   ]
 }

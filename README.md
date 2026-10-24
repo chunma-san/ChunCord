@@ -6,7 +6,7 @@
 
 [![Custom build](https://github.com/chunma-san/ChunCord/actions/workflows/custom-release.yml/badge.svg?branch=custom)](https://github.com/chunma-san/ChunCord/actions/workflows/custom-release.yml)
 
-ChunCord is my Equicord fork, with the regular Equicord plugins, 123 selected TestCord plugins and an Illegalcord collection of 47 plugins, including the three earlier custom additions.
+ChunCord is my Equicord fork, with the regular Equicord plugins, 123 selected TestCord plugins and an Illegalcord collection of 45 plugins, including the three earlier custom additions.
 
 The base stays with [Equicord](https://github.com/Equicord/Equicord). Vencord changes arrive through Equicord. Only the [selected TestCord plugins](TESTCORD_PLUGINS.md) and their required helpers come from [TestCord](https://github.com/TestcordDev/TestCord); its client, settings and updater are not imported.
 

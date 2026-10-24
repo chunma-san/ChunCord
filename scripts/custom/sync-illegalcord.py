@@ -44,8 +44,8 @@ def main():
     revision = run('git', 'rev-parse', 'HEAD', cwd=source)
     manifest = json.loads((ROOT/'scripts/custom/illegalcord-allowlist.json').read_text())
     plugins = manifest['plugins']
-    if len(plugins) != 47 or len({p['name'] for p in plugins}) != 47:
-        raise ValueError('The reviewed selection must contain exactly 47 plugins')
+    if len(plugins) != 45 or len({p['name'] for p in plugins}) != 45:
+        raise ValueError('The reviewed selection must contain exactly 45 plugins')
     mapping = {}
     for plugin in plugins:
         folder = relative(plugin['folder'])
@@ -127,10 +127,10 @@ def main():
             out = ROOT/f
             out.parent.mkdir(parents=True, exist_ok=True)
             out.write_bytes(prepared[f])
-    lock = {'source':manifest['source'], 'revision':revision, 'plugin_count':47,
+    lock = {'source':manifest['source'], 'revision':revision, 'plugin_count':45,
             'source_files':hashes, 'native_sources':native, 'ported_files':output_hashes}
     lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True)+'\n', encoding='utf-8')
-    print('Synced 47 Illegalcord plugins at '+revision+'; all imported plugins remain off by default.')
+    print('Synced 45 Illegalcord plugins at '+revision+'; all imported plugins remain off by default.')
 
 
 if __name__ == '__main__':

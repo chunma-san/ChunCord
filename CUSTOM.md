@@ -20,7 +20,7 @@ Public releases include `desktop.asar` and SHA-256 checksums. The ChunCord insta
 | --- | --- |
 | Equicord `main` | Client, built-in Equicord plugins and its Vencord updates |
 | TestCord `main` | Exactly the 123 entries in `scripts/custom/testcord-allowlist.json` and listed helpers |
-| Illegalcord `main` | The 47 entries in `scripts/custom/illegalcord-allowlist.json`, including the three previous user plugins |
+| Illegalcord `main` | The 45 entries in `scripts/custom/illegalcord-allowlist.json`, including the three previous user plugins |
 | This fork | Compatibility helpers, reviewed patches and release workflow |
 
 `scripts/custom/testcord-lock.json` records the upstream revision and source hashes. `patches/testcord/compat.patch` preserves the Equicord adaptations, including the encrypted vault migration and AI action confirmations. Plugin authorship remains with the original contributors. The imported GPL license is in `patches/testcord/LICENSE`.

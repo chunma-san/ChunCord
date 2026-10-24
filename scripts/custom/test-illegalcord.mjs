@@ -12,9 +12,9 @@ import ts from "typescript";
 
 const selection = JSON.parse(fs.readFileSync("scripts/custom/illegalcord-allowlist.json", "utf8"));
 const lock = JSON.parse(fs.readFileSync("scripts/custom/illegalcord-lock.json", "utf8"));
-assert.equal(selection.plugins.length, 47);
+assert.equal(selection.plugins.length, 45);
 assert.equal(lock.plugin_count, selection.plugins.length);
-assert.equal(new Set(selection.plugins.map(p => p.name)).size, 47);
+assert.equal(new Set(selection.plugins.map(p => p.name)).size, 45);
 assert(!selection.plugins.some(p => p.name === "GhostSelfbot"));
 for (const [file, hash] of Object.entries(lock.ported_files)) {
     const data = fs.readFileSync(file);
@@ -67,6 +67,28 @@ for (const plugin of selection.plugins) {
 }
 for (const name of ["BadgeSelector", "FakeMuteAndDeafen", "ServerBadges"])
     assert.equal(providers.get(name), "src/illegalcordplugins");
+
+let treePatch;
+registrations("src/illegalcordplugins/typingFriends/index.tsx", (properties, ast) => {
+    for (const patch of properties.get("patches").elements) {
+        const fields = new Map(patch.properties.filter(ts.isPropertyAssignment).map(p => [p.name.getText(ast), p.initializer]));
+        if (fields.get("find")?.text !== ".setGuildsTree(") continue;
+        const replacement = new Map(fields.get("replacement").properties.map(p => [p.name.getText(ast), p.initializer]));
+        const match = vm.runInNewContext(replacement.get("match").getText(ast));
+        treePatch = { match: new RegExp(match.source.replaceAll("\\i", "(?:[A-Za-z_$][\\w$]*)")), replace: replacement.get("replace").text.replaceAll("$self", "Vencord.Plugins.plugins.TypingFriends") };
+    }
+});
+assert(treePatch);
+const treeFactory = 'function(){function App(props){let{guildDiscoveryButton:button,disableAppDownload:noDownload,isOverlay:overlay,renderTreeNode:draw,lurkingGuildIds:ids}=props;return draw({type:"guild",id:"guild-one"})}return(0,r.jsx)(App,{guildDiscoveryButton:button,disableAppDownload:noDownload,isOverlay:overlay,renderTreeNode:draw,lurkingGuildIds:ids})}';
+const patchedTree = treeFactory.replace(treePatch.match, treePatch.replace);
+assert.notEqual(patchedTree, treeFactory);
+const treeResult = vm.runInNewContext(`(${patchedTree})()`, {
+    button: null, noDownload: false, overlay: false, ids: [], draw: () => "original",
+    r: { jsx: (component, props) => component(props) },
+    Vencord: { Plugins: { plugins: { TypingFriends: { wrapTreeNode: (rendered, node) => ({ rendered, guild: node.id }) } } } }
+});
+assert.equal(treeResult.rendered, "original");
+assert.equal(treeResult.guild, "guild-one");
 
 async function fixture(entry, stubs, state) {
     const output = await build({ entryPoints: [entry], bundle: true, write: false, platform: "node", format: "cjs", plugins: [{
@@ -144,4 +166,4 @@ assert.equal(icon.configure(null, "original", false), "original");
 const music = guardNativeMethods("YMusicSync", { connect: () => "connected", disconnect: () => "closed" });
 assert.throws(() => music.connect(), /disabled/);
 assert.equal(music.disconnect(), "closed");
-console.log("47 Illegalcord registrations, unique providers, port hashes, disabled native access and session lifecycle checks passed.");
+console.log("45 Illegalcord registrations, unique providers, port hashes, disabled native access and session lifecycle checks passed.");
