@@ -9,6 +9,7 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 import { build } from "esbuild";
 import ts from "typescript";
+import vm from "node:vm";
 
 async function load(file, plugins = []) {
     const output = await build({ entryPoints: [file], bundle: true, write: false, platform: "node", format: "esm", plugins });
@@ -18,6 +19,27 @@ const manifest = JSON.parse(fs.readFileSync("scripts/custom/testcord-allowlist.j
 assert.equal(manifest.plugins.length, 123);
 assert.equal(new Set(manifest.plugins.map(p => p.name)).size, 123);
 const lock = JSON.parse(fs.readFileSync("scripts/custom/testcord-lock.json", "utf8"));
+// Exercise the actual ported matcher, including its capture-group contract.
+const tileSource = fs.readFileSync("src/testcordplugins/hyprTiles/components/TileContent.tsx", "utf8");
+const tileAst = ts.createSourceFile("TileContent.tsx", tileSource, ts.ScriptTarget.Latest, true);
+let forumMatcher;
+function findForumMatcher(node) {
+    if (ts.isCallExpression(node) && node.expression.getText(tileAst) === "extractAndLoadChunksLazy")
+        forumMatcher = vm.runInNewContext(node.arguments[1].getText(tileAst));
+    ts.forEachChild(node, findForumMatcher);
+}
+findForumMatcher(tileAst);
+assert(forumMatcher, "Forum chunk matcher must exist");
+const forumSource = forumMatcher.source.replaceAll("\\i", "(?:[A-Za-z_$][\\w$]*)");
+const forumRegex = new RegExp(forumSource);
+for (const text of [
+    'Promise.all([r.e("1"),r.e("2")]).then(r.bind(r,"3")),name:"ForumChannel"',
+    'r.e("1").then(r.bind(r,3)),name:"ForumChannel"',
+    'Promise.resolve().then(r.bind(r,"3")),name:"ForumChannel"'
+]) assert.equal(forumRegex.exec(text)?.[2], "3");
+assert.equal(forumRegex.exec('r.e("1").then(r.bind(r,3)),name:"ForumChannel"')?.[1], 'r.e("1")');
+const absentForum = 'Promise.all([' + Array(1000).fill('r.e("1")').join(',') + ']).then(r.bind(r,"3")),name:"OtherChannel"';
+assert.equal(vm.runInNewContext("new RegExp(source).test(text)", { source: forumSource, text: absentForum }, { timeout: 1000 }), false);
 for (const [file, hash] of Object.entries(lock.ported_files)) {
     const data = fs.readFileSync(file);
     const normalized = /\.(png|webp)$/.test(file) ? data : Buffer.from(data.toString("utf8").replace(/\r\n/g, "\n"));

@@ -908,3 +908,26 @@
  
          await exec(cleanupCmd);
  
+diff --git a/src/testcordplugins/hyprTiles/components/TileContent.tsx b/src/testcordplugins/hyprTiles/components/TileContent.tsx
+index cca8c0f8..fc54b267 100644
+--- a/src/testcordplugins/hyprTiles/components/TileContent.tsx
++++ b/src/testcordplugins/hyprTiles/components/TileContent.tsx
+@@ -8,7 +8,6 @@ import ErrorBoundary from "@components/ErrorBoundary";
+ import { classNameFactory } from "@utils/css";
+ import { Channel } from "@vencord/discord-types";
+ import {
+-    DefaultExtractAndLoadChunksRegex,
+     extractAndLoadChunksLazy,
+     findComponentByCodeLazy,
+ } from "@webpack";
+@@ -40,7 +39,9 @@ const ChatMessages = findComponentByCodeLazy("forceCompact", "forceCozy") as Rea
+
+ const requireForumView = extractAndLoadChunksLazy(
+     ["Missing channel in Channel.renderHeaderToolbar"],
+-    new RegExp(DefaultExtractAndLoadChunksRegex.source + '.{1,150}name:"ForumChannel"')
++    // Keep chunk arguments disjoint from the call delimiters. The generic
++    // matcher backtracks exponentially when the ForumChannel suffix is absent.
++    /(?:(?:Promise\.all\(\[)?((?:\i\.e\((?:\d+|"[^"\r\n]+")\),?)+)(?:\]\))?|Promise\.resolve\(\))\.then\(\i\.bind\(\i,"?([^"),\s]+)"?\)\).{1,150}name:"ForumChannel"/
+ );
+
+ interface TileContentProps {

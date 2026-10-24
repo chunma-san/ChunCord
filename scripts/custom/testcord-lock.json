@@ -330,7 +330,7 @@
     "src/testcordplugins/greedcmds/index.tsx": "600fc262a8b1654cb5c4337d08c3e876b47dab73e5bb225eedaf70e26f510cc4",
     "src/testcordplugins/hyprTiles/components/HotkeyReferenceButton.tsx": "4311aff0696e8b7227684fefa759a99993616ddc419d32366160055fc0c90748",
     "src/testcordplugins/hyprTiles/components/KeybindEditor.tsx": "987b3daca2a6c946547c8c6acbdc6f8636156a42cb70c9a1a8598bc795401563",
-    "src/testcordplugins/hyprTiles/components/TileContent.tsx": "c13585c5d1f7d6e1f6ef23b0283df597728ad8c7b2e19eae757a7287cfe2795a",
+    "src/testcordplugins/hyprTiles/components/TileContent.tsx": "0b29b1c7b2e72e94790b617ce48b0fcd118fb19bd45528f4d87ed5547dafd46a",
     "src/testcordplugins/hyprTiles/components/WorkspaceHost.tsx": "e8901ca72d104051a9025e3fcd9f28b3a316bbd0b0806315378565237dcf7dbd",
     "src/testcordplugins/hyprTiles/components/WorkspaceSwitcherButton.tsx": "b256adc944fce48837041ff10cd36ef89f27db252637a926fb9a2bdf1916f459",
     "src/testcordplugins/hyprTiles/controller.ts": "ce18b6fa5f2e9151c9db14bd941c73025c6031cd1b3c19179bd7366d25fea436",
