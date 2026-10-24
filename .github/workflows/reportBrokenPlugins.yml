@@ -32,19 +32,24 @@ on:
 env:
     FORCE_COLOR: true
 
+permissions:
+    contents: read
+
 jobs:
     TestPlugins:
         name: Test Patches
         runs-on: ubuntu-latest
+        timeout-minutes: 25
 
         steps:
-            - uses: actions/checkout@v7
+            - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
               with:
-                  repository: ${{ inputs.pr_repo || github.repository }}
-                  ref: ${{ inputs.ref || (github.event_name == 'schedule' && 'dev' || github.ref) }}
+                  repository: ${{ inputs.repository || github.repository }}
+                  ref: ${{ inputs.ref || github.event.repository.default_branch }}
+                  persist-credentials: false
 
             - name: Setup PNPM
-              uses: pnpm/setup@v2.1.0
+              uses: pnpm/setup@ce3b1e5f04cd26dbb4614172464b544b5633cc92
               with:
                   runtime: node@v24
                   require-lockfile: true
@@ -53,7 +58,7 @@ jobs:
               run: |
                   pnpm install --frozen-lockfile --prefer-offline
 
-            - name: Build Equicord Reporter Version
+            - name: Build ChunCord Reporter Version
               run: pnpm buildReporter
 
             - name: Run Reporter
@@ -69,10 +74,7 @@ jobs:
 
                   pids=""
 
-                  branch="${{ inputs.discord_branch }}"
-                  if [[ "${{ github.event_name }}" = "schedule" ]]; then
-                    branch="both"
-                  fi
+                  branch="$DISCORD_BRANCH"
 
                   if [[ "$branch" = "both" || "$branch" = "stable" ]]; then
                     node dist/report.mjs > "$stable_output_file" &
@@ -94,5 +96,6 @@ jobs:
                   cat "$stable_output_file" "$canary_output_file" >> $GITHUB_STEP_SUMMARY
                   exit $exit_code
               env:
-                  WEBHOOK_URL: ${{ inputs.webhook_url || secrets.WEBHOOK_URL }}
-                  WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
+                  DISCORD_BRANCH: ${{ inputs.discord_branch || 'both' }}
+                  # Scheduled fork reports stay in the GitHub job summary.
+                  WEBHOOK_URL: ${{ inputs.webhook_url }}
