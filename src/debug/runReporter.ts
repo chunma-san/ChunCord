@@ -87,6 +87,8 @@ async function runReporter() {
         const searchHistory = [...Webpack.lazyWebpackSearchHistory];
         let checkedSearches = 0;
         for (const [searchType, args, stack] of searchHistory) {
+            if (IS_REPORTER && IS_WEB)
+                console.log("[REPORTER_PROGRESS]", JSON.stringify({ index: checkedSearches + 1, total: searchHistory.length, searchType, source: stack?.split("\n")[2] }));
             if (++checkedSearches % 10 === 0)
                 await new Promise<void>(resolve => setTimeout(resolve, 0));
             let method = searchType;

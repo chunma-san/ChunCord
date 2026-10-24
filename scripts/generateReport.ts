@@ -66,6 +66,7 @@ interface PatchInfo {
 };
 
 const report = {
+    lastSearch: undefined as { index: number; total: number; searchType: string; source?: string; } | undefined,
     badPatches: [] as PatchInfo[],
     slowPatches: [] as PatchInfo[],
     badStarts: [] as {
@@ -245,6 +246,7 @@ async function finishReport(incomplete?: string) {
     if (incomplete) {
         process.exitCode = 1;
         report.otherErrors.push(incomplete);
+        if (report.lastSearch) report.otherErrors.push(`Last replayed search: ${JSON.stringify(report.lastSearch)}`);
     }
     clearTimeout(reportDeadline);
     try {
@@ -297,6 +299,12 @@ async function handleConsole(e: import("puppeteer-core").ConsoleMessage) {
     if (isReporterMeta) {
         const value = consoleValue(rawArgs[1]);
         if (typeof value === "string") metaData = JSON.parse(value);
+        return;
+    }
+
+    if (firstArg === "[REPORTER_PROGRESS]") {
+        const value = consoleValue(rawArgs[1]);
+        if (typeof value === "string") report.lastSearch = JSON.parse(value);
         return;
     }
 
