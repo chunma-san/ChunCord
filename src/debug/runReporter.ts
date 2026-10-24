@@ -52,7 +52,10 @@ async function runReporter() {
         await loadLazyChunksDone;
 
         // Manually require all modules to make sure all lazily required modules are patched
+        let requiredModules = 0;
         for (const moduleId of Object.keys(Webpack.wreq.m)) {
+            if (++requiredModules % 50 === 0)
+                await new Promise<void>(resolve => setTimeout(resolve, 0));
             try {
                 Webpack.wreq(moduleId);
             } catch { }
@@ -79,7 +82,10 @@ async function runReporter() {
             }
         }
 
-        for (const [searchType, args, stack] of Webpack.lazyWebpackSearchHistory) {
+        // Replaying factories can register new lazy searches. Inspect the
+        // captured set rather than extending this traversal while it runs.
+        const searchHistory = [...Webpack.lazyWebpackSearchHistory];
+        for (const [searchType, args, stack] of searchHistory) {
             let method = searchType;
 
             if (searchType === "findComponent") method = "find";

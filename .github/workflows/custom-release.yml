@@ -48,6 +48,7 @@ jobs:
           fi
       - run: node scripts/custom/test-testcord.mjs
       - run: node scripts/custom/test-chuncord.mjs
+      - run: node scripts/custom/test-reporter.mjs
       - run: pnpm buildStandalone
       - run: pnpm testTsc
       - name: Package validated build and source
