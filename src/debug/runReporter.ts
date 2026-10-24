@@ -62,10 +62,10 @@ async function runReporter() {
         }
 
         if (IS_REPORTER && IS_WEB && !IS_VESKTOP && !IS_EQUIBOP) {
-            console.log("[REPORTER_META]", {
+            console.log("[REPORTER_META]", JSON.stringify({
                 buildNumber: getBuildNumber(),
                 buildHash: window.GLOBAL_ENV.SENTRY_TAGS.buildId
-            });
+            }));
         }
 
         for (const patch of patches) {
@@ -85,7 +85,10 @@ async function runReporter() {
         // Replaying factories can register new lazy searches. Inspect the
         // captured set rather than extending this traversal while it runs.
         const searchHistory = [...Webpack.lazyWebpackSearchHistory];
+        let checkedSearches = 0;
         for (const [searchType, args, stack] of searchHistory) {
+            if (++checkedSearches % 10 === 0)
+                await new Promise<void>(resolve => setTimeout(resolve, 0));
             let method = searchType;
 
             if (searchType === "findComponent") method = "find";
@@ -104,7 +107,17 @@ async function runReporter() {
                 } else if (method === "extractAndLoadChunks") {
                     const [code, matcher] = args;
 
-                    result = await Webpack.extractAndLoadChunks(code, matcher);
+                    let timeout: ReturnType<typeof setTimeout>;
+                    try {
+                        result = await Promise.race([
+                            Webpack.extractAndLoadChunks(code, matcher),
+                            new Promise<never>((_, reject) => {
+                                timeout = setTimeout(() => reject(new Error("Reporter chunk lookup timed out")), 15000);
+                            })
+                        ]);
+                    } finally {
+                        clearTimeout(timeout!);
+                    }
                     if (result === false) result = null;
                 } else if (method === "mapMangledModule") {
                     const [code, mapper, includeBlacklistedExports] = args;

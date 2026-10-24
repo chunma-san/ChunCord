@@ -82,3 +82,11 @@ jobs:
                   USE_CANARY: ${{ matrix.discord_branch == 'canary' && 'true' || 'false' }}
                   # Scheduled fork reports stay in the GitHub job summary.
                   WEBHOOK_URL: ${{ inputs.webhook_url }}
+            - name: Preserve patch report
+              if: always()
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+              with:
+                  name: patch-report-${{ matrix.discord_branch }}
+                  path: dist/patch-report-*.json
+                  if-no-files-found: warn
+                  retention-days: 7

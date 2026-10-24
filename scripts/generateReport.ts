@@ -23,6 +23,7 @@ import { createHmac } from "crypto";
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 import pup, { JSHandle } from "puppeteer-core";
+import { consoleError, consoleValue } from "./reporterConsole";
 
 const logStderr = (...data: any[]) => console.error(`${CANARY ? "CANARY" : "STABLE"} ---`, ...data);
 
@@ -53,9 +54,7 @@ await page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/5
 await page.setBypassCSP(true);
 
 async function maybeGetError(handle: JSHandle): Promise<string | undefined> {
-    return await (handle as JSHandle<Error>)?.getProperty("message")
-        .then(m => m?.jsonValue())
-        .catch(() => undefined);
+    return consoleError(handle);
 }
 
 interface PatchInfo {
@@ -106,6 +105,7 @@ function toCodeBlock(s: string, indentation = 0, isDiscord = false) {
 }
 
 async function printReport() {
+    writeFileSync(`dist/patch-report-${CANARY ? "canary" : "stable"}.json`, JSON.stringify({ metaData, ...report }, null, 2));
     console.log();
 
     console.log("# Equicord Report" + (CANARY ? " (Canary)" : ""));
@@ -238,6 +238,27 @@ async function printReport() {
     }
 }
 
+let finishing = false;
+async function finishReport(incomplete?: string) {
+    if (finishing) return;
+    finishing = true;
+    if (incomplete) {
+        process.exitCode = 1;
+        report.otherErrors.push(incomplete);
+    }
+    clearTimeout(reportDeadline);
+    try {
+        await printReport();
+    } finally {
+        await Promise.race([browser.close().catch(error => {
+            process.exitCode = 1;
+            logStderr("Failed to close reporter browser:", String(error));
+        }), new Promise(resolve => setTimeout(resolve, 5000))]);
+        process.exit(process.exitCode ?? 0);
+    }
+}
+const reportDeadline = setTimeout(() => void finishReport("INCOMPLETE: reporter exceeded its eight-minute deadline; remaining patches were not verified."), 8 * 60 * 1000);
+
 page.on("console", e => {
     void handleConsole(e).catch(error => {
         process.exitCode = 1;
@@ -257,7 +278,7 @@ async function handleConsole(e: import("puppeteer-core").ConsoleMessage) {
         try {
             return await Promise.all(
                 args.map(async a => {
-                    return await maybeGetError(a) || await a.jsonValue();
+                    return await maybeGetError(a) || consoleValue(a);
                 })
             ).then(a => a.join(" ").trim());
         } catch {
@@ -274,17 +295,13 @@ async function handleConsole(e: import("puppeteer-core").ConsoleMessage) {
     const isReporterMeta = firstArg === "[REPORTER_META]";
 
     if (isReporterMeta) {
-        metaData = await rawArgs[1].jsonValue() as any;
+        const value = consoleValue(rawArgs[1]);
+        if (typeof value === "string") metaData = JSON.parse(value);
         return;
     }
 
-    outer:
     if (isEquicord) {
-        try {
-            var args = await Promise.all(e.args().map(a => a.jsonValue()));
-        } catch {
-            break outer;
-        }
+        const args = rawArgs.map(consoleValue);
 
         const [, tag, message, otherMessage, stack] = args as Array<string>;
 
@@ -328,7 +345,8 @@ async function handleConsole(e: import("puppeteer-core").ConsoleMessage) {
 
                 switch (message) {
                     case "A fatal error occurred:":
-                        process.exit(1);
+                        await finishReport("INCOMPLETE: lazy chunk loading failed.");
+                        return;
                 }
 
                 break;
@@ -337,7 +355,8 @@ async function handleConsole(e: import("puppeteer-core").ConsoleMessage) {
 
                 switch (message) {
                     case "A fatal error occurred:":
-                        process.exit(1);
+                        await finishReport("INCOMPLETE: the in-browser reporter failed.");
+                        return;
                     case "Webpack Find Fail:":
                         process.exitCode = 1;
 
@@ -347,9 +366,8 @@ async function handleConsole(e: import("puppeteer-core").ConsoleMessage) {
                         report.badWebpackFinds.push({ find: otherMessage, source: source ?? "Unknown source" });
                         break;
                     case "Finished test":
-                        await browser.close();
-                        await printReport();
-                        process.exit();
+                        await finishReport();
+                        return;
                 }
         }
     }
@@ -388,4 +406,8 @@ await page.evaluateOnNewDocument(`
     }
 `);
 
-await page.goto(CANARY ? "https://canary.discord.com/login" : "https://discord.com/login", { timeout: 120000 });
+try {
+    await page.goto(CANARY ? "https://canary.discord.com/login" : "https://discord.com/login", { timeout: 120000 });
+} catch (error) {
+    await finishReport(`INCOMPLETE: Discord navigation failed: ${String(error)}`);
+}
