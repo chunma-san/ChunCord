@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 import fs from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import ts from "typescript";
 
@@ -41,6 +42,12 @@ for (const plugin of manifest.plugins) for (const file of plugin.files) {
     }
     if (!/\.[mc]?[jt]sx?$/.test(file)) continue;
     let code = fs.readFileSync(file, "utf8").replace(/\r\n/g, "\n");
+    if (file.endsWith("IGP/openpgp.min.mjs")) {
+        const body = code.slice(code.indexOf("\n") + 1);
+        if (!code.startsWith("/*! OpenPGP.js v6.2.2 - ") || createHash("sha256").update(body).digest("hex") !== "4164c059aff6f6e6fa933752c80687d4e60a34b46fa1b28a376bd3e24301764b")
+            throw new Error("Bundled OpenPGP code changed. Verify the official release and licenses before updating the accepted hash.");
+        continue;
+    }
     let relative = path.posix.relative(path.posix.dirname(file), support + "/constants");
     if (!relative.startsWith(".")) relative = "./" + relative;
     code = code.replaceAll('"@utils/constants"', JSON.stringify(relative));
@@ -49,15 +56,15 @@ for (const plugin of manifest.plugins) for (const file of plugin.files) {
         .replace("migrateOldSettingToNewPlugin, ", "")
         .replace(/^migrateOldSettingToNewPlugin\("WebRTCLeakPrevent"[^\n]+\n/gm, "");
     if (plugin.name === "SoundcloudRPC") code = code.replaceAll("../IllegalcordDynamicIsland/native", "./native").replaceAll("pluginHelpers.IllegalcordDynamicIsland", "pluginHelpers.SoundcloudRPC");
-    if (file.endsWith("discreetMode/index.tsx")) code = code
+    if (file.endsWith("ghostClient/index.tsx")) code = code
         .replace('import { installLarpCordPrivacy } from "./larpCord";\n', "")
         .replace("        const larpCordPrivacy = installLarpCordPrivacy(isInterfaceHidden);\n", "")
         .replace("            larpCordPrivacy.refresh();\n", "")
         .replace("            larpCordPrivacy.stop();\n", "")
         .replace("Client Diagnostics and LarpCord contact replacements remain available.", "Client Diagnostics remain available.")
         .replace("LarpCord profile changes are suspended in this mode. Its email and phone replacements remain active.", "Profile customization plugins are suspended in this mode.");
-    if (file.endsWith("discreetMode/suspension.ts")) code = code.replace('["DiscreetMode", "LarpCord", "ClientDiagnostics"]', '["DiscreetMode", "ClientDiagnostics"]');
-    if (file.includes("discreetMode/")) code = code.replaceAll("(?:illegalcord|equicord|vencord", "(?:chuncord|illegalcord|equicord|vencord");
+    if (file.endsWith("ghostClient/suspension.ts")) code = code.replace('["GhostClient", "LarpCord", "ClientDiagnostics"]', '["GhostClient", "ClientDiagnostics"]');
+    if (file.includes("ghostClient/")) code = code.replaceAll("(?:illegalcord|equicord|vencord", "(?:chuncord|illegalcord|equicord|vencord");
     const ast = ts.createSourceFile(file, code, ts.ScriptTarget.Latest, true);
     const edits = [];
     function visit(node) {

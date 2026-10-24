@@ -20,7 +20,7 @@ The source is [ImHisako/Illegalcord](https://github.com/ImHisako/Illegalcord). C
 | DetectBlock | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/detectBlock) |
 | DisableAnimations | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/disableAnimations) |
 | DiscordHardened | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/DiscordHardened) |
-| DiscreetMode | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/discreetMode) |
+| GhostClient | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/ghostClient) |
 | DontLimitMe | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/dontLimitMe) |
 | EmbeddedURLs | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/embeddedURLs) |
 | ExpandedWidgets | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/expandedWidgets) |
@@ -54,7 +54,7 @@ The source is [ImHisako/Illegalcord](https://github.com/ImHisako/Illegalcord). C
 | YMusicSync | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/yMusicSync.desktop) |
 | ZeroWidthSanitizer | [Source](https://github.com/ImHisako/Illegalcord/tree/main/src/illegalcordplugins/ZeroWidthSanitizer) |
 
-SoundcloudRPC includes the shared WebNowPlaying native bridge under its own plugin namespace. It listens on loopback only and starts when the plugin is enabled. ClientIcon uses the bundled ChunCord icon. DiscreetMode retains its interface, activity and plugin suspension controls; its LarpCord-specific adapter is omitted because ChunCord already includes FakeUserSwitcher.
+SoundcloudRPC includes the shared WebNowPlaying native bridge under its own plugin namespace. It listens on loopback only and starts when the plugin is enabled. ClientIcon uses the bundled ChunCord icon. GhostClient retains its interface, activity and plugin suspension controls; its LarpCord-specific adapter is omitted because ChunCord already includes FakeUserSwitcher. Upstream renamed DiscreetMode to GhostClient, and its settings migration is preserved.
 
 ## Not imported
 
@@ -99,7 +99,7 @@ Already included plugins are kept with their current provider. Similar features 
 
 ## Updates and checks
 
-The existing six-hour release workflow synchronizes this selection. The importer verifies repository identity, regular files, paths, hashes and compatibility patches before copying a candidate into place. Native code and its imported helper changes require manual review; they are not accepted silently. Changes to the selection require editing the allowlist.
+The existing six-hour release workflow synchronizes this selection. The importer verifies repository identity, regular files, paths, hashes and compatibility patches before copying a candidate into place. Native code and its imported helper changes require manual review; they are not accepted silently. The bundled OpenPGP code is pinned to a verified official v6.2.2 body and also requires review before replacement. Changes to the selection require editing the allowlist.
 
 Checks cover unique registrations, dependencies, disabled defaults, port integrity, native activation guards and session cleanup. Desktop compilation and the patch reporter provide additional checks. These do not establish that every optional integration works on every Discord build. Plugins that use external services or system tools still need their own configuration.
 

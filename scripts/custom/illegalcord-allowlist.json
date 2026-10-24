@@ -161,17 +161,17 @@
       ]
     },
     {
-      "name": "DiscreetMode",
-      "folder": "src/illegalcordplugins/discreetMode",
-      "entry": "src/illegalcordplugins/discreetMode/index.tsx",
+      "name": "GhostClient",
+      "folder": "src/illegalcordplugins/ghostClient",
+      "entry": "src/illegalcordplugins/ghostClient/index.tsx",
       "files": [
-        "src/illegalcordplugins/discreetMode/fullSuspension.ts",
-        "src/illegalcordplugins/discreetMode/index.tsx",
-        "src/illegalcordplugins/discreetMode/pinDms.ts",
-        "src/illegalcordplugins/discreetMode/settings.ts",
-        "src/illegalcordplugins/discreetMode/style.css",
-        "src/illegalcordplugins/discreetMode/suspension.ts",
-        "src/illegalcordplugins/discreetMode/visuals.tsx"
+        "src/illegalcordplugins/ghostClient/fullSuspension.ts",
+        "src/illegalcordplugins/ghostClient/index.tsx",
+        "src/illegalcordplugins/ghostClient/pinDms.ts",
+        "src/illegalcordplugins/ghostClient/settings.tsx",
+        "src/illegalcordplugins/ghostClient/style.css",
+        "src/illegalcordplugins/ghostClient/suspension.ts",
+        "src/illegalcordplugins/ghostClient/visuals.tsx"
       ]
     },
     {

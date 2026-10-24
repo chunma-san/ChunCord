@@ -69,6 +69,8 @@ def main():
     contents = {}
     tree = dict(line.split('\t', 1)[::-1] for line in run('git', 'ls-tree', '-r', 'HEAD', cwd=source).splitlines())
     for dst, src in mapping.items():
+        if src not in tree:
+            raise ValueError('Selected source file is missing; review upstream moves or renames: '+src)
         mode = tree.get(src, '').split(' ', 1)[0]
         if mode != '100644':
             raise ValueError('Only regular, non-executable source files may be imported: '+src)
