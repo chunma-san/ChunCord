@@ -58,8 +58,12 @@ try {
     await assert.rejects(updater.applyUpdate(), /verification failed/);
     assert.equal(fs.readFileSync(installed, "utf8"), "previous version");
     globalThis.chunCordDownloadFixture = data;
+    await assert.rejects(updater.applyUpdate(), /Repair/);
+    fs.writeFileSync(installed + ".loader-version", "1");
     assert.equal(await updater.applyUpdate(), true);
-    assert.deepEqual(fs.readFileSync(installed), data);
+    assert.equal(fs.readFileSync(installed, "utf8"), "previous version");
+    assert.deepEqual(fs.readFileSync(installed + ".pending"), data);
+    assert.equal(JSON.parse(fs.readFileSync(installed + ".pending.json")).sha256, hash);
     globalThis.chunCordReleaseFixture = { ...release, target_commitish: "a".repeat(40) };
     assert.deepEqual(await updater.listUpdates(), []);
 } finally {
@@ -69,4 +73,4 @@ try {
     for (const file of fs.readdirSync(directory)) fs.unlinkSync(path.join(directory, file));
     fs.rmdirSync(directory);
 }
-console.log("ChunCord release validation, update notification data, checksum rejection and atomic replacement passed.");
+console.log("ChunCord release validation, notification data, checksum rejection and restart-safe staging passed.");

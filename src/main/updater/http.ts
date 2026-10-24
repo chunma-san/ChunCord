@@ -20,7 +20,7 @@ import { fetchBuffer, fetchJson } from "@main/utils/http";
 import { VENCORD_USER_AGENT } from "@shared/vencordUserAgent";
 import { parseChunCordRelease, releaseChecksum, releaseMatches, type ChunCordRelease } from "@shared/chuncordRelease";
 import { createHash, randomUUID } from "crypto";
-import { existsSync, renameSync, unlinkSync, writeFileSync } from "original-fs";
+import { existsSync, readFileSync, renameSync, unlinkSync, writeFileSync } from "original-fs";
 
 import gitHash from "~git-hash";
 import gitRemote from "~git-remote";
@@ -76,12 +76,20 @@ async function applyUpdate() {
     const data = await fetchBuffer(candidate.asset.browser_download_url);
     if (data.length !== candidate.asset.size || createHash("sha256").update(data).digest("hex") !== expected)
         throw new Error("ChunCord update verification failed. The installed version was preserved.");
+    if (!existsSync(`${__dirname}.loader-version`) || readFileSync(`${__dirname}.loader-version`, "utf8").trim() !== "1")
+        throw new Error("Close Discord and run Repair in the latest ChunCord Installer once to enable restart-safe updates.");
     const temporary = `${__dirname}.update-${randomUUID()}`;
+    const receiptTemporary = `${temporary}.json`;
     try {
         writeFileSync(temporary, data, { flush: true, flag: "wx" });
-        renameSync(temporary, __dirname);
+        // Electron holds the running archive open on Windows. The installer
+        // bootstrap commits this verified candidate before loading it next time.
+        writeFileSync(receiptTemporary, JSON.stringify({ version: 1, size: data.length, sha256: expected, revision: candidate.revision }), { flush: true, flag: "wx" });
+        renameSync(temporary, `${__dirname}.pending`);
+        renameSync(receiptTemporary, `${__dirname}.pending.json`);
     } finally {
         if (existsSync(temporary)) unlinkSync(temporary);
+        if (existsSync(receiptTemporary)) unlinkSync(receiptTemporary);
     }
 
     PendingUpdate = null;

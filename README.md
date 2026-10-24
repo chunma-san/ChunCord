@@ -22,6 +22,8 @@ New TestCord plugins start disabled. Enable only the ones you want. BadgeSelecto
 
 Updates download through ChunCord inside Discord. A notification tells you when to restart. You can also use **Settings → ChunCord → Updater**. The installer includes Repair and Uninstall. Keep the installer available if a Discord update needs a repair.
 
+Updates are verified and staged while Discord is running, then applied before ChunCord loads on the next start. If an older installation reports an `EPERM` update error, close Discord and run **Repair** with the latest installer once.
+
 Windows installers are currently unsigned. Windows may show an unrecognized publisher prompt. Official ChunCord downloads are hosted only under the two GitHub repositories linked here.
 
 See [CUSTOM.md](CUSTOM.md) for source builds and release details.
