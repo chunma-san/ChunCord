@@ -113,7 +113,7 @@
     "src/illegalcordplugins/_kamidereCompat/branding.ts": "ddea13ce8ed580f08168c0303a226b1e98ee4627e3bb36f614c59ded634bc448",
     "src/illegalcordplugins/_kamidereCompat/runtimeActivity.ts": "d3cfd2ca1fff9e2627fc05f71ff2d80c3555cb915f6cc9a27e23fdceebaebc3f",
     "src/illegalcordplugins/_legalWarnings.tsx": "89ab01e30e6790054dd0e9002a40e4a03e3ce01df2138d1bf4226cecf6b82b52",
-    "src/illegalcordplugins/_support/constants.ts": "f0783ffe8f11e6808757d85a459455c6ef57ac87a89f9a827529d561d7bcd674",
+    "src/illegalcordplugins/_support/constants.ts": "2b4ae897ed04fd0907c4f9bbaa71fab1e29c5d37ad3eada3681437b0cd6c22d4",
     "src/illegalcordplugins/betterMicrophone.desktop/components/MicrophoneSettingsModal.tsx": "db66fcbcad1e184def78f44ac78903821377d311df585162c40be524115d4315",
     "src/illegalcordplugins/betterMicrophone.desktop/components/index.tsx": "c3d71bd9d17da03ffb6d1c7c53d2ee194c4b8d89c1e2c2b5997a05db6fedf4e4",
     "src/illegalcordplugins/betterMicrophone.desktop/constants/constants.ts": "f6e7ee8c781a563898f04bcf2d4d15569f057893e94fc0239383aa2b1582103c",
@@ -164,7 +164,7 @@
     "src/illegalcordplugins/ghostClient/fullSuspension.ts": "6b7d906508d1136f0b8a004a92e94f3d802b91331c57b7f90b4209d92a80dc5e",
     "src/illegalcordplugins/ghostClient/index.tsx": "753e24bd9c0b81d73f9b97b74d28a6a7d923153fa0b29bf6e8797be4ddc719a9",
     "src/illegalcordplugins/ghostClient/pinDms.ts": "f845cbe661e21d09d3cb5e48b688bdd22ca915c9d7e37338f04da860484c79be",
-    "src/illegalcordplugins/ghostClient/settings.tsx": "10b5549e2248ca6b99b23b5a1d4f456fde2776c948788e1fab667b5a10aa8d97",
+    "src/illegalcordplugins/ghostClient/settings.tsx": "129b46cbe8d1c1aa6fbc7545de01d673779fef211db32eb5570e5a34cf3669e6",
     "src/illegalcordplugins/ghostClient/style.css": "f9996f55a6c371691b337e1369866258ee7b5c589819256f4f0dbc46f1e91212",
     "src/illegalcordplugins/ghostClient/suspension.ts": "08c163cccea089906df29706395eb061bf29aa0258544b19c9b62014038b9d34",
     "src/illegalcordplugins/ghostClient/visuals.tsx": "f948c6ffbc2a25dc916adceafdb8e05f95a7a29699302259fd865fbca5402966",
@@ -288,7 +288,7 @@
     "src/illegalcordplugins/yMusicSync.desktop/styles.css": "823a7709d427653428a46028186fac76b2f31c1d17924ac0c8d581600ae1721e",
     "src/illegalcordplugins/yMusicSync.desktop/types.ts": "67ef4f00107756ae8953a8e2f87b6b1b8c7b90eca51279c452650d255b5e39d6"
   },
-  "revision": "e07de55b9f6ce6183ee6cde40aa47efbecfb88bc",
+  "revision": "c10d510d99c598b9c262407f0548e3e176483b3c",
   "source": "https://github.com/ImHisako/Illegalcord",
   "source_files": {
     "src/illegalcordplugins/2FA HIder/index.tsx": "54c6a51ac201c0ddb251582d6dc997ce57b57a3020d0f3574b8d6e8af923e4c3",
@@ -410,7 +410,7 @@
     "src/illegalcordplugins/ghostClient/fullSuspension.ts": "6b7d906508d1136f0b8a004a92e94f3d802b91331c57b7f90b4209d92a80dc5e",
     "src/illegalcordplugins/ghostClient/index.tsx": "a88a7a14a0c9f72fbe662907ee7a8fe0abd6bce2dce4e438c44e3fde29ba8532",
     "src/illegalcordplugins/ghostClient/pinDms.ts": "f845cbe661e21d09d3cb5e48b688bdd22ca915c9d7e37338f04da860484c79be",
-    "src/illegalcordplugins/ghostClient/settings.tsx": "10b5549e2248ca6b99b23b5a1d4f456fde2776c948788e1fab667b5a10aa8d97",
+    "src/illegalcordplugins/ghostClient/settings.tsx": "129b46cbe8d1c1aa6fbc7545de01d673779fef211db32eb5570e5a34cf3669e6",
     "src/illegalcordplugins/ghostClient/style.css": "f9996f55a6c371691b337e1369866258ee7b5c589819256f4f0dbc46f1e91212",
     "src/illegalcordplugins/ghostClient/suspension.ts": "15bd8e76b48d0c73b7c2a4e729407d2aa906a80277ca59f81b8b24bc289a954f",
     "src/illegalcordplugins/ghostClient/visuals.tsx": "f948c6ffbc2a25dc916adceafdb8e05f95a7a29699302259fd865fbca5402966",
@@ -533,6 +533,6 @@
     "src/illegalcordplugins/yMusicSync.desktop/store.ts": "7bba51e27862b0cb52d76d43fc9474ada9671a277e863baef03620924b92e326",
     "src/illegalcordplugins/yMusicSync.desktop/styles.css": "823a7709d427653428a46028186fac76b2f31c1d17924ac0c8d581600ae1721e",
     "src/illegalcordplugins/yMusicSync.desktop/types.ts": "67ef4f00107756ae8953a8e2f87b6b1b8c7b90eca51279c452650d255b5e39d6",
-    "src/utils/constants.ts": "af626182e8f788765546a55540e5ebac5865fa2df0b766c4edb07e85ebbc3e03"
+    "src/utils/constants.ts": "8297c0b11988275660c65f083b5f82048ee720da1db6df1117d4f848d8e72caa"
   }
 }
