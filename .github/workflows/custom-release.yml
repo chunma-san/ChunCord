@@ -40,24 +40,32 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Sync the selected TestCord plugins
         run: |
-          git clone --depth=1 https://github.com/TestcordDev/TestCord.git "$RUNNER_TEMP/testcord-source"
-          python3 scripts/custom/sync-testcord.py "$RUNNER_TEMP/testcord-source"
-          git add src/testcordplugins scripts/custom/testcord-lock.json
-          if ! git diff --cached --quiet; then
-            git commit -m 'Sync selected TestCord plugins'
+          if git clone --depth=1 https://github.com/TestcordDev/TestCord.git "$RUNNER_TEMP/testcord-source"; then
+            python3 scripts/custom/sync-testcord.py "$RUNNER_TEMP/testcord-source"
+            git add src/testcordplugins scripts/custom/testcord-lock.json
+            if ! git diff --cached --quiet; then
+              git commit -m 'Sync selected TestCord plugins'
+            fi
+          else
+            echo "::warning::TestcordDev/TestCord is unreachable; keeping the committed locked selection and skipping the re-sync."
           fi
       - run: node scripts/custom/test-testcord.mjs
       - name: Sync the selected Illegalcord plugins
         run: |
-          git clone --depth=1 https://github.com/ImHisako/Illegalcord.git "$RUNNER_TEMP/illegalcord-source"
-          python3 scripts/custom/sync-illegalcord.py "$RUNNER_TEMP/illegalcord-source"
-          git add src/illegalcordplugins scripts/custom/illegalcord-lock.json
-          if ! git diff --cached --quiet; then
-            git commit -m 'Sync selected Illegalcord plugins'
+          if git clone --depth=1 https://github.com/ImHisako/Illegalcord.git "$RUNNER_TEMP/illegalcord-source"; then
+            python3 scripts/custom/sync-illegalcord.py "$RUNNER_TEMP/illegalcord-source"
+            git add src/illegalcordplugins scripts/custom/illegalcord-lock.json
+            if ! git diff --cached --quiet; then
+              git commit -m 'Sync selected Illegalcord plugins'
+            fi
+          else
+            echo "::warning::ImHisako/Illegalcord is unreachable; keeping the committed locked selection and skipping the re-sync."
           fi
       - run: node scripts/custom/test-illegalcord.mjs
       - run: node scripts/custom/test-chuncord.mjs
       - run: node scripts/custom/test-reporter.mjs
+      - name: Record the build timestamp for reproducible artifacts
+        run: echo "SOURCE_DATE_EPOCH=$(git log -1 --format=%ct)" >> "$GITHUB_ENV"
       - run: pnpm buildStandalone
       - run: pnpm testTsc
       - name: Package validated build and source
