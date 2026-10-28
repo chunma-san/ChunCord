@@ -10,6 +10,7 @@ import re
 from pathlib import Path, PurePosixPath
 import shutil
 import subprocess
+import sys
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -101,7 +102,8 @@ def main():
                     queue.append(candidate)
     native = {src:hashes[src] for src in sorted(native_paths)}
     if old and old.get('native_sources') != native and not args.review_native:
-        raise ValueError('Native source changed. Review it before importing with --review-native.')
+        print('Native source changed. The committed selection is unchanged; review before importing with --review-native.', file=sys.stderr)
+        raise SystemExit(3)
     scratch = Path(os.environ.get('RUNNER_TEMP', ROOT.parent))
     with tempfile.TemporaryDirectory(prefix='equicord-illegalcord-', dir=scratch) as folder:
         stage = Path(folder)

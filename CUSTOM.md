@@ -38,7 +38,7 @@ The Illegalcord selection, exclusions, compatibility details and source links ar
 
 The existing release workflow runs every six hours, on pushes to `custom` and on manual dispatch. Source and downloads publish only after the candidate build passes. Scheduled GitHub runs can be delayed or paused after inactivity.
 
-If a plugin repository cannot be cloned, the workflow retains the committed selection and still requires its offline lock verification to pass. Import errors and native-source changes continue to stop the build. This keeps existing TestCord plugins available when their original repository is unavailable, without claiming that those plugins receive upstream updates. Build timestamps come from the final source commit after synchronization.
+If a plugin repository cannot be cloned, the workflow retains the committed selection and still requires its offline lock verification to pass. Illegalcord native changes stop its importer with exit code 3 before it writes any files; automated releases keep the existing verified selection while those changes await review. Other import errors still stop the build. This keeps existing TestCord plugins available when their original repository is unavailable, without claiming that those plugins receive upstream updates. Build timestamps come from the final source commit after synchronization.
 
 ChunCord integration maintained by [chunma-san](https://github.com/chunma-san); original plugin authors and licenses remain preserved.
 

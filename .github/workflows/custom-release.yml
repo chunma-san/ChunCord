@@ -53,10 +53,18 @@ jobs:
       - name: Sync the selected Illegalcord plugins
         run: |
           if git clone --depth=1 https://github.com/ImHisako/Illegalcord.git "$RUNNER_TEMP/illegalcord-source"; then
-            python3 scripts/custom/sync-illegalcord.py "$RUNNER_TEMP/illegalcord-source"
-            git add src/illegalcordplugins scripts/custom/illegalcord-lock.json
-            if ! git diff --cached --quiet; then
-              git commit -m 'Sync selected Illegalcord plugins'
+            if python3 scripts/custom/sync-illegalcord.py "$RUNNER_TEMP/illegalcord-source"; then
+              git add src/illegalcordplugins scripts/custom/illegalcord-lock.json
+              if ! git diff --cached --quiet; then
+                git commit -m 'Sync selected Illegalcord plugins'
+              fi
+            else
+              status=$?
+              if [ "$status" -eq 3 ]; then
+                echo "::warning::Illegalcord native changes need review; retaining the committed selection for offline verification."
+              else
+                exit "$status"
+              fi
             fi
           else
             echo "::warning::ImHisako/Illegalcord is unreachable; keeping the committed locked selection and skipping the re-sync."
