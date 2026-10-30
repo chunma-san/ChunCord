@@ -16,6 +16,8 @@ Public releases include `desktop.asar` and SHA-256 checksums. The ChunCord insta
 
 ## Source ownership
 
+ChunCord retains the legacy `Button`, `Text`, `Forms`, `Switch` and tooltip adapters used by its selected plugin collections. Keep these adapters and their types when merging upstream UI migrations. Package updates use upstream's dependency catalog while preserving the additional dependencies needed by the selected plugins. The ChannelGallery endpoint adaptation is included in the import patch so a later sync preserves it.
+
 | Source | What it supplies |
 | --- | --- |
 | Equicord `main` | Client, built-in Equicord plugins and its Vencord updates |

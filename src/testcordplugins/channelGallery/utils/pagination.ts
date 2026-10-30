@@ -10,8 +10,9 @@ const FETCH_TIMEOUT_MS = 15_000;
 
 function getMessagesEndpoint(channelId: string): string {
     try {
-        if (typeof Constants?.Endpoints?.MESSAGES === "function") {
-            const ep = Constants.Endpoints.MESSAGES(channelId);
+        const endpoint: unknown = Constants?.Endpoints?.MESSAGES;
+        if (typeof endpoint === "function") {
+            const ep = endpoint(channelId);
             if (ep) return ep;
         }
     } catch { }

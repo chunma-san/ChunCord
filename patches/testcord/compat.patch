@@ -931,3 +931,17 @@ index cca8c0f8..fc54b267 100644
  );
 
  interface TileContentProps {
+diff --git a/src/testcordplugins/channelGallery/utils/pagination.ts b/src/testcordplugins/channelGallery/utils/pagination.ts
+--- a/src/testcordplugins/channelGallery/utils/pagination.ts
++++ b/src/testcordplugins/channelGallery/utils/pagination.ts
+@@ -11,7 +11,8 @@
+ function getMessagesEndpoint(channelId: string): string {
+     try {
+-        if (typeof Constants?.Endpoints?.MESSAGES === "function") {
+-            const ep = Constants.Endpoints.MESSAGES(channelId);
++        const endpoint: unknown = Constants?.Endpoints?.MESSAGES;
++        if (typeof endpoint === "function") {
++            const ep = endpoint(channelId);
+             if (ep) return ep;
+         }
+     } catch { }

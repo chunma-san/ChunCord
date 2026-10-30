@@ -1,7 +1,6 @@
 import { Moment } from "moment";
 import type { ComponentClass, ComponentPropsWithRef, ComponentType, CSSProperties, FunctionComponent, HtmlHTMLAttributes, HTMLProps, JSX, KeyboardEvent, MouseEvent, PointerEvent, PropsWithChildren, ReactNode, Ref, RefObject } from "react";
 
-
 // #region Old compability
 
 export type HeadingTag = `h${1 | 2 | 3 | 4 | 5 | 6}`;
@@ -74,28 +73,6 @@ export type Tooltip = ComponentType<TooltipProps> & {
 };
 
 export type TooltipPositions = Record<"BOTTOM" | "CENTER" | "LEFT" | "RIGHT" | "TOP" | "WINDOW_CENTER", string>;
-
-export type TooltipContainer = ComponentType<PropsWithChildren<{
-    text: ReactNode;
-    element?: "div" | "span";
-    "aria-label"?: string | false;
-
-    delay?: number;
-    /** Tooltip.Colors.BLACK */
-    color?: string;
-    /** TooltipPositions.TOP */
-    position?: PopoutPosition;
-    spacing?: number;
-
-    className?: string;
-    tooltipClassName?: string | null;
-    tooltipContentClassName?: string | null;
-
-    allowOverflow?: boolean;
-    forceOpen?: boolean;
-    hideOnClick?: boolean;
-    disableTooltipPointerEvents?: boolean;
-}>>;
 
 export type Card = ComponentType<PropsWithChildren<HTMLProps<HTMLDivElement> & {
     editable?: boolean;
