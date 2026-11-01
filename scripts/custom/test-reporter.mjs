@@ -22,7 +22,12 @@ const stubs={
  '@api/PluginManager':'export const addPatch=(...args)=>globalThis.__reporterFixture.addPatch(...args);',
  '@plugins/devCompanion.dev/initWs':'export function initWs(){}',
  '@utils/Logger':'export class Logger { log(...args){globalThis.__reporterFixture.logs.push(args);} warn(){} }',
- '@webpack':'export const wreq=Object.assign(()=>{},{m:{}});export const lazyWebpackSearchHistory=globalThis.__reporterFixture.history;export async function extractAndLoadChunks(){return new Promise(()=>{});}export function mapMangledModule(){return {};}',
+ '@webpack':`export const wreq=Object.assign(()=>{},{m:{},f:{}});
+ export const factoryListeners=new Set();
+ factoryListeners.add=function(callback){Set.prototype.add.call(this,callback);queueMicrotask(callback);return this;};
+ globalThis.__reporterFixture.factoryListeners=factoryListeners;
+ globalThis.__reporterFixture.wreq=wreq;
+ export const lazyWebpackSearchHistory=globalThis.__reporterFixture.history;export async function extractAndLoadChunks(){return new Promise(()=>{});}export function mapMangledModule(){return {};}`,
  '@webpack/patcher':'export const patches=[];export const patchTimings=[];export const getBuildNumber=()=>0;',
  './loadLazyChunks':'export async function loadLazyChunks(){}',
  './reporterData':'export const reporterData={};'
@@ -45,6 +50,8 @@ try {
  assert(logs.some(x=>x[0]==='Finished test'),'Reporter must finish');
  assert.equal(calls,1,'Searches registered during replay belong to a later snapshot');
  assert.equal(history.length,3);
+ assert.equal(sandbox.__reporterFixture.factoryListeners.size,0,'Reporter must remove its one-shot factory listener');
+ assert.equal(typeof sandbox.__reporterFixture.wreq.f.css,'function','Reporter must skip chunk CSS after runtime initialization');
  assert(logs.some(x=>x[0]==='Webpack Find Fail:'),'Timed-out chunk lookup must be reported as a failure');
  console.log('Real reporter regression: isolated globals, stable replay, bounded chunk lookup and failure reporting PASS');
 } finally {delete sandbox.__reporterFixture;}
