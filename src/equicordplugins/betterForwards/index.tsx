@@ -94,6 +94,7 @@ export default definePlugin({
     tags: ["Chat", "Utility"],
     searchTerms: ["selfForward", "betterForwardMeta"],
     authors: [Devs.thororen, Devs.sadan, Devs.nin0dev, EquicordDevs.VillainsRule, Devs.Davri],
+    dependencies: ["ConcatenatedModules"],
     settings,
     managedStyle,
     patches: [

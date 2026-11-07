@@ -17,6 +17,10 @@ import { _blacklistBadModules, _initWebpack, factoryListeners, moduleListeners, 
 
 export const patches = [] as Patch[];
 
+export function getBuildNumber() {
+    return window.GLOBAL_ENV?.BUILD_NUMBER || -1;
+}
+
 export const SYM_ORIGINAL_MODULE_FACTORIES = Symbol("WebpackPatcher.originalModuleFactories");
 export const SYM_IS_PROXIED_FACTORY = Symbol("WebpackPatcher.isProxiedFactory");
 export const SYM_ORIGINAL_FACTORY = Symbol("WebpackPatcher.originalFactory");
@@ -492,7 +496,7 @@ function patchFactory(moduleId: PropertyKey, originalFactory: AnyModuleFactory):
     for (let i = 0; i < patches.length; i++) {
         const patch = patches[i];
 
-        const buildNumber = window.GLOBAL_ENV?.BUILD_NUMBER || -1;
+        const buildNumber = getBuildNumber();
         const shouldCheckBuildNumber = buildNumber !== -1;
 
         if (
