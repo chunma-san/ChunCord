@@ -78,7 +78,6 @@
     "include": [
         "src/**/*",
         "browser/**/*",
-        "scripts/**/*",
-        "eslint.config.mjs"
+        "scripts/**/*"
     ],
 }

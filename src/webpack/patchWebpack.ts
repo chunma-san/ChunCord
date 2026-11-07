@@ -18,7 +18,7 @@ import { _blacklistBadModules, _initWebpack, factoryListeners, moduleListeners, 
 export const patches = [] as Patch[];
 
 export function getBuildNumber() {
-    return window.GLOBAL_ENV?.BUILD_NUMBER || -1;
+    return Number(window.GLOBAL_ENV?.BUILD_NUMBER ?? -1);
 }
 
 export const SYM_ORIGINAL_MODULE_FACTORIES = Symbol("WebpackPatcher.originalModuleFactories");

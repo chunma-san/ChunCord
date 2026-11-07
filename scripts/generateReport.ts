@@ -21,8 +21,8 @@
 
 import { createHmac } from "crypto";
 import { readFileSync, writeFileSync } from "fs";
-import { join } from "path";
 import pup, { JSHandle } from "puppeteer-core";
+
 import { consoleError, consoleValue } from "./reporterConsole";
 
 const logStderr = (...data: any[]) => console.error(`${CANARY ? "CANARY" : "STABLE"} ---`, ...data);
@@ -44,7 +44,7 @@ const browser = await pup.launch({
     headless: true,
     protocolTimeout: 300000,
     executablePath: process.env.CHROMIUM_BIN,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: ["--no-sandbox", "--disable-setuid-sandbox"]
 });
 
 const browserJs = readFileSync("./dist/browser/browser.js", "utf-8");
@@ -63,7 +63,7 @@ interface PatchInfo {
     id: string;
     match: string;
     error?: string;
-};
+}
 
 const report = {
     lastSearch: undefined as { index: number; total: number; searchType: string; source?: string; } | undefined,

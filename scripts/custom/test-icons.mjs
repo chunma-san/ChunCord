@@ -3,9 +3,11 @@
  * Copyright (c) 2026 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
+
 import assert from "node:assert/strict";
-import { build } from "esbuild";
 import vm from "node:vm";
+
+import { build } from "esbuild";
 
 async function waitFor(predicate) {
     const deadline = Date.now() + 5000;
@@ -130,12 +132,12 @@ assert.equal(typeof api.default.iconsModule.BrokenIcon, "function", "Comma-separ
 assert.equal(api.default.iconsModule.FolderIcon, FolderIcon, "Imperative callers can load icons without React");
 const patch = api.default.patches[0].replacement;
 const pattern = new RegExp(patch.match.source.replaceAll("\\i", "[A-Za-z_$][\\w$]*"));
-const moduleSource = 'let saved=function helper(x){return x};function badge(p){let cache,{first:f,badgeIcon:b}=p;cache??=r(42);let path=`./${b}.web.tsx`;}';
+const moduleSource = "let saved=function helper(x){return x};function badge(p){let cache,{first:f,badgeIcon:b}=p;cache??=r(42);let path=`./${b}.web.tsx`;}";
 const patchedSource = moduleSource.replace(pattern, patch.replace.replaceAll("$self", "plugin"));
 let registered;
 vm.runInNewContext(patchedSource, { plugin: { setIconLoader(value) { registered = value; } }, r: () => newLoader });
 assert.equal(registered, newLoader, "The context loader registers without calling the badge function");
-assert(patchedSource.includes('let saved=function helper(x){return x}'), "A preceding function expression stays unchanged");
+assert(patchedSource.includes("let saved=function helper(x){return x}"), "A preceding function expression stays unchanged");
 api.useIcons("FolderIcon");
 const removedIcon = subscriptions.at(-1);
 api.default.setIconsModule({});
