@@ -7,7 +7,7 @@
 import { BaseText } from "@components/BaseText";
 import { Flex } from "@components/Flex";
 import { AtIcon, DiscordIconSizes, RightArrow, TextIcon } from "@components/Icons";
-import { iconsModule } from "@equicordplugins/_core/concatenatedModules";
+import { useIcons } from "@equicordplugins/_core/concatenatedModules";
 import { getGuildAcronym, getIntlMessage } from "@utils/discord";
 import { getUserAvatarUrl, identity } from "@utils/misc";
 import { BasicGuild, Channel, Guild, GuildProfile, Message, MessageAttachment } from "@vencord/discord-types";
@@ -232,13 +232,13 @@ interface SubEmbedPickerProps extends Required<ForwardOptionsState> {
 }
 
 function SubEmbedPicker({ title, subEmbeds, opts, setOpts, hasOpts, defaultOpts }: SubEmbedPickerProps) {
-    const { EmbedIcon, ImageIcon } = iconsModule;
+    const { EmbedIcon, ImageIcon } = useIcons("EmbedIcon,ImageIcon");
     const items = useMemo(() => subEmbeds.map(({ id, name, isMainEmbed }) => ({
         id,
         label: name,
         icon: isMainEmbed ? EmbedIcon : ImageIcon,
         isDisabled: !hasOpts,
-    })), [subEmbeds, hasOpts]);
+    })), [subEmbeds, hasOpts, EmbedIcon, ImageIcon]);
     const validItems = useMemo(() => new Set(subEmbeds.map(({ id }) => id)), [subEmbeds]);
 
     const selected = hasOpts ? opts.onlyEmbedIndices : defaultOpts.onlyEmbedIndices;
@@ -309,10 +309,9 @@ const attachmentIcons: Partial<Record<AttachmentType, string>> = {
 };
 
 function AttachmentIcon({ attachment, ...props }: { attachment: MessageAttachment; size?: string; color?: string; }) {
-    const Icon = useMemo(() => {
-        const type = getAttachmentType(attachment, true);
-        return iconsModule[(attachmentIcons[type] ?? "ImageFile") + "Icon"];
-    }, [attachment]);
+    const type = getAttachmentType(attachment, true);
+    const name = (attachmentIcons[type] ?? "ImageFile") + "Icon";
+    const Icon = useIcons(name)[name];
 
     return Icon && <Icon style={{ flexShrink: 0 }} {...props} />;
 }

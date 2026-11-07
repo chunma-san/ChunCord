@@ -5,7 +5,7 @@
  */
 
 import { BaseText } from "@components/BaseText";
-import { BasicChannelTabsProps, Bookmark, BookmarkFolder, BookmarkProps, getDiscordFolderIcon, isBookmarkFolder, isTabSelected, navigateToBookmark, openedTabs, settings, UseBookmarkMethods, useBookmarks } from "@equicordplugins/channelTabs/util";
+import { BasicChannelTabsProps, Bookmark, BookmarkFolder, BookmarkProps, isBookmarkFolder, isTabSelected, navigateToBookmark, openedTabs, settings, UseBookmarkMethods, useBookmarks,useDiscordFolderIcon } from "@equicordplugins/channelTabs/util";
 import { CircleQuestionIcon, DiscoveryIcon, EnvelopeIcon, FriendsIcon, NitroIcon, QuestIcon, ShopIcon } from "@equicordplugins/channelTabs/util/icons";
 import { classNameFactory } from "@utils/css";
 import { getGuildAcronym, getIntlMessage } from "@utils/discord";
@@ -43,8 +43,8 @@ function FolderIcon({ fill }: { fill: string; }) {
 }
 
 function BookmarkIcon({ bookmark }: { bookmark: Bookmark | BookmarkFolder; }) {
+    const IconComponent = useDiscordFolderIcon(isBookmarkFolder(bookmark) ? bookmark.iconName : undefined);
     if (isBookmarkFolder(bookmark)) {
-        const IconComponent = getDiscordFolderIcon(bookmark.iconName);
 
         const fill = bookmark.iconName === "CircleShieldIcon" ? "var(--background-base-low)" : bookmark.iconColor;
         const customIconSize = 16;

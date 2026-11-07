@@ -4,24 +4,21 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { iconsModule } from "@equicordplugins/_core/concatenatedModules";
+import { useIcons } from "@equicordplugins/_core/concatenatedModules";
 import { Icon } from "@vencord/discord-types";
+import { useMemo } from "@webpack/common";
 
-let iconNames: string[] | undefined;
-
-export function getDiscordFolderIcon(name?: string): Icon | undefined {
+export function useDiscordFolderIcon(name?: string): Icon | undefined {
+    const iconsModule = useIcons(name ?? "");
     if (!name) return;
 
     const icon = iconsModule[name];
     return typeof icon === "function" && name.endsWith("Icon") ? icon : undefined;
 }
 
-export function getDiscordFolderIconNames(): string[] {
-    if (iconNames) return iconNames;
-
-    iconNames = Object.keys(iconsModule)
+export function useDiscordFolderIconNames(): string[] {
+    const iconsModule = useIcons();
+    return useMemo(() => Object.keys(iconsModule)
         .filter(name => name.endsWith("Icon") && typeof iconsModule[name] === "function")
-        .sort((a, b) => a.localeCompare(b));
-
-    return iconNames;
+        .sort((a, b) => a.localeCompare(b)), [iconsModule]);
 }

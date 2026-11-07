@@ -9,7 +9,7 @@ import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { BookCheckIcon, OpenExternalIcon, PencilIcon, StarFilled, StarOutlined, TrashIcon, UnsendIcon, WindowTopOutlineIcon, XLargeBoldIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
-import { bookmarkFolderColors, bookmarkPlaceholderName, closeOtherTabs, closeTab, closeTabsToTheLeft, closeTabsToTheRight, createTab, getDiscordFolderIcon, getDiscordFolderIconNames, hasClosedTabs, isBookmarkFolder, openedTabs, reopenClosedTab, settings, toggleCompactTab } from "@equicordplugins/channelTabs/util";
+import { bookmarkFolderColors, bookmarkPlaceholderName, closeOtherTabs, closeTab, closeTabsToTheLeft, closeTabsToTheRight, createTab, hasClosedTabs, isBookmarkFolder, openedTabs, reopenClosedTab, settings, toggleCompactTab,useDiscordFolderIcon, useDiscordFolderIconNames } from "@equicordplugins/channelTabs/util";
 import { Bookmark, BookmarkFolder, Bookmarks, ChannelTabsProps, UseBookmarkMethods } from "@equicordplugins/channelTabs/util/types";
 import { getIntlMessage } from "@utils/discord";
 import { Margins } from "@utils/margins";
@@ -67,7 +67,7 @@ export function BasicContextMenu() {
 }
 
 function FolderGlyph({ color, iconName }: { color: string; iconName?: string; }) {
-    const IconComponent = getDiscordFolderIcon(iconName);
+    const IconComponent = useDiscordFolderIcon(iconName);
     const resolvedColor = normalizeFolderColor(color);
     const fill = iconName === "CircleShieldIcon" ? "var(--background-base-low)" : resolvedColor;
     const customIconSize = 16;
@@ -127,7 +127,7 @@ function FolderIconPickerModal({ modalProps, modalKey, name, color, iconName, on
 }) {
     const [search, setSearch] = useState("");
     const [localColor, setLocalColor] = useState(normalizeFolderColor(color));
-    const iconNames = useMemo(() => getDiscordFolderIconNames(), []);
+    const iconNames = useDiscordFolderIconNames();
     const filteredIconNames = useMemo(() => {
         const normalized = search.trim().toLowerCase();
         if (!normalized) return iconNames;

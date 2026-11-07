@@ -492,7 +492,7 @@ function patchFactory(moduleId: PropertyKey, originalFactory: AnyModuleFactory):
     for (let i = 0; i < patches.length; i++) {
         const patch = patches[i];
 
-        const buildNumber = window.GLOBAL_ENV.BUILD_NUMBER || -1;
+        const buildNumber = window.GLOBAL_ENV?.BUILD_NUMBER || -1;
         const shouldCheckBuildNumber = buildNumber !== -1;
 
         if (

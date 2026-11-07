@@ -52,6 +52,8 @@ Add your own plugin source under `src/userplugins/<PluginName>/`. Upstream ignor
 
 ## Compatibility
 
+The November 2026 upstream merge retains JSON reporter metadata and handles an unavailable build number during early startup. Discord icon chunks load on demand; folder bookmarks and icon viewers update when those chunks arrive, with fallbacks while loading. Run `node scripts/custom/test-icons.mjs` for deferred loading, import reuse and failed-chunk recovery checks.
+
 All imported plugins start disabled and none is required. The three existing plugins retain their settings. Current Equicord modal, toast, layout and music APIs are used through local adapters. TestCord's full core, update system and unrelated plugins are excluded.
 
 Imported native methods also check that their plugin is enabled. A small set of cleanup methods remains callable after disabling a plugin so it can stop its own server, sessions or subprocesses. This is an activation guard, not a sandbox for enabled plugins.
