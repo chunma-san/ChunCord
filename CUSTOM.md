@@ -21,26 +21,25 @@ ChunCord retains the legacy `Button`, `Text`, `Forms`, `Switch` and tooltip adap
 | Source | What it supplies |
 | --- | --- |
 | Equicord `main` | Client, built-in Equicord plugins and its Vencord updates |
-| TestCord `main` | Exactly the 123 entries in `scripts/custom/testcord-allowlist.json` and listed helpers |
+| ChunCord maintained collection | The 123 entries in `scripts/custom/testcord-allowlist.json`, originally imported from TestCord; maintained locally |
 | Illegalcord `main` | The 45 entries in `scripts/custom/illegalcord-allowlist.json`, including the three previous user plugins |
 | This fork | Compatibility helpers, reviewed patches and release workflow |
 
 `scripts/custom/testcord-lock.json` records the upstream revision and source hashes. `patches/testcord/compat.patch` preserves the Equicord adaptations, including the encrypted vault migration and AI action confirmations. Plugin authorship remains with the original contributors. The imported GPL license is in `patches/testcord/LICENSE`.
 
-To refresh the selection from a clean public upstream checkout:
+The TestCord import is retired. Maintain these plugins directly in this repository and refresh only the affected entries in `ported_files` after reviewing a local change. Keep `source_files`, `native_sources`, `source`, and `revision` as historical import provenance, not as the current update source. Legacy `testcord` paths and plugin IDs are retained to preserve user settings, imports, and dependencies. The offline regression and hash checks remain mandatory.
+
+To refresh Illegalcord from its reviewed upstream checkout:
 
 ```sh
-python3 scripts/custom/sync-testcord.py /path/to/TestCord
 python3 scripts/custom/sync-illegalcord.py /path/to/Illegalcord
 ```
 
-The importer checks repository identity, file paths, source types and the fixed plugin count. It stages changes in a temporary directory and applies the port before replacing source. New upstream files are not imported automatically. A failed patch or an unreviewed native code change stops the update. Review such changes before using `--review-native`, update the patch if needed, then repeat the checks above. Changes to the selection itself require an explicit manifest edit.
-
-The Illegalcord selection, exclusions, compatibility details and source links are documented in [ILLEGALCORD_PLUGINS.md](ILLEGALCORD_PLUGINS.md). Its lock file and compatibility patch follow the same update rules as the TestCord selection.
+The Illegalcord selection, exclusions, compatibility details and source links are documented in [ILLEGALCORD_PLUGINS.md](ILLEGALCORD_PLUGINS.md). Its importer and compatibility patch remain independent of the locally maintained collection.
 
 The existing release workflow runs every six hours, on pushes to `custom` and on manual dispatch. Source and downloads publish only after the candidate build passes. Scheduled GitHub runs can be delayed or paused after inactivity.
 
-If a plugin repository cannot be cloned, the workflow retains the committed selection and still requires its offline lock verification to pass. Illegalcord native changes stop its importer with exit code 3 before it writes any files; automated releases keep the existing verified selection while those changes await review. Other import errors still stop the build. This keeps existing TestCord plugins available when their original repository is unavailable, without claiming that those plugins receive upstream updates. Build timestamps come from the final source commit after synchronization.
+If a plugin repository cannot be cloned, the workflow retains the committed selection and still requires its offline lock verification to pass. Illegalcord native changes stop its importer with exit code 3 before it writes any files; automated releases keep the existing verified selection while those changes await review. Other import errors still stop the build. The locally maintained ChunCord collection never fetches TestCord; its original provenance and GPL license remain recorded. Build timestamps come from the final source commit after synchronization.
 
 ChunCord integration maintained by [chunma-san](https://github.com/chunma-san); original plugin authors and licenses remain preserved.
 

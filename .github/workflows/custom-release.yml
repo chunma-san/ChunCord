@@ -38,18 +38,8 @@ jobs:
                   runtime: node@v24
                   require-lockfile: true
             - run: pnpm install --frozen-lockfile
-            - name: Sync the selected TestCord plugins
-              run: |
-                  if git clone --depth=1 https://github.com/TestcordDev/TestCord.git "$RUNNER_TEMP/testcord-source"; then
-                    python3 scripts/custom/sync-testcord.py "$RUNNER_TEMP/testcord-source"
-                    git add src/testcordplugins scripts/custom/testcord-lock.json
-                    if ! git diff --cached --quiet; then
-                      git commit -m 'Sync selected TestCord plugins'
-                    fi
-                  else
-                    echo "::warning::TestcordDev/TestCord is unreachable; keeping the committed locked selection and skipping the re-sync."
-                  fi
-            - run: node scripts/custom/test-testcord.mjs
+            - name: Verify the locally maintained ChunCord plugins
+              run: node scripts/custom/test-testcord.mjs
             - name: Sync the selected Illegalcord plugins
               run: |
                   if git clone --depth=1 https://github.com/ImHisako/Illegalcord.git "$RUNNER_TEMP/illegalcord-source"; then

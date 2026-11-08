@@ -430,7 +430,7 @@ export default function PluginSettings() {
                             { label: "Show Disabled", value: SearchStatus.DISABLED },
                             { label: "Show Equicord", value: SearchStatus.EQUICORD },
                             { label: "Show Vencord", value: SearchStatus.VENCORD },
-                            { label: "Show TestCord", value: SearchStatus.TESTCORD },
+                            { label: "Show ChunCord", value: SearchStatus.TESTCORD },
                             { label: "Show Illegalcord", value: SearchStatus.ILLEGALCORD },
                             { label: "Show New", value: SearchStatus.NEW },
                             hasUserPlugins && { label: "Show UserPlugins", value: SearchStatus.USER_PLUGINS },

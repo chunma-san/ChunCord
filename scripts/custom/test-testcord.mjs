@@ -3,13 +3,15 @@
  * Copyright (c) 2026 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
+
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
-import { createHash } from "node:crypto";
+import vm from "node:vm";
+
 import { build } from "esbuild";
 import ts from "typescript";
-import vm from "node:vm";
 
 async function load(file, plugins = []) {
     const output = await build({ entryPoints: [file], bundle: true, write: false, platform: "node", format: "esm", plugins });
@@ -19,6 +21,27 @@ const manifest = JSON.parse(fs.readFileSync("scripts/custom/testcord-allowlist.j
 assert.equal(manifest.plugins.length, 123);
 assert.equal(new Set(manifest.plugins.map(p => p.name)).size, 123);
 const lock = JSON.parse(fs.readFileSync("scripts/custom/testcord-lock.json", "utf8"));
+const collectionRoot = "src/testcordplugins";
+const collectionFiles = fs.readdirSync(collectionRoot, { recursive: true })
+    .map(entry => path.posix.join(collectionRoot, entry.replaceAll("\\", "/")))
+    .filter(file => {
+        const entry = fs.lstatSync(file);
+        assert(!entry.isSymbolicLink(), `Maintained collection must not contain symlinks: ${file}`);
+        return path.basename(file) !== ".DS_Store" && entry.isFile();
+    })
+    .sort();
+const discoveredFolders = fs.readdirSync(collectionRoot)
+    .filter(name => !name.startsWith("_") && !name.startsWith(".") && name !== "index.ts" && !/\.(zip|rar|7z|tar|gz|bz2)/.test(name))
+    .sort();
+assert.deepEqual(discoveredFolders, manifest.plugins.map(plugin => path.basename(plugin.folder)).sort(), "Build-discovered plugins must exactly match the reviewed allowlist");
+assert.deepEqual(Object.keys(lock.ported_files).sort(), collectionFiles, "Every maintained file must have a recorded hash, with no stale lock entries");
+for (const plugin of manifest.plugins) {
+    assert(collectionFiles.includes(plugin.entry), `${plugin.name} entry is missing`);
+    for (const file of plugin.files) assert(collectionFiles.includes(file), `${plugin.name} selected file is missing: ${file}`);
+}
+for (const support of manifest.support) assert(collectionFiles.includes(support.target), `Support file is missing: ${support.target}`);
+assert(collectionFiles.includes("src/testcordplugins/_support/constants.ts"), "Original author registry must be retained");
+
 // Exercise the actual ported matcher, including its capture-group contract.
 const tileSource = fs.readFileSync("src/testcordplugins/hyprTiles/components/TileContent.tsx", "utf8");
 const tileAst = ts.createSourceFile("TileContent.tsx", tileSource, ts.ScriptTarget.Latest, true);
@@ -38,7 +61,7 @@ for (const text of [
     'Promise.resolve().then(r.bind(r,"3")),name:"ForumChannel"'
 ]) assert.equal(forumRegex.exec(text)?.[2], "3");
 assert.equal(forumRegex.exec('r.e("1").then(r.bind(r,3)),name:"ForumChannel"')?.[1], 'r.e("1")');
-const absentForum = 'Promise.all([' + Array(1000).fill('r.e("1")').join(',') + ']).then(r.bind(r,"3")),name:"OtherChannel"';
+const absentForum = "Promise.all([" + Array(1000).fill('r.e("1")').join(",") + ']).then(r.bind(r,"3")),name:"OtherChannel"';
 assert.equal(vm.runInNewContext("new RegExp(source).test(text)", { source: forumSource, text: absentForum }, { timeout: 1000 }), false);
 for (const [file, hash] of Object.entries(lock.ported_files)) {
     const data = fs.readFileSync(file);

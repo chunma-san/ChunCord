@@ -12,7 +12,7 @@ for name in ['patcher.js','preload.js','renderer.js']:
     if not (desktop/name).is_file() or not (desktop/name).stat().st_size:raise RuntimeError('Incomplete desktop output: '+name)
 lock=json.loads((root/'scripts/custom/testcord-lock.json').read_text())
 selection=json.loads((root/'scripts/custom/testcord-allowlist.json').read_text())
-info={'source_commit':git('rev-parse','HEAD'),'upstream_commit':git('rev-parse','upstream/main'),'plugins':['BadgeSelector','FakeMuteAndDeafen','ServerBadges'],'testcord_plugins':[p['name'] for p in selection['plugins']],'testcord_revision':lock['revision'],'standalone':True}
+info={'source_commit':git('rev-parse','HEAD'),'upstream_commit':git('rev-parse','upstream/main'),'plugins':['BadgeSelector','FakeMuteAndDeafen','ServerBadges'],'testcord_plugins':[p['name'] for p in selection['plugins']],'testcord_revision':lock['revision'],'chuncord_plugins':[p['name'] for p in selection['plugins']],'chuncord_plugin_maintenance':'local','chuncord_plugin_maintainer':'chunma-san','standalone':True}
 illegalcord=json.loads((root/'scripts/custom/illegalcord-allowlist.json').read_text())
 info['illegalcord_plugins']=[p['name'] for p in illegalcord['plugins']]
 info['illegalcord_revision']=json.loads((root/'scripts/custom/illegalcord-lock.json').read_text())['revision']

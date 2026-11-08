@@ -14,7 +14,7 @@
 
 My Equicord fork, with extra plugins and updates delivered inside Discord.
 
-ChunCord keeps the Equicord plugin collection and adds **123 selected TestCord plugins** and **45 Illegalcord plugins**. Each collection has its own filter in the plugin settings, so you can find what you want without searching through everything.
+ChunCord keeps the Equicord plugin collection and adds **123 locally maintained ChunCord plugins (originally from TestCord)** and **45 Illegalcord plugins**. Each collection has its own filter in the plugin settings, so you can find what you want without searching through everything.
 
 ## Get started
 
@@ -24,7 +24,7 @@ ChunCord keeps the Equicord plugin collection and adds **123 selected TestCord p
 
 You do not need Git, Node.js or a source folder. Once setup finishes, you can delete the downloaded installer. ChunCord keeps its installed files in your application data folder.
 
-Imported plugins start disabled. Use **Show TestCord** or **Show Illegalcord** to browse the extra collections and enable the plugins you want.
+Imported plugins start disabled. Use **Show ChunCord** or **Show Illegalcord** to browse the extra collections and enable the plugins you want.
 
 ## Staying up to date
 
@@ -36,14 +36,14 @@ The installer is currently unsigned, so Windows may show an unknown publisher wa
 
 ## What gets updated
 
-The release workflow checks upstream every six hours. Equicord supplies the base client and Vencord changes. The selected plugins are synced from TestCord and Illegalcord, with ChunCord compatibility fixes applied before building.
+The release workflow checks upstream every six hours. Equicord supplies the base client and Vencord changes. The 123 ChunCord plugins are maintained locally; TestCord is no longer contacted for updates. Illegalcord plugins retain their reviewed synchronization workflow.
 
 A release is published only after the build checks pass. Merge conflicts or failed checks leave the previous release available. Native code changes require review. Discord changes can still break individual plugins after a successful build; read each plugin's description and settings before enabling it.
 
 | Collection | Details |
 | --- | --- |
 | Equicord and Vencord | Base client and standard plugins, maintained through Equicord |
-| TestCord | [The 123 selected plugins](TESTCORD_PLUGINS.md) |
+| ChunCord maintained collection | [The 123 plugins and their provenance](TESTCORD_PLUGINS.md) |
 | Illegalcord | [The 45 included plugins and exclusions](ILLEGALCORD_PLUGINS.md) |
 
 For source builds, compatibility changes and release details, see [CUSTOM.md](CUSTOM.md).
