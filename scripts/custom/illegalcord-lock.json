@@ -63,7 +63,7 @@
     "src/illegalcordplugins/DiscordHardened/SecurityPanel.tsx": "24224017d43fc96da84b34790917c5abead12fd38215372c275972d3bab25a46",
     "src/illegalcordplugins/DiscordHardened/SettingsPage.tsx": "40a0b8ce3faf07e4706c2542bdd3412358264eb72411010e34fae2cddacc4d5a",
     "src/illegalcordplugins/DiscordHardened/browsers.ts": "b1a06c48edb4bfe37085ef164d1ae248be75ff4fc90b119f7b36b23ff4dae0e7",
-    "src/illegalcordplugins/DiscordHardened/index.ts": "1a9406155e001c0e0dd8da89ff5c539f2610f0272364d62e757e019d5bd35afe",
+    "src/illegalcordplugins/DiscordHardened/index.ts": "19f12c9c22d65bed16ea00878d4d60b276e6e8974c9fff40286236ad99582348",
     "src/illegalcordplugins/DiscordHardened/microphonePrivacy.ts": "9fb7c6203b9c1f87a5c9d5d2726d9552300714e46ce2a648c020f7ef85b48129",
     "src/illegalcordplugins/DiscordHardened/native.ts": "8fdab4d6bd0207d1cdd2ff4672df1c8915eef19f1700cd06feac5ce4987854db",
     "src/illegalcordplugins/DiscordHardened/nativePermissions.ts": "c35fd5ad75816e001a87913289c7556d3ebab96fd706b82bdf2fd265befc75b4",

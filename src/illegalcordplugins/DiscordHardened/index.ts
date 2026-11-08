@@ -521,8 +521,8 @@ export default definePlugin({
         {
             find: ".isPlatformEmbedded)window.open(",
             replacement: {
-                match: /(?<=async function(?: \i)?\(\i,\i\)\{)/,
-                replace: "if($self.openLink(arguments[0]))return;",
+                match: /window\.open\((\i)\)/,
+                replace: "($self.openLink($1)||window.open($1))",
             },
         },
         {
