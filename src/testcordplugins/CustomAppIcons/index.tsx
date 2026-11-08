@@ -41,7 +41,6 @@ interface AppIconData {
 const AppIconData = findByPropsLazy("UZ", "QA") as AppIconData;
 
 const AppIconStore = findByPropsLazy("getCurrentDesktopIcon");
-const EditorFooterClasses = findByPropsLazy("editorFooter");
 
 function removeAppIcon() {
     const current_icon = AppIconStore.getCurrentDesktopIcon();
@@ -98,15 +97,14 @@ export default definePlugin({
     },
     addButtons() {
 
-        const { editorFooter } = EditorFooterClasses;
         return (
             <>
-                <Button color={Button.Colors.BRAND} size={Button.Sizes.MEDIUM} className={editorFooter} onClick={() => {
+                <Button color={Button.Colors.BRAND} size={Button.Sizes.MEDIUM} onClick={() => {
                     openModal(props => <AppIconModal {...props as any} />);
                 }}>
                     Add Custom App Icon
                 </Button>
-                <Button color={Button.Colors.RED} size={Button.Sizes.MEDIUM} className={editorFooter} onClick={removeAppIcon}>
+                <Button color={Button.Colors.RED} size={Button.Sizes.MEDIUM} onClick={removeAppIcon}>
                     Remove Custom selected App Icon
                 </Button>
             </>

@@ -12,10 +12,9 @@ import { definePluginSettings } from "@api/Settings";
 import { TestcordDevs } from "../_support/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { User } from "@vencord/discord-types";
-import { findByPropsLazy, findStoreLazy } from "@webpack";
+import { findStoreLazy } from "@webpack";
 import { FluxDispatcher, Menu, React } from "../_support/webpack";
 
-const VoiceActions = findByPropsLazy("leaveChannel");
 const VoiceStateStore = findStoreLazy("VoiceStateStore");
 const UserStore = findStoreLazy("UserStore");
 const SelectedChannelStore = findStoreLazy("SelectedChannelStore");

@@ -6,7 +6,7 @@
 
 import { createStore, del, entries, set } from "@api/DataStore";
 import { copyWithToast, openUserProfile } from "@utils/discord";
-import { findByPropsLazy } from "@webpack";
+import { findStoreLazy } from "@webpack";
 import {
     Avatar, Button, React, RelationshipStore, RestAPI, TextInput, Toasts, useCallback, useEffect, useMemo, useRef, UserProfileStore, UserStore, UserUtils,
 useState
@@ -15,7 +15,7 @@ useState
 import { deleteUserNotes as deletePluginNote, saveUserNotes as savePluginNote, usersNotes as userNotesPluginMap } from "../data";
 
 const NotesStore = createStore("UserNotesData", "UserNotesStore");
-const DiscordNoteStore = findByPropsLazy("getNote", "notes") ?? findByPropsLazy("getNote");
+const DiscordNoteStore = findStoreLazy("NoteStore");
 
 export type FilterStatus = "ALL" | "FRIENDS" | "BLOCKED";
 

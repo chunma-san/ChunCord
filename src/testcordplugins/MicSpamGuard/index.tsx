@@ -85,7 +85,7 @@ const pausedDynamics = new Set<string>();
 
 const { setLocalVolume } = findByPropsLazy("setLocalVolume");
 const volumeToAmplitude: (volume: number) => number = findByCodeLazy(/Math\.pow\([^,]+,\s*2\.8\)/);
-const amplitudeToVolume: (volume: number) => number = findByCodeLazy("Math.log10", "35714285714285715");
+const amplitudeToVolume: (volume: number) => number = findByCodeLazy("Math.log10", "1/2.8");
 
 let connection: VoiceConnection | null = null;
 let boundConnection: VoiceConnection | null = null;

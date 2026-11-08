@@ -18,8 +18,8 @@ export default definePlugin({
         {
             find: "cancelQueueMetricTimers",
             replacement: {
-                match: /this\.maxSize=[a-zA-Z]+,/,
-                replace: "this.maxSize=Number.MAX_SAFE_INTEGER,"
+                match: /this\.maxSize=\i(?=[,}])/,
+                replace: "this.maxSize=Number.MAX_SAFE_INTEGER"
             }
         }
     ]
