@@ -64,7 +64,7 @@ function makeFilter(
 }
 
 const parseTrimmed = (token: SearchToken) => token.getFullMatch().trim();
-const parseBoolean = (token: SearchToken) => token.getFullMatch().trim() === "true";
+const parseBoolean = (token: SearchToken) => token.getFullMatch().trim().toLowerCase() === "true";
 const parseNumber = (token: SearchToken) => Number(token.getFullMatch().trim());
 
 const booleanAutocomplete: SearchAutocomplete = () => [

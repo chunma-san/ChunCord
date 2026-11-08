@@ -57,17 +57,19 @@
         "jsqr": "catalog:",
         "nanoid": "catalog:",
         "native-file-system-adapter": "catalog:",
-        "yaml-js": "catalog:",
         "virtual-merge": "^1.0.1",
-        "ws": "8.21.0"
+        "ws": "8.21.0",
+        "yaml-js": "catalog:"
     },
     "devDependencies": {
         "@electron/asar": "catalog:",
         "@stylistic/eslint-plugin": "catalog:",
         "@types/chrome": "catalog:",
+        "@types/lodash": "^4.17.24",
         "@types/node": "catalog:",
         "@types/react": "catalog:",
         "@types/react-dom": "catalog:",
+        "@types/ws": "8.18.1",
         "@types/yazl": "catalog:",
         "@vencord/discord-types": "link:packages/discord-types",
         "diff": "catalog:",
@@ -89,12 +91,10 @@
         "ts-pattern": "catalog:",
         "tsx": "catalog:",
         "type-fest": "catalog:",
+        "typed-emitter": "2.1.0",
         "typescript": "catalog:",
         "typescript-transform-paths": "catalog:",
-        "zip-local": "catalog:",
-        "@types/lodash": "^4.17.24",
-        "@types/ws": "8.18.1",
-        "typed-emitter": "2.1.0"
+        "zip-local": "catalog:"
     },
     "engines": {
         "node": ">=22"

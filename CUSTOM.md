@@ -52,6 +52,8 @@ Add your own plugin source under `src/userplugins/<PluginName>/`. Upstream ignor
 
 ## Compatibility
 
+The upstream settings-modal resynchronization and numeric range UI are deferred in this release because their interaction with delayed writes introduced draft regressions. The previous settings controls remain unchanged. Imported TestCord and Illegalcord files are excluded from formatting to preserve their verified source hashes.
+
 The November 2026 upstream merge retains JSON reporter metadata and handles an unavailable build number during early startup. Discord icon chunks load on demand; folder bookmarks and icon viewers update when those chunks arrive, with fallbacks while loading. Console and plugin callers can await `Vencord.Plugins.plugins.ConcatenatedModules.loadIcons()` to load all icons, or pass a comma-separated list of icon names. Calls made before Discord registers its loader reject with a not-ready error; mounted React consumers wait for registration. The public `WebpackPatcher.getBuildNumber()` accessor reads the current build number on each call. Run `node scripts/custom/test-icons.mjs` for deferred loading, import reuse and failed-chunk recovery checks.
 
 All imported plugins start disabled and none is required. The three existing plugins retain their settings. Current Equicord modal, toast, layout and music APIs are used through local adapters. TestCord's full core, update system and unrelated plugins are excluded.

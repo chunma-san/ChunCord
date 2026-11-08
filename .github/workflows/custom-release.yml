@@ -3,128 +3,128 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 name: ChunCord sync and release
 on:
-  push:
-    branches: [custom]
-  workflow_dispatch:
-  schedule:
-    - cron: '17 */6 * * *'
+    push:
+        branches: [custom]
+    workflow_dispatch:
+    schedule:
+        - cron: "17 */6 * * *"
 permissions:
-  contents: read
+    contents: read
 concurrency:
-  group: custom-release
-  cancel-in-progress: false
+    group: custom-release
+    cancel-in-progress: false
 jobs:
-  build:
-    if: github.repository == 'chunma-san/ChunCord' && github.ref == 'refs/heads/custom'
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
-        with:
-          ref: custom
-          fetch-depth: 0
-          persist-credentials: false
-      - name: Merge official source in the isolated build
-        run: |
-          mkdir -p "$RUNNER_TEMP/validated"
-          git rev-parse HEAD > "$RUNNER_TEMP/validated/base.txt"
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git remote add upstream https://github.com/Equicord/Equicord.git
-          git fetch upstream main
-          git merge --no-edit upstream/main
-      - uses: pnpm/setup@ce3b1e5f04cd26dbb4614172464b544b5633cc92
-        with:
-          runtime: node@v24
-          require-lockfile: true
-      - run: pnpm install --frozen-lockfile
-      - name: Sync the selected TestCord plugins
-        run: |
-          if git clone --depth=1 https://github.com/TestcordDev/TestCord.git "$RUNNER_TEMP/testcord-source"; then
-            python3 scripts/custom/sync-testcord.py "$RUNNER_TEMP/testcord-source"
-            git add src/testcordplugins scripts/custom/testcord-lock.json
-            if ! git diff --cached --quiet; then
-              git commit -m 'Sync selected TestCord plugins'
-            fi
-          else
-            echo "::warning::TestcordDev/TestCord is unreachable; keeping the committed locked selection and skipping the re-sync."
-          fi
-      - run: node scripts/custom/test-testcord.mjs
-      - name: Sync the selected Illegalcord plugins
-        run: |
-          if git clone --depth=1 https://github.com/ImHisako/Illegalcord.git "$RUNNER_TEMP/illegalcord-source"; then
-            if python3 scripts/custom/sync-illegalcord.py "$RUNNER_TEMP/illegalcord-source"; then
-              git add src/illegalcordplugins scripts/custom/illegalcord-lock.json
-              if ! git diff --cached --quiet; then
-                git commit -m 'Sync selected Illegalcord plugins'
-              fi
-            else
-              status=$?
-              if [ "$status" -eq 3 ]; then
-                echo "::warning::Illegalcord native changes need review; retaining the committed selection for offline verification."
-              else
-                exit "$status"
-              fi
-            fi
-          else
-            echo "::warning::ImHisako/Illegalcord is unreachable; keeping the committed locked selection and skipping the re-sync."
-          fi
-      - run: node scripts/custom/test-illegalcord.mjs
-      - run: node scripts/custom/test-chuncord.mjs
-      - run: node scripts/custom/test-reporter.mjs
-      - run: node scripts/custom/test-icons.mjs
-      - name: Record the build timestamp for reproducible artifacts
-        run: echo "SOURCE_DATE_EPOCH=$(git log -1 --format=%ct)" >> "$GITHUB_ENV"
-      - run: pnpm buildStandalone
-      - run: pnpm testTsc
-      - name: Package validated build and source
-        run: |
-          python3 scripts/custom/package.py "$RUNNER_TEMP/validated"
-          if [ "$(git rev-parse HEAD)" != "$(cat "$RUNNER_TEMP/validated/base.txt")" ]; then
-            git bundle create "$RUNNER_TEMP/validated/source.bundle" HEAD --not origin/custom
-          fi
-          git rev-parse HEAD > "$RUNNER_TEMP/validated/head.txt"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: validated-custom-build
-          path: ${{ runner.temp }}/validated/
-          retention-days: 3
-          if-no-files-found: error
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
-        with:
-          ref: custom
-          fetch-depth: 0
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
-        with:
-          name: validated-custom-build
-          path: ${{ runner.temp }}/validated
-      - name: Publish only the tested source revision
-        run: |
-          test "$(git rev-parse HEAD)" = "$(cat "$RUNNER_TEMP/validated/base.txt")"
-          if [ -f "$RUNNER_TEMP/validated/source.bundle" ]; then
-            git fetch "$RUNNER_TEMP/validated/source.bundle" HEAD
-            test "$(git rev-parse FETCH_HEAD)" = "$(cat "$RUNNER_TEMP/validated/head.txt")"
-            git merge --ff-only FETCH_HEAD
-            git push origin HEAD:custom
-          fi
-      - name: Publish custom desktop download
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          cd "$RUNNER_TEMP/validated"
-          sha256sum -c SHA256SUMS.txt
-          release_tag="chuncord-$(cut -c1-12 head.txt)"
-          if ! gh release view "$release_tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh api "repos/$GITHUB_REPOSITORY/commits/$(cat head.txt)" --jq '"## Changes\n\n" + .commit.message + "\n\nSource: " + .html_url' > release-notes.md
-            gh release create "$release_tag" --repo "$GITHUB_REPOSITORY" --draft --target "$(cat head.txt)" --title "ChunCord" --generate-notes --notes-file release-notes.md desktop.asar equibop.asar SHA256SUMS.txt build-info.json
-          fi
-          if [ "$(gh release view "$release_tag" --repo "$GITHUB_REPOSITORY" --json isDraft --jq .isDraft)" = true ]; then
-            gh release upload "$release_tag" --repo "$GITHUB_REPOSITORY" --clobber desktop.asar equibop.asar SHA256SUMS.txt build-info.json
-            gh release edit "$release_tag" --repo "$GITHUB_REPOSITORY" --draft=false --latest
-          fi
+    build:
+        if: github.repository == 'chunma-san/ChunCord' && github.ref == 'refs/heads/custom'
+        runs-on: ubuntu-latest
+        timeout-minutes: 30
+        steps:
+            - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+              with:
+                  ref: custom
+                  fetch-depth: 0
+                  persist-credentials: false
+            - name: Merge official source in the isolated build
+              run: |
+                  mkdir -p "$RUNNER_TEMP/validated"
+                  git rev-parse HEAD > "$RUNNER_TEMP/validated/base.txt"
+                  git config user.name 'github-actions[bot]'
+                  git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+                  git remote add upstream https://github.com/Equicord/Equicord.git
+                  git fetch upstream main
+                  git merge --no-edit upstream/main
+            - uses: pnpm/setup@ce3b1e5f04cd26dbb4614172464b544b5633cc92
+              with:
+                  runtime: node@v24
+                  require-lockfile: true
+            - run: pnpm install --frozen-lockfile
+            - name: Sync the selected TestCord plugins
+              run: |
+                  if git clone --depth=1 https://github.com/TestcordDev/TestCord.git "$RUNNER_TEMP/testcord-source"; then
+                    python3 scripts/custom/sync-testcord.py "$RUNNER_TEMP/testcord-source"
+                    git add src/testcordplugins scripts/custom/testcord-lock.json
+                    if ! git diff --cached --quiet; then
+                      git commit -m 'Sync selected TestCord plugins'
+                    fi
+                  else
+                    echo "::warning::TestcordDev/TestCord is unreachable; keeping the committed locked selection and skipping the re-sync."
+                  fi
+            - run: node scripts/custom/test-testcord.mjs
+            - name: Sync the selected Illegalcord plugins
+              run: |
+                  if git clone --depth=1 https://github.com/ImHisako/Illegalcord.git "$RUNNER_TEMP/illegalcord-source"; then
+                    if python3 scripts/custom/sync-illegalcord.py "$RUNNER_TEMP/illegalcord-source"; then
+                      git add src/illegalcordplugins scripts/custom/illegalcord-lock.json
+                      if ! git diff --cached --quiet; then
+                        git commit -m 'Sync selected Illegalcord plugins'
+                      fi
+                    else
+                      status=$?
+                      if [ "$status" -eq 3 ]; then
+                        echo "::warning::Illegalcord native changes need review; retaining the committed selection for offline verification."
+                      else
+                        exit "$status"
+                      fi
+                    fi
+                  else
+                    echo "::warning::ImHisako/Illegalcord is unreachable; keeping the committed locked selection and skipping the re-sync."
+                  fi
+            - run: node scripts/custom/test-illegalcord.mjs
+            - run: node scripts/custom/test-chuncord.mjs
+            - run: node scripts/custom/test-reporter.mjs
+            - run: node scripts/custom/test-icons.mjs
+            - name: Record the build timestamp for reproducible artifacts
+              run: echo "SOURCE_DATE_EPOCH=$(git log -1 --format=%ct)" >> "$GITHUB_ENV"
+            - run: pnpm buildStandalone
+            - run: pnpm testTsc
+            - name: Package validated build and source
+              run: |
+                  python3 scripts/custom/package.py "$RUNNER_TEMP/validated"
+                  if [ "$(git rev-parse HEAD)" != "$(cat "$RUNNER_TEMP/validated/base.txt")" ]; then
+                    git bundle create "$RUNNER_TEMP/validated/source.bundle" HEAD --not origin/custom
+                  fi
+                  git rev-parse HEAD > "$RUNNER_TEMP/validated/head.txt"
+            - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+              with:
+                  name: validated-custom-build
+                  path: ${{ runner.temp }}/validated/
+                  retention-days: 3
+                  if-no-files-found: error
+    publish:
+        needs: build
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+              with:
+                  ref: custom
+                  fetch-depth: 0
+            - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+              with:
+                  name: validated-custom-build
+                  path: ${{ runner.temp }}/validated
+            - name: Publish only the tested source revision
+              run: |
+                  test "$(git rev-parse HEAD)" = "$(cat "$RUNNER_TEMP/validated/base.txt")"
+                  if [ -f "$RUNNER_TEMP/validated/source.bundle" ]; then
+                    git fetch "$RUNNER_TEMP/validated/source.bundle" HEAD
+                    test "$(git rev-parse FETCH_HEAD)" = "$(cat "$RUNNER_TEMP/validated/head.txt")"
+                    git merge --ff-only FETCH_HEAD
+                    git push origin HEAD:custom
+                  fi
+            - name: Publish custom desktop download
+              env:
+                  GH_TOKEN: ${{ github.token }}
+              run: |
+                  cd "$RUNNER_TEMP/validated"
+                  sha256sum -c SHA256SUMS.txt
+                  release_tag="chuncord-$(cut -c1-12 head.txt)"
+                  if ! gh release view "$release_tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+                    gh api "repos/$GITHUB_REPOSITORY/commits/$(cat head.txt)" --jq '"## Changes\n\n" + .commit.message + "\n\nSource: " + .html_url' > release-notes.md
+                    gh release create "$release_tag" --repo "$GITHUB_REPOSITORY" --draft --target "$(cat head.txt)" --title "ChunCord" --generate-notes --notes-file release-notes.md desktop.asar equibop.asar SHA256SUMS.txt build-info.json
+                  fi
+                  if [ "$(gh release view "$release_tag" --repo "$GITHUB_REPOSITORY" --json isDraft --jq .isDraft)" = true ]; then
+                    gh release upload "$release_tag" --repo "$GITHUB_REPOSITORY" --clobber desktop.asar equibop.asar SHA256SUMS.txt build-info.json
+                    gh release edit "$release_tag" --repo "$GITHUB_REPOSITORY" --draft=false --latest
+                  fi
