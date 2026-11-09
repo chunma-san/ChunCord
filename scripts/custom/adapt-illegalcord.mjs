@@ -55,6 +55,12 @@ for (const plugin of manifest.plugins) for (const file of plugin.files) {
     if (plugin.name === "DiscordHardened") code = code
         .replace("migrateOldSettingToNewPlugin, ", "")
         .replace(/^migrateOldSettingToNewPlugin\("WebRTCLeakPrevent"[^\n]+\n/gm, "");
+    if (plugin.name === "DiscordHardened") code = code
+        .replace(String.raw`/(?<=async function \i\(\i,\i\)\{)/`, String.raw`/window\.open\((\i)\)/`)
+        .replace("if($self.openLink(arguments[0]))return;", "($self.openLink($1)||window.open($1))");
+    if (plugin.name === "DontLimitMe") code = code
+        .replace(String.raw`/this\.maxSize=[a-zA-Z]+,/`, String.raw`/this\.maxSize=\i(?=[,}])/`)
+        .replace("this.maxSize=Number.MAX_SAFE_INTEGER,", "this.maxSize=Number.MAX_SAFE_INTEGER");
     if (plugin.name === "SoundcloudRPC") code = code.replaceAll("../IllegalcordDynamicIsland/native", "./native").replaceAll("pluginHelpers.IllegalcordDynamicIsland", "pluginHelpers.SoundcloudRPC");
     if (file.endsWith("ghostClient/index.tsx")) code = code
         .replace('import { installLarpCordPrivacy } from "./larpCord";\n', "")

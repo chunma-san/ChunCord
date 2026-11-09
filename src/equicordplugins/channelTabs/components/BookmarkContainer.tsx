@@ -6,6 +6,7 @@
 
 import { BaseText } from "@components/BaseText";
 import { BasicChannelTabsProps, Bookmark, BookmarkFolder, BookmarkProps, isBookmarkFolder, isTabSelected, navigateToBookmark, openedTabs, settings, UseBookmarkMethods, useBookmarks,useDiscordFolderIcon } from "@equicordplugins/channelTabs/util";
+import { Text } from "@components/Text";
 import { CircleQuestionIcon, DiscoveryIcon, EnvelopeIcon, FriendsIcon, NitroIcon, QuestIcon, ShopIcon } from "@equicordplugins/channelTabs/util/icons";
 import { classNameFactory } from "@utils/css";
 import { getGuildAcronym, getIntlMessage } from "@utils/discord";
@@ -97,7 +98,7 @@ function BookmarkIcon({ bookmark }: { bookmark: Bookmark | BookmarkFolder; }) {
             className={cl("bookmark-icon")}
         />
         : <div className={cl("bookmark-icon")}>
-            <BaseText size="xxs" weight="semibold" tag="span">{getGuildAcronym(guild)}</BaseText>
+            <Text size="xxs" weight="semibold" tag="span">{getGuildAcronym(guild)}</Text>
         </div>;
 
     if (channel?.recipients?.length) {
@@ -273,9 +274,9 @@ function FolderBookmarkItem({ bookmark, bookmarks, folderIndex, bookmarkIndex, m
                 <path fill="currentColor" d="M10 17l5-5-5-5z" />
             </svg>
             <BookmarkIcon bookmark={bookmark} />
-            <BaseText size="sm" className={cl("name-text")}>
+            <Text size="sm" className={cl("name-text")}>
                 {bookmark.name}
-            </BaseText>
+            </Text>
             {bookmarkNotificationDot && <NotificationDot channelIds={[bookmark.channelId]} />}
         </div>
     );
@@ -435,9 +436,9 @@ function Bookmark(props: BookmarkProps & { isExpanded?: boolean; onToggleFolder?
                     />
                 </svg>
             )}
-            <BaseText size="sm" className={cl("name-text")}>
+            <Text size="sm" className={cl("name-text")}>
                 {bookmark.name}
-            </BaseText>
+            </Text>
             {bookmarkNotificationDot && <NotificationDot channelIds={isBookmarkFolder(bookmark)
                 ? bookmark.bookmarks.map(b => b.channelId)
                 : [bookmark.channelId]
@@ -570,12 +571,12 @@ export default function BookmarkContainer(props: BasicChannelTabsProps & { userI
     return (
         <div className={cl("bookmark-container")}>
             <HorizontalScroller className={classes(cl("bookmarks"), isOver && cl("bookmarks-drop-target"))} customRef={dropRef}>
-                {!bookmarks && <BaseText className={cl("bookmark-placeholder-text")} size="xs">
+                {!bookmarks && <Text className={cl("bookmark-placeholder-text")} size="xs">
                     Loading bookmarks...
-                </BaseText>}
-                {bookmarks && !bookmarks.length && <BaseText className={cl("bookmark-placeholder-text")} size="xs">
+                </Text>}
+                {bookmarks && !bookmarks.length && <Text className={cl("bookmark-placeholder-text")} size="xs">
                     You have no bookmarks. You can add an open tab or hide this by right clicking it
-                </BaseText>}
+                </Text>}
                 {Array.isArray(bookmarks) && bookmarks.length > 0 &&
                     bookmarks.flatMap((bookmark, i) => {
                         if (!isBookmarkFolder(bookmark)) {
