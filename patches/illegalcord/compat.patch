@@ -1,16 +1,18 @@
+diff --git a/src/illegalcordplugins/DiscordHardened/nativeSession.ts b/src/illegalcordplugins/DiscordHardened/nativeSession.ts
+index 3e6ee24..4702204 100644
 --- a/src/illegalcordplugins/DiscordHardened/nativeSession.ts
 +++ b/src/illegalcordplugins/DiscordHardened/nativeSession.ts
-@@ -25,6 +25,7 @@
-
+@@ -25,6 +25,7 @@ interface SessionState {
+ 
  const logger = new Logger("DiscordHardened");
  const sessions = new Map<Session, SessionState>();
 +let listening = false;
-
+ 
  export function getSessionStatus(ses: Session) {
      const settings = RendererSettings.store.plugins?.DiscordHardened;
-@@ -63,6 +64,11 @@
+@@ -63,6 +64,11 @@ function filterRequest(details: OnBeforeRequestListenerDetails): boolean {
  }
-
+ 
  export function prepareSession(ses: Session): SessionState {
 +    if (!listening) {
 +        listening = true;
@@ -20,7 +22,7 @@
      const existing = sessions.get(ses);
      if (existing) return existing;
      const restorePermissions = installPermissionControls(ses);
-@@ -171,19 +177,21 @@
+@@ -171,19 +177,21 @@ export async function releaseSession(ses: Session): Promise<boolean> {
      }
      state.restore();
      sessions.delete(ses);
@@ -31,12 +33,12 @@
 +    }
      return true;
  }
-
+ 
  function protectWindow(_event: Electron.Event, contents: WebContents): void {
 -    if (contents.session === session.defaultSession) prepareSession(contents.session);
 +    if (RendererSettings.store.plugins?.DiscordHardened?.enabled === true && contents.session === session.defaultSession) prepareSession(contents.session);
  }
-
+ 
  function stop(): void {
      app.removeListener("web-contents-created", protectWindow);
      for (const state of sessions.values()) state.restore();
@@ -47,8 +49,63 @@
 -app.on("web-contents-created", protectWindow);
 -app.once("will-quit", stop);
 -void app.whenReady().then(() => prepareSession(session.defaultSession));
+diff --git a/src/illegalcordplugins/betterScreenshare.desktop/index.tsx b/src/illegalcordplugins/betterScreenshare.desktop/index.tsx
+index cd27247..c18dc64 100644
+--- a/src/illegalcordplugins/betterScreenshare.desktop/index.tsx
++++ b/src/illegalcordplugins/betterScreenshare.desktop/index.tsx
+@@ -33,7 +33,7 @@ import { GoLivePanelWrapper, replacedSubmitFunction } from "../betterScreenshare
+ import { initScreenshareAudioStore, initScreenshareStore, type ScreenshareProfile, screenshareStore } from "../betterScreenshare.desktop/stores";
+ import { Emitter, ScreenshareSettingsIcon } from "../philsPluginLibrary";
+ 
+-const Button = findComponentByCodeLazy(".NONE,disabled:", ".PANEL_BUTTON");
++const Button = findComponentByCodeLazy("tooltipForceOpen:", "tooltipPositionKey:");
+ 
+ interface StreamVideoQualityOptions {
+     width?: number;
+@@ -632,7 +632,7 @@ const BetterScreenshare = definePlugin({
+             find: "this.getDefaultGoliveQuality()",
+             replacement: [
+                 {
+-                    match: /(this\.goliveMaxQuality)=(this\.getDefaultGoliveQuality\(\))/,
++                    match: /(this\.goliveMaxQuality)=([^;]+?)(?=,this\.lastGoLivePixelCount=)/,
+                     replace: "$1=$self.patchStreamQuality($2)"
+                 },
+                 {
+diff --git a/src/illegalcordplugins/ghostClient/index.tsx b/src/illegalcordplugins/ghostClient/index.tsx
+index 6d777b2..dbf3940 100644
+--- a/src/illegalcordplugins/ghostClient/index.tsx
++++ b/src/illegalcordplugins/ghostClient/index.tsx
+@@ -233,9 +233,9 @@ export default definePlugin({
+             }
+         },
+         {
+-            find: ".currentToastMap.has(",
++            find: ".currentToastMap.get(",
+             replacement: {
+-                match: /(?<=function \i\(\i\)\{)(?=let \i=\i\?\.surface\?\?"app")/,
++                match: /(?<=function(?: \i)?\(\i\)\{)(?=let \i=\i\?\.surface\?\?"app")/,
+                 replace: "if($self.isGhostClientActive())return;"
+             }
+         }
+diff --git a/src/illegalcordplugins/philsPluginLibrary/discordModules/classes.ts b/src/illegalcordplugins/philsPluginLibrary/discordModules/classes.ts
+index 8389bc1..d02ea29 100644
+--- a/src/illegalcordplugins/philsPluginLibrary/discordModules/classes.ts
++++ b/src/illegalcordplugins/philsPluginLibrary/discordModules/classes.ts
+@@ -16,10 +16,8 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+ 
+-import { findByPropsLazy } from "@webpack";
++import { findCssClassesLazy } from "@webpack";
+ 
+-import * as types from "../../philsPluginLibrary/types";
+-
+-export const panelClasses: types.PanelClasses = findByPropsLazy("button", "buttonContents", "buttonColor");
++export const panelClasses = findCssClassesLazy("button", "buttonContents", "buttonColor", "container", "buttonIcon", "actionButtons");
+ 
+ // waitFor(filters.byProps("button", "buttonContents", "buttonColor"), result => panelClasses = result);
 diff --git a/src/illegalcordplugins/typingFriends/index.tsx b/src/illegalcordplugins/typingFriends/index.tsx
-index 13810d50..349f45b3 100644
+index 13810d5..e6d12b1 100644
 --- a/src/illegalcordplugins/typingFriends/index.tsx
 +++ b/src/illegalcordplugins/typingFriends/index.tsx
 @@ -305,8 +305,8 @@ export default definePlugin({
@@ -57,7 +114,7 @@ index 13810d50..349f45b3 100644
              replacement: {
 -                match: /renderTreeNode:(\i)(?=,lurkingGuildIds:)/,
 -                replace: "renderTreeNode:(...args)=>$self.wrapTreeNode($1(...args),args[0])"
-+                match: /(\.jsxs?\)\(\i,\{guildDiscoveryButton:\i,disableAppDownload:\i,isOverlay:\i,)renderTreeNode:(\i)(?=,lurkingGuildIds:)/,
++                match: /(\(0,\i\.jsxs?\)\(\i,\{[^{}]{0,300}?)renderTreeNode:(\i)(?=,lurkingGuildIds:)/,
 +                replace: "$1renderTreeNode:(...args)=>$self.wrapTreeNode($2(...args),args[0])"
              }
          },
