@@ -16,8 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { Logger } from "@utils/Logger";
 import * as t from "@vencord/discord-types";
-import { _resolveReady, filters, findByCodeLazy, findByPropsLazy, findLazy, mapMangledModuleLazy, waitFor } from "@webpack";
+import { _resolveReady, filters, findByCode, findByCodeLazy, findByPropsLazy, findLazy, mapMangledModuleLazy, waitFor } from "@webpack";
 import type * as TSPattern from "ts-pattern";
 
 export let FluxDispatcher: t.FluxDispatcher;
@@ -70,7 +71,14 @@ waitFor("parseTopic", m => Parser = m);
 export let Alerts: t.Alerts;
 waitFor(["show", "close"], m => Alerts = m);
 
-export const showToast: t.showToast = findByCodeLazy(".currentToastMap.has(");
+let toastFunction: t.showToast | undefined;
+const toastLogger = new Logger("Toast");
+export const showToast: t.showToast = (...args) => {
+    toastFunction ??= findByCode(".currentToastMap.get(", "setState");
+    if (toastFunction) return toastFunction(...args);
+    toastLogger.error("Failed to find showToast! Falling back to logging");
+    toastLogger.log(...args);
+};
 
 export const UserUtils = {
     getUser: findByCodeLazy(".USER(")

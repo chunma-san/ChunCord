@@ -59,3 +59,7 @@ Built on [Equicord](https://github.com/Equicord/Equicord) and [Vencord](https://
 - [GPL license](LICENSE)
 
 ChunCord is not affiliated with Discord. Client modifications can violate Discord's terms. Cosmetic badges do not grant Nitro, verification or partnership.
+
+## Reviewed upstream update (2026-11-16)
+
+Maintained by [chunma-san](https://github.com/chunma-san). The Equicord 1.15.17.3 merge retains the previously validated RichPresence, ProfileSets, DuplicateCategory, DownloadAllAttachments and WebScreenShareFixes implementations pending regression fixes. NoTrack retains its existing analytics-blocking implementation. The previously disabled BetterBackreading plugin remains disabled.
