@@ -53,7 +53,9 @@ jobs:
                       if [ "$status" -eq 3 ]; then
                         echo "::warning::Illegalcord native changes need review; retaining the committed selection for offline verification."
                       else
-                        exit "$status"
+                        git restore --source=HEAD --staged --worktree -- src/illegalcordplugins scripts/custom/illegalcord-lock.json
+                        git clean -fd -- src/illegalcordplugins
+                        echo "::warning::Illegalcord import failed; retaining the verified committed selection. Equicord updates will still be checked."
                       fi
                     fi
                   else
@@ -65,13 +67,16 @@ jobs:
             - run: node scripts/custom/test-icons.mjs
             - run: node scripts/custom/test-compatibility.mjs
             - run: node scripts/custom/test-bootstrap.mjs
+            - run: python3 scripts/custom/test-build-candidate.py
+            - run: node scripts/custom/test-isolation.mjs
             - name: Record the build timestamp for reproducible artifacts
               run: echo "SOURCE_DATE_EPOCH=$(git log -1 --format=%ct)" >> "$GITHUB_ENV"
-            - run: pnpm buildStandalone
-            - run: pnpm testTsc
+            - name: Typecheck and build with bounded optional-plugin isolation
+              run: python3 scripts/custom/build-candidate.py
             - name: Package validated build and source
               run: |
                   python3 scripts/custom/package.py "$RUNNER_TEMP/validated"
+                  cp dist/optional-plugin-status.json "$RUNNER_TEMP/validated/optional-plugin-status.json"
                   if [ "$(git rev-parse HEAD)" != "$(cat "$RUNNER_TEMP/validated/base.txt")" ]; then
                     git bundle create "$RUNNER_TEMP/validated/source.bundle" HEAD --not origin/custom
                   fi
@@ -114,6 +119,7 @@ jobs:
                   release_tag="chuncord-$(cut -c1-12 head.txt)"
                   if ! gh release view "$release_tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
                     gh api "repos/$GITHUB_REPOSITORY/commits/$(cat head.txt)" --jq '"## Changes\n\n" + .commit.message + "\n\nSource: " + .html_url' > release-notes.md
+                    python3 -c 'import json; p=json.load(open("optional-plugin-status.json"))["quarantined"]; print("\nOptional plugins omitted from this build: " + (", ".join(x["name"] for x in p) if p else "none"))' >> release-notes.md
                     gh release create "$release_tag" --repo "$GITHUB_REPOSITORY" --draft --target "$(cat head.txt)" --title "ChunCord" --generate-notes --notes-file release-notes.md desktop.asar equibop.asar SHA256SUMS.txt build-info.json
                   fi
                   if [ "$(gh release view "$release_tag" --repo "$GITHUB_REPOSITORY" --json isDraft --jq .isDraft)" = true ]; then

@@ -16,6 +16,12 @@ info={'source_commit':git('rev-parse','HEAD'),'upstream_commit':git('rev-parse',
 illegalcord=json.loads((root/'scripts/custom/illegalcord-allowlist.json').read_text())
 info['illegalcord_plugins']=[p['name'] for p in illegalcord['plugins']]
 info['illegalcord_revision']=json.loads((root/'scripts/custom/illegalcord-lock.json').read_text())['revision']
+candidate=json.loads((root/'dist/optional-plugin-status.json').read_text())
+if candidate.get('typecheck')!='passed' or candidate.get('build')!='passed':raise RuntimeError('Candidate checks did not pass')
+info['quarantined_plugins']=candidate['quarantined']
+omitted={p['name'] for p in candidate['quarantined']}
+for key in ('testcord_plugins','chuncord_plugins','illegalcord_plugins'):
+    info[key]=[name for name in info[key] if name not in omitted]
 (destination/'build-info.json').write_text(json.dumps(info,indent=2)+'\n')
 for name in ['desktop.asar','equibop.asar']:
     source=root/'dist'/name

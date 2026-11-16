@@ -51,6 +51,28 @@ Add your own plugin source under `src/userplugins/<PluginName>/`. Upstream ignor
 
 ## Compatibility
 
+### Scheduled update isolation
+
+GitHub Actions checks upstream every six hours; a home-server agent is not needed.
+An unavailable or incompatible Illegalcord import retains the committed selection
+and warns in the run. Its existing integrity and security checks must still pass.
+Equicord merge conflicts and core failures remain publication blockers.
+
+`python3 scripts/custom/build-candidate.py` checks TypeScript before building.
+Only compiler errors owned by manifest-listed optional custom plugins may omit
+that plugin from the candidate. At most ten plugins and three isolation rounds
+are allowed. Required plugins, shared support, unclassified failures and build
+errors stop publication. Full retained-source fixtures run before isolation.
+Source directories are restored after the attempt, so the next update retries
+them. The release notes and `build-info.json` identify omitted plugins; they are
+not counted as active plugins. This does not automatically repair plugin logic
+or classify logged-out Discord patch-reporter failures as success.
+
+Removed upstream plugin source remains accessible in this repository's Git
+history. Use the last commit before removal to recover it, rather than adding
+deleted plugins back into the active build. Maintained by
+[chunma-san](https://github.com/chunma-san).
+
 Host-update folder shims run the verified pending-update bootstrap before loading
 the archive. ChunCord repairs its own legacy direct-require shim on startup;
 other injectors are left unchanged. This prevents a Discord host update from
