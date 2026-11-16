@@ -233,9 +233,9 @@ export default definePlugin({
             }
         },
         {
-            find: ".currentToastMap.has(",
+            find: ".currentToastMap.get(",
             replacement: {
-                match: /(?<=function \i\(\i\)\{)(?=let \i=\i\?\.surface\?\?"app")/,
+                match: /(?<=function(?: \i)?\(\i\)\{)(?=let \i=\i\?\.surface\?\?"app")/,
                 replace: "if($self.isGhostClientActive())return;"
             }
         }

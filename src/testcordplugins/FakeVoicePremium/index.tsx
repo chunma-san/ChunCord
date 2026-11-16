@@ -729,7 +729,7 @@ export default definePlugin({
         {
             find: "handleOpenActivityPopout",
             replacement: {
-                match: /\i\.open\(\i\.\i\.ACTIVITY_POPOUT,.{0,80}?defaultHeight:480\}\)/,
+                match: /\i\.\i\(\i\.\i\.ACTIVITY_POPOUT,.{0,80}?defaultHeight:480\}\)/,
                 replace: "$self.shouldOpenEmbeddedActivity()&&$&"
             }
         },

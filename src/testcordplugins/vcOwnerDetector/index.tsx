@@ -342,19 +342,16 @@ export default definePlugin({
 
     patches: [
         {
-            find: ".usernameSpeaking",
+            find: "#{intl::GUEST_NAME_SUFFIX}",
             replacement: {
-                match: /(className:)([^,}]+)(username[^,}]*)/,
-                replace: "$1$self.addOwnerClass($2$3)"
+                match: /(className:)(\i\(\)\(\i,\i\.\i,\i,\{[^}]+\}\))(,children:\[.{0,240}?getName\((\i)\))/,
+                replace: "$1$self.addOwnerClass($2,$4?.id)$3"
             }
         }
     ],
 
-    addOwnerClass(originalClass: string) {
-        const currentUser = UserStore.getCurrentUser();
-        if (!currentUser) return originalClass;
-
-        const isOwner = veryimportantmap.has(currentUser.id);
+    addOwnerClass(originalClass: string, userId?: string) {
+        const isOwner = userId != null && veryimportantmap.has(userId);
         return isOwner ? `${originalClass} vc-owner-yellow` : originalClass;
     }
 });

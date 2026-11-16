@@ -305,7 +305,7 @@ export default definePlugin({
             find: ".setGuildsTree(",
             predicate: () => settings.store.showGuildIcons,
             replacement: {
-                match: /(\.jsxs?\)\(\i,\{guildDiscoveryButton:\i,disableAppDownload:\i,isOverlay:\i,)renderTreeNode:(\i)(?=,lurkingGuildIds:)/,
+                match: /(\(0,\i\.jsxs?\)\(\i,\{[^{}]{0,300}?)renderTreeNode:(\i)(?=,lurkingGuildIds:)/,
                 replace: "$1renderTreeNode:(...args)=>$self.wrapTreeNode($2(...args),args[0])"
             }
         },

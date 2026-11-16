@@ -97,9 +97,8 @@ const DS_KEY = "nightcord-ai-history";
 
 const VoiceActions = findByPropsLazy("selectVoiceChannel", "disconnect");
 const ChannelActions = findByPropsLazy("openPrivateChannel");
-const PrivateChannelStore = findByPropsLazy("getPrivateChannelIds", "getSortedPrivateChannels");
+const PrivateChannelStore = findByPropsLazy("getPrivateChannelIds");
 const GuildStore = findByPropsLazy("getGuildIds", "getGuilds");
-const CallActionsLazy = findByPropsLazy("startCall");
 let navClickHandler: (() => void) | null = null;
 
 interface DiscordAction {
@@ -170,14 +169,6 @@ async function callUser(userId: string): Promise<void> {
     await ChannelActions.openPrivateChannel(userId);
     await sleep(400);
     const channelId = await getDMChannelId(userId);
-
-    // Method 1: startCall via CallActionsLazy
-    try {
-        if (typeof CallActionsLazy?.startCall === "function") {
-            CallActionsLazy.startCall({ channelId });
-            return;
-        }
-    } catch (_) { /* */ }
 
     // Method 2: CALL_CONNECT dispatch (starts a call on an existing DM channel)
     try {

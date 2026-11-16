@@ -33,7 +33,7 @@ import { GoLivePanelWrapper, replacedSubmitFunction } from "../betterScreenshare
 import { initScreenshareAudioStore, initScreenshareStore, type ScreenshareProfile, screenshareStore } from "../betterScreenshare.desktop/stores";
 import { Emitter, ScreenshareSettingsIcon } from "../philsPluginLibrary";
 
-const Button = findComponentByCodeLazy(".NONE,disabled:", ".PANEL_BUTTON");
+const Button = findComponentByCodeLazy("tooltipForceOpen:", "tooltipPositionKey:");
 
 interface StreamVideoQualityOptions {
     width?: number;
@@ -632,7 +632,7 @@ const BetterScreenshare = definePlugin({
             find: "this.getDefaultGoliveQuality()",
             replacement: [
                 {
-                    match: /(this\.goliveMaxQuality)=(this\.getDefaultGoliveQuality\(\))/,
+                    match: /(this\.goliveMaxQuality)=([^;]+?)(?=,this\.lastGoLivePixelCount=)/,
                     replace: "$1=$self.patchStreamQuality($2)"
                 },
                 {
