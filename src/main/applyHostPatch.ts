@@ -4,14 +4,19 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { existsSync, lstatSync, mkdirSync, readdirSync, renameSync, rmdirSync, statSync, unlinkSync, writeFileSync } from "original-fs";
+import { randomUUID } from "crypto";
+import { existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, renameSync, rmdirSync, statSync, unlinkSync, writeFileSync } from "original-fs";
 import { basename, dirname, join } from "path";
+
+import { createChunCordBootstrap } from "./chuncordBootstrap";
 
 const STUB_PACKAGE = JSON.stringify({ name: "discord", main: "index.js" });
 const VERSION_PREFIX = "app-";
 
-const makeStubIndex = (patcherPath: string) =>
-    `require(${JSON.stringify(patcherPath)});`;
+const legacyStubIndex = (patcherPath: string) => `require(${JSON.stringify(patcherPath)});`;
+const makeStubIndex = (patcherPath: string) => dirname(patcherPath).endsWith(".asar")
+    ? createChunCordBootstrap(dirname(patcherPath))
+    : legacyStubIndex(patcherPath);
 
 /** `_app.asar` next to `app.asar` marks any patched install. */
 export const isAlreadyPatched = (resources: string) =>
@@ -32,7 +37,22 @@ export const patchResourcesDir = (resources: string, patcherJsPath: string): boo
     const app = join(resources, "app.asar");
     const _app = join(resources, "_app.asar");
 
-    if (isAlreadyPatched(resources) || !existsSync(app) || existsSync(_app)) return false;
+    if (isAlreadyPatched(resources)) {
+        const index = join(app, "index.js");
+        if (dirname(patcherJsPath).endsWith(".asar") && existsSync(index)
+            && readFileSync(index, "utf8").trim() === legacyStubIndex(patcherJsPath)) {
+            const temporary = `${index}.update-${randomUUID()}`;
+            try {
+                writeFileSync(temporary, makeStubIndex(patcherJsPath), { flag: "wx", flush: true });
+                renameSync(temporary, index);
+            } finally {
+                if (existsSync(temporary)) unlinkSync(temporary);
+            }
+            return true;
+        }
+        return false;
+    }
+    if (!existsSync(app) || existsSync(_app)) return false;
     try {
         if (lstatSync(app).isDirectory()) return false;
     } catch {

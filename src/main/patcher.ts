@@ -20,6 +20,7 @@ import { onceDefined } from "@shared/onceDefined";
 import electron, { app, BrowserWindowConstructorOptions, Menu } from "electron";
 import { dirname, join } from "path";
 
+import { patchResourcesDir } from "./applyHostPatch";
 import { RendererSettings } from "./settings";
 import { patchTrayMenu } from "./trayMenu";
 import { IS_VANILLA } from "./utils/constants";
@@ -28,6 +29,14 @@ console.log("[Equicord] Starting up...");
 
 // Our injector file at app/index.js
 const injectorPath = require.main!.filename;
+
+if (!IS_VESKTOP && !IS_EQUIBOP) {
+    try {
+        patchResourcesDir(join(dirname(injectorPath), ".."), join(__dirname, "patcher.js"));
+    } catch (error) {
+        console.error("[ChunCord] Failed to refresh update bootstrap", error);
+    }
+}
 
 // The original app.asar
 const asarPath = join(dirname(injectorPath), "..", "_app.asar");

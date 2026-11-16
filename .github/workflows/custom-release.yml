@@ -64,6 +64,7 @@ jobs:
             - run: node scripts/custom/test-reporter.mjs
             - run: node scripts/custom/test-icons.mjs
             - run: node scripts/custom/test-compatibility.mjs
+            - run: node scripts/custom/test-bootstrap.mjs
             - name: Record the build timestamp for reproducible artifacts
               run: echo "SOURCE_DATE_EPOCH=$(git log -1 --format=%ct)" >> "$GITHUB_ENV"
             - run: pnpm buildStandalone

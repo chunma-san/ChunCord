@@ -51,6 +51,16 @@ Add your own plugin source under `src/userplugins/<PluginName>/`. Upstream ignor
 
 ## Compatibility
 
+Host-update folder shims run the verified pending-update bootstrap before loading
+the archive. ChunCord repairs its own legacy direct-require shim on startup;
+other injectors are left unchanged. This prevents a Discord host update from
+bypassing staged ChunCord updates. Run `node scripts/custom/test-bootstrap.mjs`
+for activation-before-load, corruption rejection and scoped migration checks.
+An installation already stranded on the old shim needs one out-of-process shim
+repair (the current installer's Repair action preserves settings). A fix inside
+the pending archive cannot execute until that entry point is repaired. Once the
+fixed build is active, future host updates retain the pending-update bootstrap.
+
 The November 2026 compatibility repairs update panel components and CSS lookup,
 voice-row patch composition, Quest tile layouts, guild-tree callbacks and toast
 handling. Run `node scripts/custom/test-compatibility.mjs` alongside the existing
