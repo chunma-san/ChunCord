@@ -106,3 +106,8 @@ Imported native methods also check that their plugin is enabled. A small set of 
 PasswordManager now starts locked and derives its encryption key from the entered password with PBKDF2 and a random salt. Existing legacy vaults migrate only after a successful unlock. AI Discord actions are disabled by default and require confirmation when enabled. These changes do not make a complete password-manager or third-party plugin security audit.
 
 Some plugins depend on external services, API keys, operating-system tools or private Discord internals. A successful build establishes compilation, not a runtime test of all 123 plugins. Automation plugins can send messages or change server state when enabled; fake badges and profiles are local simulations.
+
+## CustomProfileWidgets
+
+CustomProfileWidgets 5.8 is included as a tracked userplugin. See [source and usage](src/userplugins/customProfileWidgets/README.md). Original author LilithLis; integration maintained by [chunma-san](https://github.com/chunma-san). Widgets are local to the viewer's client.
+
